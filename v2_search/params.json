@@ -1,6 +1,8 @@
 {
-    "target_total": 10,
-    "keyword_industry": "investment banking",
+    "target_total": 40,
+    "keyword_industry": "Investment Banking Associate",
     "include_cad_schools": true,
-    "positions": []
+    "positions": [
+        "Associates"
+    ]
 }

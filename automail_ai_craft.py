@@ -1,9 +1,11 @@
+import keyword
 from re import search
 from turtle import pu
 from typing import List, Tuple, Optional
 
 from httpx import Limits
 from sqlalchemy import true
+from sqlalchemy.engine import result
 from lib.linkedin_wrapper import LinkedinWrapper
 import math
 import logging
@@ -101,6 +103,44 @@ def enrich_person(
     logger.info("Successfully enriched profile data")
     return cleaned_person
 
+def multi_enrich_persons(
+    linkedin: LinkedinWrapper,
+    values: List[str],
+    url_value: bool = False
+) -> List[dict]:
+    return [enrich_person(linkedin, value, url_value) for value in values]
+
+def draft_email(
+    openai: OpenAI,
+    user_profile: dict,
+    candidate_profile: dict,
+    keyword_industry: str
+) -> str:
+    messages = [
+        {"role": "system", "content": EMAIL_SYSTEM_PROMPT},
+        {"role": "user", "content": f"""
+                User Profile:
+        {json.dumps(user_profile, indent=2)}
+
+        Candidate Profile:
+        {json.dumps(candidate_profile, indent=2)}
+
+        Num: 1
+        Role:
+        Email template:
+        {EMAIL_TEMPLATE}
+        """}
+    ]
+    
+    response = openai.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=messages,
+        temperature=0.7,
+        max_tokens=500
+    )
+
+    return response.choices[0].message.content  
+
 
 if __name__ == "__main__":
 
@@ -117,48 +157,72 @@ if __name__ == "__main__":
     linkedin = LinkedinWrapper(linkedin_user, linkedin_password, debug=True)
 
     # ==================================================================
+    # Single enrichement
 
-    result = enrich_person(
-        linkedin=linkedin,
-        value="https://www.linkedin.com/in/josh-karathra-16108a1b1/",
-        url_value=True
-    )
+    # result = enrich_person(
+    #     linkedin=linkedin,
+    #     value="https://www.linkedin.com/in/vaishika-mathisayan/?originalSubdomain=ca",
+    #     url_value=True
+    # )
 
-    with open("data.json", "w") as f:
-        import json
-        json.dump(result, f, indent=4)
+    # with open("data/user_profile_vaishika.json", "w") as f:
+    #     import json
+    #     json.dump(result, f, indent=4)
 
-    with open("data/user_profile_hasan.json", "r") as f:
-        user_profile = json.load(f)
+    # with open("data/user_profile_hasan.json", "r") as f:
+    #     user_profile = json.load(f)
     
-    # Prepare the messages for the completion
-    messages = [
-        {"role": "system", "content": EMAIL_SYSTEM_PROMPT},
-        {"role": "user", "content": f"""
-        User Profile:
-        {json.dumps(user_profile, indent=2)}
+    # email = draft_email(
+    #     openai=openai,
+    #     user_profile=user_profile,
+    #     candidate_profile=result
+    # )
 
-        Candidate Profile:
-        {json.dumps(result, indent=2)}
-
-        Email template:
-        {EMAIL_TEMPLATE}
-        """}
-    ]
-    
-    # Make the completion call
-    response = openai.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=messages,
-        temperature=0.7,
-        max_tokens=500
-    )
-    
-    # Print the generated email
-    print("\nGenerated Email:")
-    print(response.choices[0].message.content)
+    # print("\nGenerated Email:")
+    # print(email)
     
     # ==================================================================
+    # Multi enrichement
 
+    # Read csv
+    csv_file = "v2_output/linkedin_data.csv"
+    with open(csv_file, "r") as f:
+        csv_data = [line.strip().split(",") for line in f.readlines()]
+    # Get the 1st column
+    list_of_urns = [row[0] for row in csv_data]
     
+    multi_result_enriched = multi_enrich_persons(
+        linkedin=linkedin,
+        values=list_of_urns,
+        url_value=False
+    )
+
+    with open("data/user_profile_vaishika.json", "r") as f:
+        user_profile = json.load(f)
+
+    with open("v2_search/params.json", "r") as f:
+        params = json.load(f)
+        keyword_industry = params["keyword_industry"]
+
+    emails = []
+    
+    for enriched_person in multi_result_enriched:
+        email = draft_email(
+            openai=openai,
+            user_profile=user_profile,
+            candidate_profile=enriched_person,
+            keyword_industry=keyword_industry
+        )
+        emails.append(email)
+
+    # Add the enriched data to the csv data
+    for i in range(len(csv_data)):
+        csv_data[i].append(json.dumps(emails[i]))
+    
+    # Save the csv data
+    with open("v2_output/linkedin_data_w_enriched.csv", "w") as f:
+        f.write("urn_id,url,email\n")
+        f.write("\n".join([",".join(row) for row in csv_data]))
+
+
     # ==================================================================

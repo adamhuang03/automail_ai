@@ -1,0 +1,62 @@
+{
+    "personal": {
+        "first_name": "Vaishika",
+        "last_name": "Mathisayan",
+        "headline": "BComm Candidate, Ted Rogers School of Management",
+        "location": "Canada",
+        "city": "Toronto, Ontario",
+        "industry": "Financial Services"
+    },
+    "experiences": [
+        {
+            "title": "Venture Capital Intern",
+            "company": "FOG Ventures",
+            "description": "No description available",
+            "start_date": {
+                "month": 7,
+                "year": 2024
+            },
+            "end_date": null
+        },
+        {
+            "title": "Private Equity Analyst",
+            "company": "AD Capital ",
+            "description": "No description available",
+            "start_date": {
+                "month": 5,
+                "year": 2024
+            },
+            "end_date": {
+                "month": 7,
+                "year": 2024
+            }
+        },
+        {
+            "title": "Mergers and Acquisitions Analyst",
+            "company": "AYCE Capital",
+            "description": "No description available",
+            "start_date": {
+                "month": 11,
+                "year": 2023
+            },
+            "end_date": {
+                "month": 5,
+                "year": 2024
+            }
+        }
+    ],
+    "education": [
+        {
+            "school": "Ted Rogers School of Management - Toronto Metropolitan University",
+            "activities": null,
+            "grade": null,
+            "start_date": {
+                "year": 2023
+            },
+            "end_date": {
+                "year": 2027
+            }
+        }
+    ],
+    "id": "vaishika-mathisayan"
+}

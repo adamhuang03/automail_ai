@@ -1,6 +1,6 @@
 {
-    "function": "get_company",
-    "input": "morgan-stanley",
+    "function": "get_school",
+    "input": "torontometropolitanuniversity",
     
     "function_list-NO_EDITING": [
         "get_company",

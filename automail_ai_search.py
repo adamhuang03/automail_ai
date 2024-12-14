@@ -629,6 +629,17 @@ If they went to the University of Waterloo, please use template 2. If they went 
     Looking for people working in investment banking in the US preferably with a Canadian background from firms such as Morgan Stanley, Rothschild, Goldman Sachs, Greenhill, Bank of America, Nomura, Mizuho, Gordon Dyal, BDT & MSD, Oppenheimer, Baird, Liontree, Citi, Barclays, Moelis, Lazard, AGC Partners, BC Partners, Deutsche Bank. Separate from each office such as Los Angeles, San Francisco, New York, Chicago, Houston. Per each office maximum 2 candidates and are not already included in my list of reachouts, Prioritize the West Coast as I've been getting more response rates and prioritize banks that are known to sponsor visas.
     """
 
+    prompt_prod = """
+    
+    40 Investment Banking, Corporate Banking and Global Markets Associates from CIBC who have graduated from any Canadian University and have 2+ years of experience in the role!
+
+    """
+    # HERE EDIT PROMPT
+    
+    prompt = prompt_prod
+
+    # ==================================================================
+
     from dotenv import load_dotenv
     load_dotenv()
     openai = OpenAI(
@@ -637,28 +648,27 @@ If they went to the University of Waterloo, please use template 2. If they went 
     linkedin_user = os.getenv("LINKEDIN_USER")
     linkedin_password = os.getenv("LINKEDIN_PASSWORD")
     linkedin = LinkedinWrapper(linkedin_user, linkedin_password, debug=True)
-
     # ==================================================================
 
-    search_targets = prepare_search_parameters(
-        prompt=prompt_2,
-        openai_client=openai
-    )
+    # search_targets = prepare_search_parameters(
+    #     prompt=prompt,
+    #     openai_client=openai
+    # )
 
-    params = search_targets[0].copy()
-    params['include_cad_schools'] = params['additional_filters']['include_cad_schools_on_fill_search']
-    params['positions'] = params['additional_filters']['positions']
-    params.pop("companies")
-    params.pop("additional_filters")
-    params_clean = params 
-    search_targets_clean = search_targets[1]
+    # params = search_targets[0].copy()
+    # params['include_cad_schools'] = params['additional_filters']['include_cad_schools_on_fill_search']
+    # params['positions'] = params['additional_filters']['positions']
+    # params.pop("companies")
+    # params.pop("additional_filters")
+    # params_clean = params 
+    # search_targets_clean = search_targets[1]
 
-    # Debugging: Print prepared search targets
-    logger.info("Prepared search targets: %s", search_targets[1])
-    with open("v2_search/search_targets.json", "w") as f:
-        json.dump(search_targets_clean, f, indent=4)
-    with open("v2_search/params.json", "w") as f:
-        json.dump(params_clean, f, indent=4)
+    # # Debugging: Print prepared search targets
+    # logger.info("Prepared search targets: %s", search_targets[1])
+    # with open("v2_search/search_targets.json", "w") as f:
+    #     json.dump(search_targets_clean, f, indent=4)
+    # with open("v2_search/params.json", "w") as f:
+    #     json.dump(params_clean, f, indent=4)
 
     # ==================================================================
 
@@ -685,7 +695,7 @@ If they went to the University of Waterloo, please use template 2. If they went 
         with open("v2_output/accumulator.json", "r") as f:
             existing_urn_ids = json.load(f)
 
-    school_urn_id = "166689"
+    school_urn_id = "85465247"
 
     # # Step 2: Execute search with prepared parameters
     results = execute_search(

@@ -33,6 +33,8 @@ Looking forward to hearing back!
 Best,  
 Adam
 ““”
+
+Provide only the email as part of the output...
 """
 
 EMAIL_TEMPLATE = """
