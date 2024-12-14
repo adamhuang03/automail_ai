@@ -1,0 +1,182 @@
+{
+    "industryName": "Computer Software",
+    "lastName": "Zeng",
+    "locationName": "Canada",
+    "student": false,
+    "geoCountryName": "Canada",
+    "geoCountryUrn": "urn:li:fs_geo:101174742",
+    "geoLocationBackfilled": false,
+    "elt": false,
+    "industryUrn": "urn:li:fs_industry:4",
+    "firstName": "Aiden",
+    "entityUrn": "urn:li:fs_profile:ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk",
+    "geoLocation": {
+        "geoUrn": "urn:li:fs_geo:100761630"
+    },
+    "geoLocationName": "Toronto, Ontario",
+    "location": {
+        "basicLocation": {
+            "countryCode": "ca"
+        }
+    },
+    "headline": "Student @ EHSS | Co-Founder | National Athlete | BETA Camp 24\u2019 Winner",
+    "profile_id": "ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk",
+    "profile_urn": "urn:li:fs_miniProfile:ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk",
+    "member_urn": "urn:li:member:1142615644",
+    "public_id": "aiden-zeng",
+    "experience": [
+        {
+            "entityUrn": "urn:li:fs_position:(ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk,2447363064)",
+            "companyName": "Preppin'",
+            "timePeriod": {
+                "startDate": {
+                    "month": 7,
+                    "year": 2024
+                }
+            },
+            "title": "Co-Founder"
+        },
+        {
+            "entityUrn": "urn:li:fs_position:(ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk,2447363166)",
+            "companyName": "DECA Inc.",
+            "timePeriod": {
+                "startDate": {
+                    "month": 2,
+                    "year": 2024
+                }
+            },
+            "company": {
+                "employeeCountRange": {
+                    "start": 11,
+                    "end": 50
+                },
+                "industries": [
+                    "Education Management"
+                ]
+            },
+            "title": "Member",
+            "companyUrn": "urn:li:fs_miniCompany:1407425",
+            "companyLogoUrl": "https://media.licdn.com/dms/image/v2/C560BAQHAhw7Lm_HYwg/company-logo_"
+        },
+        {
+            "entityUrn": "urn:li:fs_position:(ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk,2447362258)",
+            "companyName": "Badminton Canada",
+            "timePeriod": {
+                "startDate": {
+                    "month": 9,
+                    "year": 2022
+                }
+            },
+            "description": "National badminton player, two-time provincial gold medalist. Competed in multiple national and provincial events.",
+            "company": {
+                "employeeCountRange": {
+                    "start": 2,
+                    "end": 10
+                },
+                "industries": [
+                    "Sports"
+                ]
+            },
+            "title": "Athlete",
+            "companyUrn": "urn:li:fs_miniCompany:10914159",
+            "companyLogoUrl": "https://media.licdn.com/dms/image/v2/C4E0BAQH0dxcNEgahcA/company-logo_"
+        },
+        {
+            "entityUrn": "urn:li:fs_position:(ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk,2447363135)",
+            "companyName": "BETA Camp",
+            "timePeriod": {
+                "endDate": {
+                    "month": 8,
+                    "year": 2024
+                },
+                "startDate": {
+                    "month": 7,
+                    "year": 2024
+                }
+            },
+            "description": "Co-founded and launched a start-up that achieved remarkable success in 4 weeks. We developed a viable business model, launched a product, and generated over four figures in revenue. Our efforts culminated in winning an equity-free investment prize of $10,000.",
+            "company": {
+                "employeeCountRange": {
+                    "start": 2,
+                    "end": 10
+                },
+                "industries": [
+                    "E-Learning"
+                ]
+            },
+            "title": "Startup Winner",
+            "companyUrn": "urn:li:fs_miniCompany:69041757",
+            "companyLogoUrl": "https://media.licdn.com/dms/image/v2/C4E0BAQF0Ylm5Od3DRQ/company-logo_"
+        },
+        {
+            "locationName": "Toronto, Ontario, Canada",
+            "entityUrn": "urn:li:fs_position:(ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk,2447364243)",
+            "geoLocationName": "Toronto, Ontario, Canada",
+            "geoUrn": "urn:li:fs_geo:100025096",
+            "companyName": "Texthelp",
+            "timePeriod": {
+                "endDate": {
+                    "month": 6,
+                    "year": 2021
+                },
+                "startDate": {
+                    "month": 2,
+                    "year": 2020
+                }
+            },
+            "description": "Represented Texthelp at multiple large events across Toronto, delivering interactive presentations on the Read&Write software. Engaged with diverse audiences to demonstrate the software\u2019s capabilities and benefits.",
+            "company": {
+                "employeeCountRange": {
+                    "start": 201,
+                    "end": 500
+                },
+                "industries": [
+                    "Computer Software"
+                ]
+            },
+            "title": "Ambassador",
+            "region": "urn:li:fs_region:(ca,0)",
+            "companyUrn": "urn:li:fs_miniCompany:85660",
+            "companyLogoUrl": "https://media.licdn.com/dms/image/v2/C4D0BAQHMbp24zQPNnA/company-logo_"
+        }
+    ],
+    "education": [
+        {
+            "entityUrn": "urn:li:fs_education:(ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk,995289917)",
+            "activities": "DECA, Athletic Council, Badminton, JV Soccer & Volleyball",
+            "grade": "11",
+            "timePeriod": {
+                "endDate": {
+                    "month": 6,
+                    "year": 2026
+                },
+                "startDate": {
+                    "month": 9,
+                    "year": 2022
+                }
+            },
+            "schoolName": "Earl Haig Secondary School"
+        }
+    ],
+    "languages": [],
+    "publications": [],
+    "certifications": [],
+    "volunteer": [],
+    "honors": [],
+    "projects": [],
+    "skills": [
+        {
+            "name": "Marketing"
+        },
+        {
+            "name": "Presentation Skills"
+        },
+        {
+            "name": "Team Building"
+        },
+        {
+            "name": "Sales Operations"
+        }
+    ],
+    "urn_id": "ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk"
+}

@@ -1,0 +1,1012 @@
+{
+    "positionGroupView": {
+        "paging": {
+            "start": 0,
+            "count": 5,
+            "total": 5,
+            "links": []
+        },
+        "entityUrn": "urn:li:fs_positionGroupView:ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk",
+        "profileId": "ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk",
+        "elements": [
+            {
+                "timePeriod": {
+                    "startDate": {
+                        "month": 7,
+                        "year": 2024
+                    }
+                },
+                "name": "Preppin'",
+                "positions": [
+                    {
+                        "entityUrn": "urn:li:fs_position:(ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk,2447363064)",
+                        "companyName": "Preppin'",
+                        "timePeriod": {
+                            "startDate": {
+                                "month": 7,
+                                "year": 2024
+                            }
+                        },
+                        "title": "Co-Founder"
+                    }
+                ],
+                "paging": {
+                    "start": 0,
+                    "count": 5,
+                    "total": 1,
+                    "links": []
+                },
+                "entityUrn": "urn:li:fs_positionGroup:(ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk,0)"
+            },
+            {
+                "timePeriod": {
+                    "startDate": {
+                        "month": 2,
+                        "year": 2024
+                    }
+                },
+                "name": "DECA Inc.",
+                "positions": [
+                    {
+                        "entityUrn": "urn:li:fs_position:(ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk,2447363166)",
+                        "companyName": "DECA Inc.",
+                        "timePeriod": {
+                            "startDate": {
+                                "month": 2,
+                                "year": 2024
+                            }
+                        },
+                        "company": {
+                            "miniCompany": {
+                                "objectUrn": "urn:li:company:1407425",
+                                "entityUrn": "urn:li:fs_miniCompany:1407425",
+                                "name": "DECA Inc.",
+                                "showcase": false,
+                                "active": true,
+                                "logo": {
+                                    "com.linkedin.common.VectorImage": {
+                                        "artifacts": [
+                                            {
+                                                "width": 200,
+                                                "fileIdentifyingUrlPathSegment": "200_200/company-logo_200_200/0/1630640135639/deca_inc__logo?e=1742428800&v=beta&t=yu40VMvkhzDlzhLNxtIRvnH__WRaJnmuejTvfq0UgYE",
+                                                "expiresAt": 1742428800000,
+                                                "height": 200
+                                            },
+                                            {
+                                                "width": 100,
+                                                "fileIdentifyingUrlPathSegment": "100_100/company-logo_100_100/0/1630640135639/deca_inc__logo?e=1742428800&v=beta&t=eAfrRztMA7BS1U6QTdXGyE8-SqM2sh1bCwZtH5xNhkg",
+                                                "expiresAt": 1742428800000,
+                                                "height": 100
+                                            },
+                                            {
+                                                "width": 400,
+                                                "fileIdentifyingUrlPathSegment": "400_400/company-logo_400_400/0/1630640135639/deca_inc__logo?e=1742428800&v=beta&t=FaM-vEa4Fdy0FwJhxm68MpC9lGikfu7Wr3UtmNcB6tc",
+                                                "expiresAt": 1742428800000,
+                                                "height": 400
+                                            }
+                                        ],
+                                        "rootUrl": "https://media.licdn.com/dms/image/v2/C560BAQHAhw7Lm_HYwg/company-logo_"
+                                    }
+                                },
+                                "universalName": "deca-inc-",
+                                "dashCompanyUrn": "urn:li:fsd_company:1407425",
+                                "trackingId": "XM4nj9TtR3iTEbPS8KvDgw=="
+                            },
+                            "employeeCountRange": {
+                                "start": 11,
+                                "end": 50
+                            },
+                            "industries": [
+                                "Education Management"
+                            ]
+                        },
+                        "title": "Member",
+                        "companyUrn": "urn:li:fs_miniCompany:1407425"
+                    }
+                ],
+                "paging": {
+                    "start": 0,
+                    "count": 2,
+                    "total": 1,
+                    "links": []
+                },
+                "miniCompany": {
+                    "objectUrn": "urn:li:company:1407425",
+                    "entityUrn": "urn:li:fs_miniCompany:1407425",
+                    "name": "DECA Inc.",
+                    "showcase": false,
+                    "active": true,
+                    "logo": {
+                        "com.linkedin.common.VectorImage": {
+                            "artifacts": [
+                                {
+                                    "width": 200,
+                                    "fileIdentifyingUrlPathSegment": "200_200/company-logo_200_200/0/1630640135639/deca_inc__logo?e=1742428800&v=beta&t=yu40VMvkhzDlzhLNxtIRvnH__WRaJnmuejTvfq0UgYE",
+                                    "expiresAt": 1742428800000,
+                                    "height": 200
+                                },
+                                {
+                                    "width": 100,
+                                    "fileIdentifyingUrlPathSegment": "100_100/company-logo_100_100/0/1630640135639/deca_inc__logo?e=1742428800&v=beta&t=eAfrRztMA7BS1U6QTdXGyE8-SqM2sh1bCwZtH5xNhkg",
+                                    "expiresAt": 1742428800000,
+                                    "height": 100
+                                },
+                                {
+                                    "width": 400,
+                                    "fileIdentifyingUrlPathSegment": "400_400/company-logo_400_400/0/1630640135639/deca_inc__logo?e=1742428800&v=beta&t=FaM-vEa4Fdy0FwJhxm68MpC9lGikfu7Wr3UtmNcB6tc",
+                                    "expiresAt": 1742428800000,
+                                    "height": 400
+                                }
+                            ],
+                            "rootUrl": "https://media.licdn.com/dms/image/v2/C560BAQHAhw7Lm_HYwg/company-logo_"
+                        }
+                    },
+                    "universalName": "deca-inc-",
+                    "dashCompanyUrn": "urn:li:fsd_company:1407425",
+                    "trackingId": "XM4nj9TtR3iTEbPS8KvDgw=="
+                },
+                "entityUrn": "urn:li:fs_positionGroup:(ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk,1)"
+            },
+            {
+                "timePeriod": {
+                    "startDate": {
+                        "month": 9,
+                        "year": 2022
+                    }
+                },
+                "name": "Badminton Canada",
+                "positions": [
+                    {
+                        "entityUrn": "urn:li:fs_position:(ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk,2447362258)",
+                        "companyName": "Badminton Canada",
+                        "timePeriod": {
+                            "startDate": {
+                                "month": 9,
+                                "year": 2022
+                            }
+                        },
+                        "description": "National badminton player, two-time provincial gold medalist. Competed in multiple national and provincial events.",
+                        "company": {
+                            "miniCompany": {
+                                "objectUrn": "urn:li:company:10914159",
+                                "entityUrn": "urn:li:fs_miniCompany:10914159",
+                                "name": "Badminton Canada",
+                                "showcase": false,
+                                "active": true,
+                                "logo": {
+                                    "com.linkedin.common.VectorImage": {
+                                        "artifacts": [
+                                            {
+                                                "width": 200,
+                                                "fileIdentifyingUrlPathSegment": "200_200/company-logo_200_200/0/1631356773388?e=1742428800&v=beta&t=8GkNWbYEfAJ65FgdEAvwmzn1BUKR0-SyaDp1Z5rMx-Y",
+                                                "expiresAt": 1742428800000,
+                                                "height": 200
+                                            },
+                                            {
+                                                "width": 100,
+                                                "fileIdentifyingUrlPathSegment": "100_100/company-logo_100_100/0/1631356773388?e=1742428800&v=beta&t=LKxuC4Gp0g3r6au_5OrBTpAoKaaZuffPoDCRn_rmncY",
+                                                "expiresAt": 1742428800000,
+                                                "height": 100
+                                            },
+                                            {
+                                                "width": 400,
+                                                "fileIdentifyingUrlPathSegment": "400_400/company-logo_400_400/0/1631356773388?e=1742428800&v=beta&t=A5oYDkc-ZFmIEGMFYl4JbwRH4als4P2_UWdCd4LiikQ",
+                                                "expiresAt": 1742428800000,
+                                                "height": 400
+                                            }
+                                        ],
+                                        "rootUrl": "https://media.licdn.com/dms/image/v2/C4E0BAQH0dxcNEgahcA/company-logo_"
+                                    }
+                                },
+                                "universalName": "badminton-canada",
+                                "dashCompanyUrn": "urn:li:fsd_company:10914159",
+                                "trackingId": "2zy2FGQBSOG3LOfa0blkvQ=="
+                            },
+                            "employeeCountRange": {
+                                "start": 2,
+                                "end": 10
+                            },
+                            "industries": [
+                                "Sports"
+                            ]
+                        },
+                        "title": "Athlete",
+                        "companyUrn": "urn:li:fs_miniCompany:10914159"
+                    }
+                ],
+                "paging": {
+                    "start": 0,
+                    "count": 2,
+                    "total": 1,
+                    "links": []
+                },
+                "miniCompany": {
+                    "objectUrn": "urn:li:company:10914159",
+                    "entityUrn": "urn:li:fs_miniCompany:10914159",
+                    "name": "Badminton Canada",
+                    "showcase": false,
+                    "active": true,
+                    "logo": {
+                        "com.linkedin.common.VectorImage": {
+                            "artifacts": [
+                                {
+                                    "width": 200,
+                                    "fileIdentifyingUrlPathSegment": "200_200/company-logo_200_200/0/1631356773388?e=1742428800&v=beta&t=8GkNWbYEfAJ65FgdEAvwmzn1BUKR0-SyaDp1Z5rMx-Y",
+                                    "expiresAt": 1742428800000,
+                                    "height": 200
+                                },
+                                {
+                                    "width": 100,
+                                    "fileIdentifyingUrlPathSegment": "100_100/company-logo_100_100/0/1631356773388?e=1742428800&v=beta&t=LKxuC4Gp0g3r6au_5OrBTpAoKaaZuffPoDCRn_rmncY",
+                                    "expiresAt": 1742428800000,
+                                    "height": 100
+                                },
+                                {
+                                    "width": 400,
+                                    "fileIdentifyingUrlPathSegment": "400_400/company-logo_400_400/0/1631356773388?e=1742428800&v=beta&t=A5oYDkc-ZFmIEGMFYl4JbwRH4als4P2_UWdCd4LiikQ",
+                                    "expiresAt": 1742428800000,
+                                    "height": 400
+                                }
+                            ],
+                            "rootUrl": "https://media.licdn.com/dms/image/v2/C4E0BAQH0dxcNEgahcA/company-logo_"
+                        }
+                    },
+                    "universalName": "badminton-canada",
+                    "dashCompanyUrn": "urn:li:fsd_company:10914159",
+                    "trackingId": "2zy2FGQBSOG3LOfa0blkvQ=="
+                },
+                "entityUrn": "urn:li:fs_positionGroup:(ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk,2)"
+            },
+            {
+                "timePeriod": {
+                    "endDate": {
+                        "month": 8,
+                        "year": 2024
+                    },
+                    "startDate": {
+                        "month": 7,
+                        "year": 2024
+                    }
+                },
+                "name": "BETA Camp",
+                "positions": [
+                    {
+                        "entityUrn": "urn:li:fs_position:(ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk,2447363135)",
+                        "companyName": "BETA Camp",
+                        "timePeriod": {
+                            "endDate": {
+                                "month": 8,
+                                "year": 2024
+                            },
+                            "startDate": {
+                                "month": 7,
+                                "year": 2024
+                            }
+                        },
+                        "description": "Co-founded and launched a start-up that achieved remarkable success in 4 weeks. We developed a viable business model, launched a product, and generated over four figures in revenue. Our efforts culminated in winning an equity-free investment prize of $10,000.",
+                        "company": {
+                            "miniCompany": {
+                                "objectUrn": "urn:li:company:69041757",
+                                "entityUrn": "urn:li:fs_miniCompany:69041757",
+                                "name": "BETA Camp",
+                                "showcase": false,
+                                "active": true,
+                                "logo": {
+                                    "com.linkedin.common.VectorImage": {
+                                        "artifacts": [
+                                            {
+                                                "width": 200,
+                                                "fileIdentifyingUrlPathSegment": "200_200/company-logo_200_200/0/1630615875271/beta_camp_logo?e=1742428800&v=beta&t=VjYVbFVr0iNmfzcxAtbFsLXo0LcaXmxrQA5S9pT3Nnk",
+                                                "expiresAt": 1742428800000,
+                                                "height": 200
+                                            },
+                                            {
+                                                "width": 100,
+                                                "fileIdentifyingUrlPathSegment": "100_100/company-logo_100_100/0/1630615875271/beta_camp_logo?e=1742428800&v=beta&t=CSVCmKL_nxXOaldSxpDbxd4WYsrhFyCLjacsgaPW4w8",
+                                                "expiresAt": 1742428800000,
+                                                "height": 100
+                                            },
+                                            {
+                                                "width": 400,
+                                                "fileIdentifyingUrlPathSegment": "400_400/company-logo_400_400/0/1630615875271/beta_camp_logo?e=1742428800&v=beta&t=D-BCRp8M68z3ZHihUmKO_6Rs8jSU5_NJB7Bg_hlRDGQ",
+                                                "expiresAt": 1742428800000,
+                                                "height": 400
+                                            }
+                                        ],
+                                        "rootUrl": "https://media.licdn.com/dms/image/v2/C4E0BAQF0Ylm5Od3DRQ/company-logo_"
+                                    }
+                                },
+                                "universalName": "beta-camp",
+                                "dashCompanyUrn": "urn:li:fsd_company:69041757",
+                                "trackingId": "nBtd3WfOQfmQb7udSb+s1w=="
+                            },
+                            "employeeCountRange": {
+                                "start": 2,
+                                "end": 10
+                            },
+                            "industries": [
+                                "E-Learning"
+                            ]
+                        },
+                        "title": "Startup Winner",
+                        "companyUrn": "urn:li:fs_miniCompany:69041757"
+                    }
+                ],
+                "paging": {
+                    "start": 0,
+                    "count": 2,
+                    "total": 1,
+                    "links": []
+                },
+                "miniCompany": {
+                    "objectUrn": "urn:li:company:69041757",
+                    "entityUrn": "urn:li:fs_miniCompany:69041757",
+                    "name": "BETA Camp",
+                    "showcase": false,
+                    "active": true,
+                    "logo": {
+                        "com.linkedin.common.VectorImage": {
+                            "artifacts": [
+                                {
+                                    "width": 200,
+                                    "fileIdentifyingUrlPathSegment": "200_200/company-logo_200_200/0/1630615875271/beta_camp_logo?e=1742428800&v=beta&t=VjYVbFVr0iNmfzcxAtbFsLXo0LcaXmxrQA5S9pT3Nnk",
+                                    "expiresAt": 1742428800000,
+                                    "height": 200
+                                },
+                                {
+                                    "width": 100,
+                                    "fileIdentifyingUrlPathSegment": "100_100/company-logo_100_100/0/1630615875271/beta_camp_logo?e=1742428800&v=beta&t=CSVCmKL_nxXOaldSxpDbxd4WYsrhFyCLjacsgaPW4w8",
+                                    "expiresAt": 1742428800000,
+                                    "height": 100
+                                },
+                                {
+                                    "width": 400,
+                                    "fileIdentifyingUrlPathSegment": "400_400/company-logo_400_400/0/1630615875271/beta_camp_logo?e=1742428800&v=beta&t=D-BCRp8M68z3ZHihUmKO_6Rs8jSU5_NJB7Bg_hlRDGQ",
+                                    "expiresAt": 1742428800000,
+                                    "height": 400
+                                }
+                            ],
+                            "rootUrl": "https://media.licdn.com/dms/image/v2/C4E0BAQF0Ylm5Od3DRQ/company-logo_"
+                        }
+                    },
+                    "universalName": "beta-camp",
+                    "dashCompanyUrn": "urn:li:fsd_company:69041757",
+                    "trackingId": "nBtd3WfOQfmQb7udSb+s1w=="
+                },
+                "entityUrn": "urn:li:fs_positionGroup:(ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk,3)"
+            },
+            {
+                "timePeriod": {
+                    "endDate": {
+                        "month": 6,
+                        "year": 2021
+                    },
+                    "startDate": {
+                        "month": 2,
+                        "year": 2020
+                    }
+                },
+                "name": "Texthelp",
+                "positions": [
+                    {
+                        "locationName": "Toronto, Ontario, Canada",
+                        "entityUrn": "urn:li:fs_position:(ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk,2447364243)",
+                        "geoLocationName": "Toronto, Ontario, Canada",
+                        "geoUrn": "urn:li:fs_geo:100025096",
+                        "companyName": "Texthelp",
+                        "timePeriod": {
+                            "endDate": {
+                                "month": 6,
+                                "year": 2021
+                            },
+                            "startDate": {
+                                "month": 2,
+                                "year": 2020
+                            }
+                        },
+                        "description": "Represented Texthelp at multiple large events across Toronto, delivering interactive presentations on the Read&Write software. Engaged with diverse audiences to demonstrate the software\u2019s capabilities and benefits.",
+                        "company": {
+                            "miniCompany": {
+                                "objectUrn": "urn:li:company:85660",
+                                "entityUrn": "urn:li:fs_miniCompany:85660",
+                                "name": "Texthelp",
+                                "showcase": false,
+                                "active": true,
+                                "logo": {
+                                    "com.linkedin.common.VectorImage": {
+                                        "artifacts": [
+                                            {
+                                                "width": 200,
+                                                "fileIdentifyingUrlPathSegment": "200_200/company-logo_200_200/0/1641828780685/texthelp_logo?e=1742428800&v=beta&t=sOBsq_15gLs-wH8TaBjm-axbzYnR5t2ZLiXfbVzAq-E",
+                                                "expiresAt": 1742428800000,
+                                                "height": 200
+                                            },
+                                            {
+                                                "width": 100,
+                                                "fileIdentifyingUrlPathSegment": "100_100/company-logo_100_100/0/1641828780685/texthelp_logo?e=1742428800&v=beta&t=4EdU9WrkM-zeifVm-tgpx3WEW7b_UoQfSi62DayyAbA",
+                                                "expiresAt": 1742428800000,
+                                                "height": 100
+                                            },
+                                            {
+                                                "width": 400,
+                                                "fileIdentifyingUrlPathSegment": "400_400/company-logo_400_400/0/1641828780685/texthelp_logo?e=1742428800&v=beta&t=HXUWfrPgE3w0uzQE5giYqWwgHMie0WufMVVLBDELaMI",
+                                                "expiresAt": 1742428800000,
+                                                "height": 400
+                                            }
+                                        ],
+                                        "rootUrl": "https://media.licdn.com/dms/image/v2/C4D0BAQHMbp24zQPNnA/company-logo_"
+                                    }
+                                },
+                                "universalName": "texthelp",
+                                "dashCompanyUrn": "urn:li:fsd_company:85660",
+                                "trackingId": "FSprY8j7Q7+CkMu6GGCtqQ=="
+                            },
+                            "employeeCountRange": {
+                                "start": 201,
+                                "end": 500
+                            },
+                            "industries": [
+                                "Computer Software"
+                            ]
+                        },
+                        "title": "Ambassador",
+                        "region": "urn:li:fs_region:(ca,0)",
+                        "companyUrn": "urn:li:fs_miniCompany:85660"
+                    }
+                ],
+                "paging": {
+                    "start": 0,
+                    "count": 2,
+                    "total": 1,
+                    "links": []
+                },
+                "miniCompany": {
+                    "objectUrn": "urn:li:company:85660",
+                    "entityUrn": "urn:li:fs_miniCompany:85660",
+                    "name": "Texthelp",
+                    "showcase": false,
+                    "active": true,
+                    "logo": {
+                        "com.linkedin.common.VectorImage": {
+                            "artifacts": [
+                                {
+                                    "width": 200,
+                                    "fileIdentifyingUrlPathSegment": "200_200/company-logo_200_200/0/1641828780685/texthelp_logo?e=1742428800&v=beta&t=sOBsq_15gLs-wH8TaBjm-axbzYnR5t2ZLiXfbVzAq-E",
+                                    "expiresAt": 1742428800000,
+                                    "height": 200
+                                },
+                                {
+                                    "width": 100,
+                                    "fileIdentifyingUrlPathSegment": "100_100/company-logo_100_100/0/1641828780685/texthelp_logo?e=1742428800&v=beta&t=4EdU9WrkM-zeifVm-tgpx3WEW7b_UoQfSi62DayyAbA",
+                                    "expiresAt": 1742428800000,
+                                    "height": 100
+                                },
+                                {
+                                    "width": 400,
+                                    "fileIdentifyingUrlPathSegment": "400_400/company-logo_400_400/0/1641828780685/texthelp_logo?e=1742428800&v=beta&t=HXUWfrPgE3w0uzQE5giYqWwgHMie0WufMVVLBDELaMI",
+                                    "expiresAt": 1742428800000,
+                                    "height": 400
+                                }
+                            ],
+                            "rootUrl": "https://media.licdn.com/dms/image/v2/C4D0BAQHMbp24zQPNnA/company-logo_"
+                        }
+                    },
+                    "universalName": "texthelp",
+                    "dashCompanyUrn": "urn:li:fsd_company:85660",
+                    "trackingId": "FSprY8j7Q7+CkMu6GGCtqQ=="
+                },
+                "entityUrn": "urn:li:fs_positionGroup:(ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk,4)"
+            }
+        ]
+    },
+    "patentView": {
+        "paging": {
+            "start": 0,
+            "count": 10,
+            "total": 0,
+            "links": []
+        },
+        "entityUrn": "urn:li:fs_patentView:ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk",
+        "profileId": "ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk",
+        "elements": []
+    },
+    "summaryTreasuryMediaCount": 0,
+    "summaryTreasuryMedias": [],
+    "educationView": {
+        "paging": {
+            "start": 0,
+            "count": 3,
+            "total": 1,
+            "links": []
+        },
+        "entityUrn": "urn:li:fs_educationView:ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk",
+        "profileId": "ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk",
+        "elements": [
+            {
+                "entityUrn": "urn:li:fs_education:(ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk,995289917)",
+                "activities": "DECA, Athletic Council, Badminton, JV Soccer & Volleyball",
+                "grade": "11",
+                "timePeriod": {
+                    "endDate": {
+                        "month": 6,
+                        "year": 2026
+                    },
+                    "startDate": {
+                        "month": 9,
+                        "year": 2022
+                    }
+                },
+                "schoolName": "Earl Haig Secondary School"
+            }
+        ]
+    },
+    "organizationView": {
+        "paging": {
+            "start": 0,
+            "count": 10,
+            "total": 0,
+            "links": []
+        },
+        "entityUrn": "urn:li:fs_organizationView:ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk",
+        "profileId": "ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk",
+        "elements": []
+    },
+    "projectView": {
+        "paging": {
+            "start": 0,
+            "count": 10,
+            "total": 0,
+            "links": []
+        },
+        "entityUrn": "urn:li:fs_projectView:ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk",
+        "profileId": "ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk",
+        "elements": []
+    },
+    "positionView": {
+        "paging": {
+            "start": 0,
+            "count": 5,
+            "total": 5,
+            "links": []
+        },
+        "entityUrn": "urn:li:fs_positionView:ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk",
+        "profileId": "ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk",
+        "elements": [
+            {
+                "entityUrn": "urn:li:fs_position:(ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk,2447363064)",
+                "companyName": "Preppin'",
+                "timePeriod": {
+                    "startDate": {
+                        "month": 7,
+                        "year": 2024
+                    }
+                },
+                "title": "Co-Founder"
+            },
+            {
+                "entityUrn": "urn:li:fs_position:(ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk,2447363166)",
+                "companyName": "DECA Inc.",
+                "timePeriod": {
+                    "startDate": {
+                        "month": 2,
+                        "year": 2024
+                    }
+                },
+                "company": {
+                    "miniCompany": {
+                        "objectUrn": "urn:li:company:1407425",
+                        "entityUrn": "urn:li:fs_miniCompany:1407425",
+                        "name": "DECA Inc.",
+                        "showcase": false,
+                        "active": true,
+                        "logo": {
+                            "com.linkedin.common.VectorImage": {
+                                "artifacts": [
+                                    {
+                                        "width": 200,
+                                        "fileIdentifyingUrlPathSegment": "200_200/company-logo_200_200/0/1630640135639/deca_inc__logo?e=1742428800&v=beta&t=yu40VMvkhzDlzhLNxtIRvnH__WRaJnmuejTvfq0UgYE",
+                                        "expiresAt": 1742428800000,
+                                        "height": 200
+                                    },
+                                    {
+                                        "width": 100,
+                                        "fileIdentifyingUrlPathSegment": "100_100/company-logo_100_100/0/1630640135639/deca_inc__logo?e=1742428800&v=beta&t=eAfrRztMA7BS1U6QTdXGyE8-SqM2sh1bCwZtH5xNhkg",
+                                        "expiresAt": 1742428800000,
+                                        "height": 100
+                                    },
+                                    {
+                                        "width": 400,
+                                        "fileIdentifyingUrlPathSegment": "400_400/company-logo_400_400/0/1630640135639/deca_inc__logo?e=1742428800&v=beta&t=FaM-vEa4Fdy0FwJhxm68MpC9lGikfu7Wr3UtmNcB6tc",
+                                        "expiresAt": 1742428800000,
+                                        "height": 400
+                                    }
+                                ],
+                                "rootUrl": "https://media.licdn.com/dms/image/v2/C560BAQHAhw7Lm_HYwg/company-logo_"
+                            }
+                        },
+                        "universalName": "deca-inc-",
+                        "dashCompanyUrn": "urn:li:fsd_company:1407425",
+                        "trackingId": "YM4nP95+QRSoi+r85cC3Dw=="
+                    },
+                    "employeeCountRange": {
+                        "start": 11,
+                        "end": 50
+                    },
+                    "industries": [
+                        "Education Management"
+                    ]
+                },
+                "title": "Member",
+                "companyUrn": "urn:li:fs_miniCompany:1407425"
+            },
+            {
+                "entityUrn": "urn:li:fs_position:(ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk,2447362258)",
+                "companyName": "Badminton Canada",
+                "timePeriod": {
+                    "startDate": {
+                        "month": 9,
+                        "year": 2022
+                    }
+                },
+                "description": "National badminton player, two-time provincial gold medalist. Competed in multiple national and provincial events.",
+                "company": {
+                    "miniCompany": {
+                        "objectUrn": "urn:li:company:10914159",
+                        "entityUrn": "urn:li:fs_miniCompany:10914159",
+                        "name": "Badminton Canada",
+                        "showcase": false,
+                        "active": true,
+                        "logo": {
+                            "com.linkedin.common.VectorImage": {
+                                "artifacts": [
+                                    {
+                                        "width": 200,
+                                        "fileIdentifyingUrlPathSegment": "200_200/company-logo_200_200/0/1631356773388?e=1742428800&v=beta&t=8GkNWbYEfAJ65FgdEAvwmzn1BUKR0-SyaDp1Z5rMx-Y",
+                                        "expiresAt": 1742428800000,
+                                        "height": 200
+                                    },
+                                    {
+                                        "width": 100,
+                                        "fileIdentifyingUrlPathSegment": "100_100/company-logo_100_100/0/1631356773388?e=1742428800&v=beta&t=LKxuC4Gp0g3r6au_5OrBTpAoKaaZuffPoDCRn_rmncY",
+                                        "expiresAt": 1742428800000,
+                                        "height": 100
+                                    },
+                                    {
+                                        "width": 400,
+                                        "fileIdentifyingUrlPathSegment": "400_400/company-logo_400_400/0/1631356773388?e=1742428800&v=beta&t=A5oYDkc-ZFmIEGMFYl4JbwRH4als4P2_UWdCd4LiikQ",
+                                        "expiresAt": 1742428800000,
+                                        "height": 400
+                                    }
+                                ],
+                                "rootUrl": "https://media.licdn.com/dms/image/v2/C4E0BAQH0dxcNEgahcA/company-logo_"
+                            }
+                        },
+                        "universalName": "badminton-canada",
+                        "dashCompanyUrn": "urn:li:fsd_company:10914159",
+                        "trackingId": "sf8fCaCAQ+SHxvzVxBYbsg=="
+                    },
+                    "employeeCountRange": {
+                        "start": 2,
+                        "end": 10
+                    },
+                    "industries": [
+                        "Sports"
+                    ]
+                },
+                "title": "Athlete",
+                "companyUrn": "urn:li:fs_miniCompany:10914159"
+            },
+            {
+                "entityUrn": "urn:li:fs_position:(ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk,2447363135)",
+                "companyName": "BETA Camp",
+                "timePeriod": {
+                    "endDate": {
+                        "month": 8,
+                        "year": 2024
+                    },
+                    "startDate": {
+                        "month": 7,
+                        "year": 2024
+                    }
+                },
+                "description": "Co-founded and launched a start-up that achieved remarkable success in 4 weeks. We developed a viable business model, launched a product, and generated over four figures in revenue. Our efforts culminated in winning an equity-free investment prize of $10,000.",
+                "company": {
+                    "miniCompany": {
+                        "objectUrn": "urn:li:company:69041757",
+                        "entityUrn": "urn:li:fs_miniCompany:69041757",
+                        "name": "BETA Camp",
+                        "showcase": false,
+                        "active": true,
+                        "logo": {
+                            "com.linkedin.common.VectorImage": {
+                                "artifacts": [
+                                    {
+                                        "width": 200,
+                                        "fileIdentifyingUrlPathSegment": "200_200/company-logo_200_200/0/1630615875271/beta_camp_logo?e=1742428800&v=beta&t=VjYVbFVr0iNmfzcxAtbFsLXo0LcaXmxrQA5S9pT3Nnk",
+                                        "expiresAt": 1742428800000,
+                                        "height": 200
+                                    },
+                                    {
+                                        "width": 100,
+                                        "fileIdentifyingUrlPathSegment": "100_100/company-logo_100_100/0/1630615875271/beta_camp_logo?e=1742428800&v=beta&t=CSVCmKL_nxXOaldSxpDbxd4WYsrhFyCLjacsgaPW4w8",
+                                        "expiresAt": 1742428800000,
+                                        "height": 100
+                                    },
+                                    {
+                                        "width": 400,
+                                        "fileIdentifyingUrlPathSegment": "400_400/company-logo_400_400/0/1630615875271/beta_camp_logo?e=1742428800&v=beta&t=D-BCRp8M68z3ZHihUmKO_6Rs8jSU5_NJB7Bg_hlRDGQ",
+                                        "expiresAt": 1742428800000,
+                                        "height": 400
+                                    }
+                                ],
+                                "rootUrl": "https://media.licdn.com/dms/image/v2/C4E0BAQF0Ylm5Od3DRQ/company-logo_"
+                            }
+                        },
+                        "universalName": "beta-camp",
+                        "dashCompanyUrn": "urn:li:fsd_company:69041757",
+                        "trackingId": "U2XgvIosQSC3IQydahyAIA=="
+                    },
+                    "employeeCountRange": {
+                        "start": 2,
+                        "end": 10
+                    },
+                    "industries": [
+                        "E-Learning"
+                    ]
+                },
+                "title": "Startup Winner",
+                "companyUrn": "urn:li:fs_miniCompany:69041757"
+            },
+            {
+                "locationName": "Toronto, Ontario, Canada",
+                "entityUrn": "urn:li:fs_position:(ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk,2447364243)",
+                "geoLocationName": "Toronto, Ontario, Canada",
+                "geoUrn": "urn:li:fs_geo:100025096",
+                "companyName": "Texthelp",
+                "timePeriod": {
+                    "endDate": {
+                        "month": 6,
+                        "year": 2021
+                    },
+                    "startDate": {
+                        "month": 2,
+                        "year": 2020
+                    }
+                },
+                "description": "Represented Texthelp at multiple large events across Toronto, delivering interactive presentations on the Read&Write software. Engaged with diverse audiences to demonstrate the software\u2019s capabilities and benefits.",
+                "company": {
+                    "miniCompany": {
+                        "objectUrn": "urn:li:company:85660",
+                        "entityUrn": "urn:li:fs_miniCompany:85660",
+                        "name": "Texthelp",
+                        "showcase": false,
+                        "active": true,
+                        "logo": {
+                            "com.linkedin.common.VectorImage": {
+                                "artifacts": [
+                                    {
+                                        "width": 200,
+                                        "fileIdentifyingUrlPathSegment": "200_200/company-logo_200_200/0/1641828780685/texthelp_logo?e=1742428800&v=beta&t=sOBsq_15gLs-wH8TaBjm-axbzYnR5t2ZLiXfbVzAq-E",
+                                        "expiresAt": 1742428800000,
+                                        "height": 200
+                                    },
+                                    {
+                                        "width": 100,
+                                        "fileIdentifyingUrlPathSegment": "100_100/company-logo_100_100/0/1641828780685/texthelp_logo?e=1742428800&v=beta&t=4EdU9WrkM-zeifVm-tgpx3WEW7b_UoQfSi62DayyAbA",
+                                        "expiresAt": 1742428800000,
+                                        "height": 100
+                                    },
+                                    {
+                                        "width": 400,
+                                        "fileIdentifyingUrlPathSegment": "400_400/company-logo_400_400/0/1641828780685/texthelp_logo?e=1742428800&v=beta&t=HXUWfrPgE3w0uzQE5giYqWwgHMie0WufMVVLBDELaMI",
+                                        "expiresAt": 1742428800000,
+                                        "height": 400
+                                    }
+                                ],
+                                "rootUrl": "https://media.licdn.com/dms/image/v2/C4D0BAQHMbp24zQPNnA/company-logo_"
+                            }
+                        },
+                        "universalName": "texthelp",
+                        "dashCompanyUrn": "urn:li:fsd_company:85660",
+                        "trackingId": "GTRkgTB8QhCHie9eK8pEjQ=="
+                    },
+                    "employeeCountRange": {
+                        "start": 201,
+                        "end": 500
+                    },
+                    "industries": [
+                        "Computer Software"
+                    ]
+                },
+                "title": "Ambassador",
+                "region": "urn:li:fs_region:(ca,0)",
+                "companyUrn": "urn:li:fs_miniCompany:85660"
+            }
+        ]
+    },
+    "profile": {
+        "industryName": "Computer Software",
+        "lastName": "Zeng",
+        "supportedLocales": [
+            {
+                "country": "US",
+                "language": "en"
+            }
+        ],
+        "locationName": "Canada",
+        "student": false,
+        "geoCountryName": "Canada",
+        "geoCountryUrn": "urn:li:fs_geo:101174742",
+        "versionTag": "2860402249",
+        "geoLocationBackfilled": false,
+        "elt": false,
+        "industryUrn": "urn:li:fs_industry:4",
+        "defaultLocale": {
+            "country": "US",
+            "language": "en"
+        },
+        "firstName": "Aiden",
+        "showEducationOnProfileTopCard": true,
+        "entityUrn": "urn:li:fs_profile:ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk",
+        "geoLocation": {
+            "geoUrn": "urn:li:fs_geo:100761630"
+        },
+        "geoLocationName": "Toronto, Ontario",
+        "location": {
+            "basicLocation": {
+                "countryCode": "ca"
+            }
+        },
+        "miniProfile": {
+            "firstName": "Aiden",
+            "lastName": "Zeng",
+            "dashEntityUrn": "urn:li:fsd_profile:ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk",
+            "occupation": "Film Student @ EHSS | Co-Founder | National Athlete | BETA Camp 24\u2019 Winner",
+            "objectUrn": "urn:li:member:1142615644",
+            "entityUrn": "urn:li:fs_miniProfile:ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk",
+            "backgroundImage": {
+                "com.linkedin.common.VectorImage": {
+                    "artifacts": [
+                        {
+                            "width": 503,
+                            "fileIdentifyingUrlPathSegment": "200_800/profile-displaybackgroundimage-shrink_200_800/0/1723672314934?e=1739404800&v=beta&t=q1ozMiORD2ALSewgZW2pYv7SFkN5oZvMPxg4hk0rmZo",
+                            "expiresAt": 1739404800000,
+                            "height": 126
+                        },
+                        {
+                            "width": 503,
+                            "fileIdentifyingUrlPathSegment": "350_1400/profile-displaybackgroundimage-shrink_350_1400/0/1723672314934?e=1739404800&v=beta&t=pePHBHrT-TFD9VZdfZoXMBa32SC4Xr-8yGwWwB1rtGs",
+                            "expiresAt": 1739404800000,
+                            "height": 126
+                        }
+                    ],
+                    "rootUrl": "https://media.licdn.com/dms/image/v2/D4E16AQEvKhDLSIDqPA/profile-displaybackgroundimage-shrink_"
+                }
+            },
+            "publicIdentifier": "aiden-zeng",
+            "trackingId": "BO41P/eHQH+X4kFbwaNxjw=="
+        },
+        "headline": "Film Student @ EHSS | Co-Founder | National Athlete | BETA Camp 24\u2019 Winner"
+    },
+    "languageView": {
+        "paging": {
+            "start": 0,
+            "count": 10,
+            "total": 0,
+            "links": []
+        },
+        "entityUrn": "urn:li:fs_languageView:ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk",
+        "profileId": "ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk",
+        "elements": []
+    },
+    "certificationView": {
+        "paging": {
+            "start": 0,
+            "count": 10,
+            "total": 0,
+            "links": []
+        },
+        "entityUrn": "urn:li:fs_certificationView:ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk",
+        "profileId": "ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk",
+        "elements": []
+    },
+    "testScoreView": {
+        "paging": {
+            "start": 0,
+            "count": 10,
+            "total": 0,
+            "links": []
+        },
+        "entityUrn": "urn:li:fs_testScoreView:ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk",
+        "profileId": "ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk",
+        "elements": []
+    },
+    "volunteerCauseView": {
+        "paging": {
+            "start": 0,
+            "count": 0,
+            "total": 0,
+            "links": []
+        },
+        "entityUrn": "urn:li:fs_volunteerCauseView:ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk",
+        "profileId": "ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk",
+        "elements": []
+    },
+    "entityUrn": "urn:li:fs_profileView:ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk",
+    "courseView": {
+        "paging": {
+            "start": 0,
+            "count": 10,
+            "total": 0,
+            "links": []
+        },
+        "entityUrn": "urn:li:fs_courseView:ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk",
+        "profileId": "ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk",
+        "elements": []
+    },
+    "honorView": {
+        "paging": {
+            "start": 0,
+            "count": 10,
+            "total": 0,
+            "links": []
+        },
+        "entityUrn": "urn:li:fs_honorView:ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk",
+        "profileId": "ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk",
+        "elements": []
+    },
+    "skillView": {
+        "paging": {
+            "start": 0,
+            "count": 4,
+            "total": 6,
+            "links": []
+        },
+        "entityUrn": "urn:li:fs_skillView:ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk",
+        "profileId": "ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk",
+        "elements": [
+            {
+                "name": "Marketing",
+                "entityUrn": "urn:li:fs_skill:(ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk,6)"
+            },
+            {
+                "name": "Presentation Skills",
+                "entityUrn": "urn:li:fs_skill:(ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk,5)"
+            },
+            {
+                "name": "Team Building",
+                "entityUrn": "urn:li:fs_skill:(ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk,1)"
+            },
+            {
+                "name": "Sales Operations",
+                "entityUrn": "urn:li:fs_skill:(ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk,2)"
+            }
+        ]
+    },
+    "volunteerExperienceView": {
+        "paging": {
+            "start": 0,
+            "count": 3,
+            "total": 0,
+            "links": []
+        },
+        "entityUrn": "urn:li:fs_volunteerExperienceView:ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk",
+        "profileId": "ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk",
+        "elements": []
+    },
+    "primaryLocale": {
+        "country": "US",
+        "language": "en"
+    },
+    "publicationView": {
+        "paging": {
+            "start": 0,
+            "count": 10,
+            "total": 0,
+            "links": []
+        },
+        "entityUrn": "urn:li:fs_publicationView:ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk",
+        "profileId": "ACoAAEQa7lwBDUlhlFJn7LGu3KSFGDUjMMw9UQk",
+        "elements": []
+    }
+}

@@ -1,5 +1,7 @@
 from re import search
 from typing import List, Tuple, Optional
+
+from httpx import Limits
 from lib.linkedin_wrapper import LinkedinWrapper
 import math
 import logging
@@ -18,7 +20,7 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-from prompts import OPENAI_EXTRACTION_PROMPT, POST_PROMPT_INSTR
+from prompt import OPENAI_EXTRACTION_PROMPT, POST_PROMPT_INSTR
 
 def parse_input_prompt(prompt: str, openai_client: OpenAI) -> dict:
     """
@@ -96,24 +98,33 @@ def prepare_search_parameters(
     """
     if prompt and openai_client:
         # Use prompt-based parameter extraction
+        logger.info("Starting prompt-based parameter extraction")
         parsed_data = parse_input_prompt(prompt, openai_client)
+        logger.debug("Parsed data from prompt: %s", parsed_data)
         company_location_targets = []
         
         total_target = parsed_data["target_total"]
         companies = parsed_data["companies"]
+        logger.info("Target total: %d, Number of companies: %d", total_target, len(companies))
         
         # If no companies specified in prompt, use "any"
         if not companies:
+            logger.info("No specific companies found in prompt, using 'any'")
             company_location_targets = [("any", [("any", total_target)])]
         else:
             for company in companies:
                 company_locations = []
+                logger.debug("Processing company: %s", company["name"])
                 # If no locations specified for company, use "any"
                 if not company["locations"]:
-                    company_locations = [("any", company["target_per_company"] if "target_per_company" in company else total_target // len(companies))]
+                    target = company["target_per_company"] if "target_per_company" in company else total_target // len(companies)
+                    logger.info("No locations specified for %s, using 'any' with target: %d", company["name"], target)
+                    company_locations = [("any", target)]
                 else:
                     for loc in company["locations"]:
                         company_locations.append((loc["location"], loc["target_per_location"]))
+                        logger.debug("Added location for %s: %s with target: %d", 
+                                   company["name"], loc["location"], loc["target_per_location"])
                 company_location_targets.append((company["name"], company_locations))
         
         logger.info("Prepared search targets from prompt: %s", company_location_targets)
@@ -192,6 +203,102 @@ def prepare_search_parameters(
     
     # logger.info("Prepared search targets: %s", company_location_targets)
     # return company_location_targets
+
+def get_location_ids(
+    linkedin: LinkedinWrapper,
+    locations: List[Tuple[str, int]]
+) -> List[Tuple[str, int]]:
+    """
+    Get location URNs from location names and replace them with their IDs.
+    
+    Args:
+        linkedin: LinkedinWrapper instance
+        locations: List of (location_name, target_count)
+    
+    Returns:
+        List of (location_id, target_count) with location names replaced by IDs
+    """
+    logger.info("Starting location ID resolution for %d locations", len(locations))
+    logger.info("Input locations: %s", locations)
+    adjusted_locations = []
+    
+    for location_name, target_count in locations:
+        logger.info("Processing location: %s with target count: %d", location_name, target_count)
+        if location_name == "any":
+            logger.info("Location is 'any', skipping search")
+            adjusted_locations.append(("any", target_count))
+            continue
+            
+        # Search for location using LinkedIn API
+        logger.info("Searching LinkedIn for location: %s", location_name)
+        try:
+            location_id = linkedin.search_geo(keywords=location_name)
+            if location_id:
+                logger.info("Found location ID for %s: %s", location_name, location_id)
+                adjusted_locations.append((location_id, target_count))
+                logger.info("Added location to adjusted targets: (%s, %d)", location_id, target_count)
+            else:
+                logger.warning("No results found for location: %s", location_name)
+        except Exception as e:
+            logger.error("Error searching for location %s: %s", location_name, str(e))
+            continue
+    
+    logger.info("Completed location ID resolution. Final adjusted locations: %s", adjusted_locations)
+    return adjusted_locations
+
+def get_company_ids(
+    linkedin: LinkedinWrapper,
+    search_targets: List[Tuple[str, List[Tuple[str, int]]]],
+) -> List[Tuple[str, List[Tuple[str, int]]]]:
+    """
+    Get company URNs from search targets and replace company names with their IDs.
+    Also resolves location IDs for each company.
+    
+    Args:
+        linkedin: LinkedinWrapper instance
+        search_targets: List of (company_name, [(location, target_count)])
+    
+    Returns:
+        List of (company_id, [(location_id, target_count)]) with names replaced by IDs
+    """
+    logger.info("Starting company ID resolution for %d targets", len(search_targets))
+    logger.info("Input search targets: %s", search_targets)
+    adjusted_search_targets = []
+    
+    for company_name, locations in search_targets:
+        logger.info("Processing company: %s with locations: %s", company_name, locations)
+        if company_name == "any":
+            logger.info("Company is 'any', skipping search")
+            # Even for 'any' company, we need to resolve location IDs
+            adjusted_locations = get_location_ids(linkedin, locations)
+            adjusted_search_targets.append(("any", adjusted_locations))
+            continue
+            
+        # Search for company using LinkedIn API
+        logger.info("Searching LinkedIn for company: %s", company_name)
+        search_results = linkedin.search_companies(
+            keywords=[company_name],
+            limit=10,
+            offset=0
+        )
+        logger.info("Search returned %d results", len(search_results) if search_results else 0)
+        if not search_results:
+            logger.warning("No results found for company: %s", company_name)
+            continue
+            
+        # Use the first result's URN ID
+        company_id = search_results[0]["urn_id"]
+        company_found_name = search_results[0]["name"]
+        logger.info("Found company ID for %s (matched with: %s): %s", 
+                   company_name, company_found_name, company_id)
+        
+        # Resolve location IDs for this company
+        adjusted_locations = get_location_ids(linkedin, locations)
+        adjusted_search_targets.append((company_id, adjusted_locations))
+        logger.info("Added company to adjusted targets: (%s, %s)", company_id, adjusted_locations)
+    
+    logger.info("Adjusted search targets with company and location IDs: %s", adjusted_search_targets)
+    return adjusted_search_targets
 
 def execute_search(
     linkedin: LinkedinWrapper,
@@ -432,7 +539,13 @@ def search_people(
     """
     try:
         # Step 1: Prepare search parameters and calculate targets
-        search_targets = prepare_search_parameters(count, current_company, locations)
+        search_targets = prepare_search_parameters(
+            # count=count,
+            # current_company=current_company,
+            # locations=locations,
+            prompt=None,
+            openai_client=None
+        )
 
         # Debugging: Print prepared search targets
         logger.info("Prepared search targets: %s", search_targets)
@@ -547,12 +660,22 @@ If they went to the University of Waterloo, please use template 2. If they went 
     with open("v2_search/params.json", "w") as f:
         json.dump(params_clean, f, indent=4)
 
+    # ==================================================================
+
+    pause = input("Update search_targets.json in v2_search/adjusted. Press enter to continue...")
+    
+    with open("v2_search/adjusted/search_targets.json", "r") as f:
+        search = json.load(f)
+
+    updated_search = get_company_ids(linkedin, search)
+    with open("v2_search/adjusted_2/search_targets.json", "w") as f:
+        json.dump(updated_search, f, indent=4)
 
     # ==================================================================
 
     pause = input("Ensure params.json and search_targets.json are correct. Press enter to continue...")
 
-    with open("v2_search/adjusted/search_targets.json", "r") as f:
+    with open("v2_search/adjusted_2/search_targets.json", "r") as f:
         search = json.load(f)
     with open("v2_search/params.json", "r") as f:
         params = json.load(f)

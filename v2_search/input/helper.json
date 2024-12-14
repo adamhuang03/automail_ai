@@ -1,0 +1,9 @@
+{
+    "function": "get_company",
+    "input": "morgan-stanley",
+    
+    "function_list-NO_EDITING": [
+        "get_company",
+        "get_school"
+    ]
+}

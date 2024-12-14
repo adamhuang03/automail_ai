@@ -3,16 +3,27 @@
         "497017",
         [
             [
-                "90000049",
-                1,
+                "102448103",
+                10,
                 0,
                 []
             ],
             [
                 "90000084",
-                1,
-                1,
+                10,
+                4,
                 [
+                    [
+                        {
+                            "urn_id": "ACoAAASFpXYBAdG6bxilX4gQ9tjmVjrpLmJbC4o",
+                            "distance": "DISTANCE_3",
+                            "jobtitle": "Investment Banking Associate at Morgan Stanley",
+                            "location": "United States",
+                            "name": "Mark Llanes",
+                            "url": "https://www.linkedin.com/in/mark-llanes?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAAASFpXYBAdG6bxilX4gQ9tjmVjrpLmJbC4o"
+                        },
+                        "from_cad_school"
+                    ],
                     [
                         {
                             "urn_id": "ACoAAAMjDXgBlWoBz74DZp5xfJFr7SorVOicIis",
@@ -23,14 +34,47 @@
                             "url": "https://www.linkedin.com/in/alexkowong?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAAAMjDXgBlWoBz74DZp5xfJFr7SorVOicIis"
                         },
                         "from_cad_school"
+                    ],
+                    [
+                        {
+                            "urn_id": "ACoAAAEL_aABErC8Eho-LLDwlmf4R0ybzR-EgPY",
+                            "distance": "DISTANCE_3",
+                            "jobtitle": "Executive Director, Technology Investment Banking (M&A) | Morgan Stanley",
+                            "location": "Menlo Park, CA",
+                            "name": "Bharat Venugopal",
+                            "url": "https://www.linkedin.com/in/bharatvenugopal?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAAAEL_aABErC8Eho-LLDwlmf4R0ybzR-EgPY"
+                        },
+                        "from_cad_school"
+                    ],
+                    [
+                        {
+                            "urn_id": "ACoAAABnnyABfmVbI57X5vpRspG9iL-NhfHNnVo",
+                            "distance": "DISTANCE_3",
+                            "jobtitle": "Executive Director at Morgan Stanley",
+                            "location": "San Francisco Bay Area",
+                            "name": "Michael W.",
+                            "url": "https://www.linkedin.com/in/michaelwang?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAAABnnyABfmVbI57X5vpRspG9iL-NhfHNnVo"
+                        },
+                        "from_cad_school"
                     ]
                 ]
             ],
             [
-                "102571732",
-                1,
-                1,
+                "105080838",
+                10,
+                10,
                 [
+                    [
+                        {
+                            "urn_id": "ACoAABJzcPkBjqPSlSR_XYYUfxmo2Ma7LY2qOdk",
+                            "distance": "DISTANCE_3",
+                            "jobtitle": "Investment Professional at Morgan Stanley Tactical Value",
+                            "location": "New York, NY",
+                            "name": "Eric K.",
+                            "url": "https://www.linkedin.com/in/ericjkang?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAABJzcPkBjqPSlSR_XYYUfxmo2Ma7LY2qOdk"
+                        },
+                        "166689"
+                    ],
                     [
                         {
                             "urn_id": "ACoAABkR9ZkBBXbjJx_6dr1DghpOVDT6_kW3d7Q",
@@ -41,77 +85,187 @@
                             "url": "https://www.linkedin.com/in/lenoydujon?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAABkR9ZkBBXbjJx_6dr1DghpOVDT6_kW3d7Q"
                         },
                         "166689"
+                    ],
+                    [
+                        {
+                            "urn_id": "ACoAADr8stIBzWV51todyGOvMWAXS6obcGn7pPc",
+                            "distance": "DISTANCE_3",
+                            "jobtitle": "Morgan Stanley | Columbia MSOR",
+                            "location": "New York, NY",
+                            "name": "Emma Zhang",
+                            "url": "https://www.linkedin.com/in/emma-zhang-b82517237?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAADr8stIBzWV51todyGOvMWAXS6obcGn7pPc"
+                        },
+                        "166689"
+                    ],
+                    [
+                        {
+                            "urn_id": "ACoAAAOOaKoBwe5hopp5MsK0x7uUrPGGig_xQgw",
+                            "distance": "DISTANCE_2",
+                            "jobtitle": "Investment Banking Associate at Morgan Stanley",
+                            "location": "New York, NY",
+                            "name": "Alexandra Brunet, P.Eng.",
+                            "url": "https://www.linkedin.com/in/alexandrabrunet?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAAAOOaKoBwe5hopp5MsK0x7uUrPGGig_xQgw"
+                        },
+                        "from_cad_school"
+                    ],
+                    [
+                        {
+                            "urn_id": "ACoAACQIzBgBogcD9Marp4rYtYYmIh8sb9olUMU",
+                            "distance": "DISTANCE_3",
+                            "jobtitle": "Investment Banking Associate Morgan Stanley",
+                            "location": "New York, NY",
+                            "name": "Austin Coles, CFA",
+                            "url": "https://www.linkedin.com/in/austincoles?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAACQIzBgBogcD9Marp4rYtYYmIh8sb9olUMU"
+                        },
+                        "from_cad_school"
+                    ],
+                    [
+                        {
+                            "urn_id": "ACoAABga6k0BVsxyWj4UlOCv7G2xUl3p5GcEpUg",
+                            "distance": "DISTANCE_3",
+                            "jobtitle": "Investment Banking Associate at Morgan Stanley",
+                            "location": "New York, NY",
+                            "name": "Ran Mo",
+                            "url": "https://www.linkedin.com/in/sternranmo?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAABga6k0BVsxyWj4UlOCv7G2xUl3p5GcEpUg"
+                        },
+                        "from_cad_school"
+                    ],
+                    [
+                        {
+                            "urn_id": "ACoAAAkSN_QBLW3tso3Hxd0wx0MhVx0n0GEVxsU",
+                            "distance": "DISTANCE_3",
+                            "jobtitle": "Managing Director, Consumer and Retail Investment Banking at Morgan Stanley",
+                            "location": "New York City Metropolitan Area",
+                            "name": "Bruce Williams",
+                            "url": "https://www.linkedin.com/in/bruce-williams-358b7442?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAAAkSN_QBLW3tso3Hxd0wx0MhVx0n0GEVxsU"
+                        },
+                        "from_cad_school"
+                    ],
+                    [
+                        {
+                            "urn_id": "ACoAAAN0LD4BytLJ3R-IKlxam1xoLLEuYXZHOYw",
+                            "distance": "DISTANCE_3",
+                            "jobtitle": "Investment Banking Associate at Morgan Stanley",
+                            "location": "New York, NY",
+                            "name": "Amanda Wai",
+                            "url": "https://www.linkedin.com/in/waiamanda?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAAAN0LD4BytLJ3R-IKlxam1xoLLEuYXZHOYw"
+                        },
+                        "from_cad_school"
+                    ],
+                    [
+                        {
+                            "urn_id": "ACoAABJzcPkBjqPSlSR_XYYUfxmo2Ma7LY2qOdk",
+                            "distance": "DISTANCE_3",
+                            "jobtitle": "Investment Professional at Morgan Stanley Tactical Value",
+                            "location": "New York, NY",
+                            "name": "Eric K.",
+                            "url": "https://www.linkedin.com/in/ericjkang?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAABJzcPkBjqPSlSR_XYYUfxmo2Ma7LY2qOdk"
+                        },
+                        "from_cad_school"
+                    ],
+                    [
+                        {
+                            "urn_id": "ACoAABbbb3UB4JmGc1dSV9TOqTFlpate4PK6H0Y",
+                            "distance": "DISTANCE_3",
+                            "jobtitle": "Investment Banking Associate at Morgan Stanley",
+                            "location": "New York City Metropolitan Area",
+                            "name": "Joe Sassi",
+                            "url": "https://www.linkedin.com/in/josephsassi?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAABbbb3UB4JmGc1dSV9TOqTFlpate4PK6H0Y"
+                        },
+                        "from_cad_school"
                     ]
                 ]
             ],
             [
                 "103112676",
-                1,
+                10,
                 0,
                 []
             ],
             [
                 "103743442",
+                10,
                 1,
-                0,
-                []
+                [
+                    [
+                        {
+                            "urn_id": "ACoAAAkr-m0B-udwEtCh_PT3LhjbfNuZS2audP0",
+                            "distance": "DISTANCE_3",
+                            "jobtitle": "Executive Director, Energy Investment Banking",
+                            "location": "Greater Houston",
+                            "name": "Abishekh Neelanshu",
+                            "url": "https://www.linkedin.com/in/abishekh-neelanshu-2b964943?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAAAkr-m0B-udwEtCh_PT3LhjbfNuZS2audP0"
+                        },
+                        "from_cad_school"
+                    ]
+                ]
             ]
         ]
     ],
     [
-        "1382",
+        "5298",
         [
             [
-                "90000049",
-                1,
+                "102448103",
+                10,
                 0,
                 []
             ],
             [
                 "90000084",
-                1,
-                1,
-                [
-                    [
-                        {
-                            "urn_id": "ACoAAC9DVo8BP9DDu6Yb3uV_IsbwSnL4935eYuY",
-                            "distance": "DISTANCE_3",
-                            "jobtitle": "Investment Banking Analyst at Goldman Sachs",
-                            "location": "San Francisco, CA",
-                            "name": "Aidan Sommer",
-                            "url": "https://www.linkedin.com/in/aidansommer?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAAC9DVo8BP9DDu6Yb3uV_IsbwSnL4935eYuY"
-                        },
-                        "166689"
-                    ]
-                ]
+                10,
+                0,
+                []
             ],
             [
-                "102571732",
-                1,
-                1,
+                "105080838",
+                10,
+                3,
                 [
                     [
                         {
-                            "urn_id": "ACoAABfOOfcBFOAgcTTlPWZ3xTaRHX-jNTGv9Gg",
+                            "urn_id": "ACoAACsLtT8BwWOavaBCOXWkDPLH43mkep0h9TI",
                             "distance": "DISTANCE_3",
-                            "jobtitle": "Investment Banking Associate at Goldman Sachs",
+                            "jobtitle": "Director @ Rothschild & Co | Investment Banking, Private Capital Markets",
                             "location": "New York, NY",
-                            "name": "Alex Hague",
-                            "url": "https://www.linkedin.com/in/alex-hague?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAABfOOfcBFOAgcTTlPWZ3xTaRHX-jNTGv9Gg"
+                            "name": "Victor D\u2019Agata",
+                            "url": "https://www.linkedin.com/in/victor-d%E2%80%99agata-767a38181?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAACsLtT8BwWOavaBCOXWkDPLH43mkep0h9TI"
                         },
                         "166689"
+                    ],
+                    [
+                        {
+                            "urn_id": "ACoAABDbPlEBQ-q5MF9ZxpOzuW7G12Y3ugpkec0",
+                            "distance": "DISTANCE_3",
+                            "jobtitle": "Global Advisory at Rothschild & Co",
+                            "location": "New York, NY",
+                            "name": "Roman V.",
+                            "url": "https://www.linkedin.com/in/romanvolikov?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAABDbPlEBQ-q5MF9ZxpOzuW7G12Y3ugpkec0"
+                        },
+                        "from_cad_school"
+                    ],
+                    [
+                        {
+                            "urn_id": "ACoAAABa9UYBHmpBEEvP_nA0h7ro5aPapOM4Jbw",
+                            "distance": "DISTANCE_3",
+                            "jobtitle": "Managing Director, Consumer & Retail M&A at Rothschild & Co",
+                            "location": "New York, NY",
+                            "name": "Jimmy Bonneau",
+                            "url": "https://www.linkedin.com/in/jimmy-bonneau-806bb51?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAAABa9UYBHmpBEEvP_nA0h7ro5aPapOM4Jbw"
+                        },
+                        "from_cad_school"
                     ]
                 ]
             ],
             [
                 "103112676",
-                1,
+                10,
                 0,
                 []
             ],
             [
                 "103743442",
-                1,
+                10,
                 0,
                 []
             ]
