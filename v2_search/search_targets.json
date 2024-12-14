@@ -1,0 +1,54 @@
+[
+    [
+        "Morgan Stanley",
+        [
+            [
+                "Los Angeles",
+                1
+            ],
+            [
+                "San Francisco",
+                1
+            ],
+            [
+                "New York",
+                1
+            ]
+        ]
+    ],
+    [
+        "Goldman Sachs",
+        [
+            [
+                "Chicago",
+                1
+            ],
+            [
+                "Houston",
+                1
+            ]
+        ]
+    ],
+    [
+        "Barclays",
+        [
+            [
+                "Los Angeles",
+                1
+            ],
+            [
+                "San Francisco",
+                1
+            ]
+        ]
+    ],
+    [
+        "Deutsche Bank",
+        [
+            [
+                "New York",
+                1
+            ]
+        ]
+    ]
+]

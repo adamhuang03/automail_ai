@@ -1,0 +1,120 @@
+[
+    [
+        "497017",
+        [
+            [
+                "90000049",
+                1,
+                0,
+                []
+            ],
+            [
+                "90000084",
+                1,
+                1,
+                [
+                    [
+                        {
+                            "urn_id": "ACoAAAMjDXgBlWoBz74DZp5xfJFr7SorVOicIis",
+                            "distance": "DISTANCE_3",
+                            "jobtitle": "Investment Banking at Morgan Stanley",
+                            "location": "San Francisco Bay Area",
+                            "name": "Alex Wong, CFA",
+                            "url": "https://www.linkedin.com/in/alexkowong?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAAAMjDXgBlWoBz74DZp5xfJFr7SorVOicIis"
+                        },
+                        "from_cad_school"
+                    ]
+                ]
+            ],
+            [
+                "102571732",
+                1,
+                1,
+                [
+                    [
+                        {
+                            "urn_id": "ACoAABkR9ZkBBXbjJx_6dr1DghpOVDT6_kW3d7Q",
+                            "distance": "DISTANCE_3",
+                            "jobtitle": "US/Canada Economist at Morgan Stanley",
+                            "location": "New York City Metropolitan Area",
+                            "name": "Lenoy Dujon",
+                            "url": "https://www.linkedin.com/in/lenoydujon?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAABkR9ZkBBXbjJx_6dr1DghpOVDT6_kW3d7Q"
+                        },
+                        "166689"
+                    ]
+                ]
+            ],
+            [
+                "103112676",
+                1,
+                0,
+                []
+            ],
+            [
+                "103743442",
+                1,
+                0,
+                []
+            ]
+        ]
+    ],
+    [
+        "1382",
+        [
+            [
+                "90000049",
+                1,
+                0,
+                []
+            ],
+            [
+                "90000084",
+                1,
+                1,
+                [
+                    [
+                        {
+                            "urn_id": "ACoAAC9DVo8BP9DDu6Yb3uV_IsbwSnL4935eYuY",
+                            "distance": "DISTANCE_3",
+                            "jobtitle": "Investment Banking Analyst at Goldman Sachs",
+                            "location": "San Francisco, CA",
+                            "name": "Aidan Sommer",
+                            "url": "https://www.linkedin.com/in/aidansommer?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAAC9DVo8BP9DDu6Yb3uV_IsbwSnL4935eYuY"
+                        },
+                        "166689"
+                    ]
+                ]
+            ],
+            [
+                "102571732",
+                1,
+                1,
+                [
+                    [
+                        {
+                            "urn_id": "ACoAABfOOfcBFOAgcTTlPWZ3xTaRHX-jNTGv9Gg",
+                            "distance": "DISTANCE_3",
+                            "jobtitle": "Investment Banking Associate at Goldman Sachs",
+                            "location": "New York, NY",
+                            "name": "Alex Hague",
+                            "url": "https://www.linkedin.com/in/alex-hague?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAABfOOfcBFOAgcTTlPWZ3xTaRHX-jNTGv9Gg"
+                        },
+                        "166689"
+                    ]
+                ]
+            ],
+            [
+                "103112676",
+                1,
+                0,
+                []
+            ],
+            [
+                "103743442",
+                1,
+                0,
+                []
+            ]
+        ]
+    ]
+]
