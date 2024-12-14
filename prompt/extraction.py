@@ -31,5 +31,7 @@ Return a JSON with the following structure:
 """
 
 POST_PROMPT_INSTR = """
-    Include all companies and locations in the search. For each location, automatically set each location to 10 unless otherwise specified.
+    Requirements:
+    - Include all companies and locations in the search.
+    - For each location, automatically set each location to 10 (even for "any"), regardless of what is specified in the input.
 """
