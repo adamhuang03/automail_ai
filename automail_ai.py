@@ -18,48 +18,7 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-OPENAI_EXTRACTION_PROMPT = """
-From the given input, please extract:
-- Target number of people for all companies, if not specified, default to 10
-    - If given a range, use the lower bound
-- Key industry to search for
-- Companies to search for, if not specified, default to "any"
-- Specific locations, if not specified, default to "any"
-- Implied job positions in particular. Industry can be excluded from the position string
-- If canadian people mentioned, then include_cad_schools_on_fill_search should be true
-
-Return a JSON with the following structure:
-{
-    "target_total": int,
-    "keyword_industry": str,
-    "companies": [
-        {
-            "name": str,
-            "locations": [
-                {
-                    "location": str,
-                    "target_per_location": int
-                }
-            ]
-        }
-    ],
-    "additional_filters": {
-        "positions": [str],
-        "include_cad_schools_on_fill_search": bool
-    }
-}
-"""
-
-POST_PROMPT_INSTR = """
-    Set the target_total first. Distribute it among all companies and locations so that the sum matches target_total and no location is assigned zero. If you cannot fit all under target_total, remove companies or locations in descending order until you achieve this balance.
-
-    Example: If target_total is 10
-
-    - All assigned targets must total 10.
-    - If there are more companies than target_total, keep the same number of companies as target_total, then adjust locations and targets to match.
-    - If there are too many locations, remove some in descending order.
-    - If a location target is 0, subtract tagets from other locations to this location, even from other companies.
-"""
+from prompts import OPENAI_EXTRACTION_PROMPT, POST_PROMPT_INSTR
 
 def parse_input_prompt(prompt: str, openai_client: OpenAI) -> dict:
     """
@@ -568,25 +527,25 @@ If they went to the University of Waterloo, please use template 2. If they went 
 
     # ==================================================================
 
-    # search_targets = prepare_search_parameters(
-    #     prompt=prompt_4,
-    #     openai_client=openai
-    # )
+    search_targets = prepare_search_parameters(
+        prompt=prompt_2,
+        openai_client=openai
+    )
 
-    # params = search_targets[0].copy()
-    # params['include_cad_schools'] = params['additional_filters']['include_cad_schools_on_fill_search']
-    # params['positions'] = params['additional_filters']['positions']
-    # params.pop("companies")
-    # params.pop("additional_filters")
-    # params_clean = params 
-    # search_targets_clean = search_targets[1]
+    params = search_targets[0].copy()
+    params['include_cad_schools'] = params['additional_filters']['include_cad_schools_on_fill_search']
+    params['positions'] = params['additional_filters']['positions']
+    params.pop("companies")
+    params.pop("additional_filters")
+    params_clean = params 
+    search_targets_clean = search_targets[1]
 
-    # # Debugging: Print prepared search targets
-    # logger.info("Prepared search targets: %s", search_targets[1])
-    # with open("v2_search/search_targets.json", "w") as f:
-    #     json.dump(search_targets_clean, f, indent=4)
-    # with open("v2_search/params.json", "w") as f:
-    #     json.dump(params_clean, f, indent=4)
+    # Debugging: Print prepared search targets
+    logger.info("Prepared search targets: %s", search_targets[1])
+    with open("v2_search/search_targets.json", "w") as f:
+        json.dump(search_targets_clean, f, indent=4)
+    with open("v2_search/params.json", "w") as f:
+        json.dump(params_clean, f, indent=4)
 
 
     # ==================================================================
@@ -615,7 +574,6 @@ If they went to the University of Waterloo, please use template 2. If they went 
         offset=0,
         cad_school_check=params['include_cad_schools']
     )
-
 
     # if os.path.exists("input/accumulator.json"):
     #     with open("input/accumulator.json", "r") as f:
