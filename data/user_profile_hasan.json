@@ -1,0 +1,95 @@
+{
+    "personal": {
+        "first_name": "Hasan",
+        "last_name": "Raza",
+        "headline": "building automail | next36 \u201825",
+        "location": "Canada",
+        "city": "Toronto, Ontario",
+        "industry": "Higher Education"
+    },
+    "experiences": [
+        {
+            "title": "Co-Founder",
+            "company": "automail",
+            "description": "personalized networking agent",
+            "start_date": {
+                "month": 10,
+                "year": 2024
+            },
+            "end_date": null
+        },
+        {
+            "title": "Operations",
+            "company": "Air",
+            "description": "No description available",
+            "start_date": {
+                "month": 12,
+                "year": 2024
+            },
+            "end_date": null
+        },
+        {
+            "title": "Co-Founder",
+            "company": "Mockt",
+            "description": "Peer-to-Peer Mock Interview Platform (https://www.getmockt.com/)",
+            "start_date": {
+                "month": 10,
+                "year": 2023
+            },
+            "end_date": null
+        },
+        {
+            "title": "Investment Banking Analyst",
+            "company": "Bank of America Merrill Lynch",
+            "description": "Mergers & Acquisitions",
+            "start_date": {
+                "month": 6,
+                "year": 2024
+            },
+            "end_date": {
+                "month": 8,
+                "year": 2024
+            }
+        },
+        {
+            "title": "Investment Analyst",
+            "company": "Brookfield Asset Management",
+            "description": "Mergers & Acquisitions",
+            "start_date": {
+                "month": 5,
+                "year": 2023
+            },
+            "end_date": {
+                "month": 8,
+                "year": 2023
+            }
+        }
+    ],
+    "education": [
+        {
+            "school": "University of Toronto",
+            "activities": null,
+            "grade": "Dean's List Scholar | Honors with High Distinction",
+            "start_date": {
+                "year": 2021
+            },
+            "end_date": {
+                "year": 2025
+            }
+        },
+        {
+            "school": "International Baccalaureate",
+            "activities": "DIS Head Boy 2019-2020, World Scholar's Cup Club Debate Coach, House Captain, Heritage & Tolerance Prefect, U16 Basketball Team (2017-2018), U18 Basketball Team (2019), U16 Cricket Team",
+            "grade": "45/45",
+            "start_date": {
+                "month": 9,
+                "year": 2019
+            },
+            "end_date": {
+                "month": 7,
+                "year": 2021
+            }
+        }
+    ],
+    "id": "hasan-raza-"
+}
