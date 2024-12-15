@@ -8,11 +8,14 @@ from openai import OpenAI
 from typing import List, Dict
 import csv
 from io import StringIO
-import sys
-from pathlib import Path
 import logging
 import asyncio
 import json
+
+import sys
+from pathlib import Path
+# Add the parent directory to sys.path
+sys.path.append(str(Path(__file__).parent.parent))
 
 # Configure logging
 # Set up logging
