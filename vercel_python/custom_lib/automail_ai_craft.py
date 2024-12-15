@@ -13,7 +13,7 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-from prompt import OPENAI_EXTRACTION_PROMPT, POST_PROMPT_INSTR, EMAIL_SYSTEM_PROMPT, EMAIL_TEMPLATE
+from ..prompt.email import EMAIL_SYSTEM_PROMPT, EMAIL_TEMPLATE
 
 # function to enrich each person in a json, toggle for urn_id or url
 def enrich_person(
