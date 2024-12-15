@@ -71,6 +71,7 @@ async def process_data(request: ProcessDataRequest):
             linkedin_client = LinkedinWrapper(
                 username=os.getenv("LINKEDIN_USER"),
                 password=os.getenv("LINKEDIN_PASSWORD"),
+                cookies_dir='custom_lib/',
                 debug=True
             )
 
