@@ -70,10 +70,27 @@ async def process_data(request: ProcessDataRequest):
             
             # Load cookies from .jr file using CookieRepository
             try:
-                cookie_repo = CookieRepository(cookies_dir='custom_lib/')
+                cookie_dir = 'custom_lib/'
+                cookie_file = os.path.join(cookie_dir, f"{os.getenv('LINKEDIN_USER')}.jr")
+                logger.info(f"Looking for cookie file at: {cookie_file}")
+                
+                # Check if file exists
+                if os.path.exists(cookie_file):
+                    logger.info(f"Cookie file found at {cookie_file}")
+                else:
+                    logger.error(f"Cookie file not found at {cookie_file}")
+                    # List contents of custom_lib directory
+                    try:
+                        files = os.listdir(cookie_dir)
+                        logger.info(f"Files in {cookie_dir}: {files}")
+                    except Exception as e:
+                        logger.error(f"Error listing directory {cookie_dir}: {str(e)}")
+
+                cookie_repo = CookieRepository(cookies_dir=cookie_dir)
                 cookies = cookie_repo.get(os.getenv("LINKEDIN_USER"))
                 if cookies and isinstance(cookies, RequestsCookieJar):
                     logger.info("Successfully loaded cookies from repository")
+                    logger.info(f"Cookie names: {[cookie.name for cookie in cookies]}")
                 else:
                     logger.warning("No valid cookies found in repository")
                     cookies = None
