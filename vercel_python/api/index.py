@@ -73,18 +73,26 @@ async def process_data(request: ProcessDataRequest):
                 cookie_dir = 'custom_lib/'
                 cookie_file = os.path.join(cookie_dir, f"{os.getenv('LINKEDIN_USER')}.jr")
                 logger.info(f"Looking for cookie file at: {cookie_file}")
+                logger.info(f"Current working directory: {os.getcwd()}")
                 
+                # Check if directory exists
+                if os.path.exists(cookie_dir):
+                    logger.info(f"Directory {cookie_dir} exists")
+                    files = os.listdir(cookie_dir)
+                    logger.info(f"Files in {cookie_dir}: {files}")
+                else:
+                    logger.error(f"Directory {cookie_dir} does not exist")
+                    # List contents of current directory
+                    files = os.listdir('.')
+                    logger.info(f"Files in current directory: {files}")
+
                 # Check if file exists
                 if os.path.exists(cookie_file):
                     logger.info(f"Cookie file found at {cookie_file}")
+                    file_size = os.path.getsize(cookie_file)
+                    logger.info(f"Cookie file size: {file_size} bytes")
                 else:
                     logger.error(f"Cookie file not found at {cookie_file}")
-                    # List contents of custom_lib directory
-                    try:
-                        files = os.listdir(cookie_dir)
-                        logger.info(f"Files in {cookie_dir}: {files}")
-                    except Exception as e:
-                        logger.error(f"Error listing directory {cookie_dir}: {str(e)}")
 
                 cookie_repo = CookieRepository(cookies_dir=cookie_dir)
                 cookies = cookie_repo.get(os.getenv("LINKEDIN_USER"))
@@ -96,6 +104,9 @@ async def process_data(request: ProcessDataRequest):
                     cookies = None
             except Exception as e:
                 logger.error(f"Error loading cookies: {str(e)}")
+                logger.error(f"Error type: {type(e)}")
+                import traceback
+                logger.error(f"Traceback: {traceback.format_exc()}")
                 cookies = None
 
             # Initialize LinkedIn client
