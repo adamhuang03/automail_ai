@@ -5,11 +5,9 @@ from pydantic import BaseModel
 import json
 import os
 from openai import OpenAI
-from typing import List, Dict
 import csv
 from io import StringIO
 import logging
-import asyncio
 import json
 
 import sys
