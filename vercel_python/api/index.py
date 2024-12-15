@@ -29,6 +29,8 @@ if not logger.hasHandlers():  # Avoid adding handlers multiple times
 # Import from the custom_lib directory relative to vercel_python
 from custom_lib.automail_ai_craft import draft_email, enrich_person, multi_enrich_persons
 from custom_lib.linkedin_wrapper import LinkedinWrapper
+from requests.cookies import RequestsCookieJar
+from linkedin_api.cookie_repository import CookieRepository
 
 # uvicorn vercel_python.api.index:app --reload --log-level info
 
@@ -66,12 +68,25 @@ async def process_data(request: ProcessDataRequest):
             logger.info("Initializing OpenAI client")
             openai_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
             
+            # Load cookies from .jr file using CookieRepository
+            try:
+                cookie_repo = CookieRepository(cookies_dir='custom_lib/')
+                cookies = cookie_repo.get(os.getenv("LINKEDIN_USER"))
+                if cookies and isinstance(cookies, RequestsCookieJar):
+                    logger.info("Successfully loaded cookies from repository")
+                else:
+                    logger.warning("No valid cookies found in repository")
+                    cookies = None
+            except Exception as e:
+                logger.error(f"Error loading cookies: {str(e)}")
+                cookies = None
+
             # Initialize LinkedIn client
             logger.info("Initializing LinkedIn client")
             linkedin_client = LinkedinWrapper(
                 username=os.getenv("LINKEDIN_USER"),
                 password=os.getenv("LINKEDIN_PASSWORD"),
-                cookies_dir='custom_lib/',
+                cookies=cookies,
                 authenticate=False,
                 debug=True
             )
