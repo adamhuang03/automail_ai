@@ -72,11 +72,18 @@ async def process_data(request: ProcessDataRequest):
                 username=os.getenv("LINKEDIN_USER"),
                 password=os.getenv("LINKEDIN_PASSWORD"),
                 cookies_dir='custom_lib/',
-                authenticate=False,
-                refresh_cookies=False,
+                authenticate=True,
                 debug=True
             )
-
+            
+            # Log cookie information
+            cookies = linkedin_client._cookies()
+            if cookies:
+                cookie_names = [cookie.name for cookie in cookies]
+                logger.info(f"LinkedIn cookies found: {', '.join(cookie_names)}")
+            else:
+                logger.warning("No LinkedIn cookies available")
+            
             logger.info(f"Enriching user profile: {request.user_linkedin_url}")
             user_profile = enrich_person(
                 linkedin=linkedin_client,
