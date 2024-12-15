@@ -28,9 +28,9 @@ if not logger.hasHandlers():  # Avoid adding handlers multiple times
     console_handler.setFormatter(formatter)
     logger.addHandler(console_handler)
 
-# Import from the lib directory relative to vercel_python
-from lib.automail_ai_craft import draft_email, enrich_person, multi_enrich_persons
-from lib.linkedin_wrapper import LinkedinWrapper
+# Import from the custom_lib directory relative to vercel_python
+from custom_lib.automail_ai_craft import draft_email, enrich_person, multi_enrich_persons
+from custom_lib.linkedin_wrapper import LinkedinWrapper
 
 # uvicorn vercel_python.api.index:app --reload --log-level info
 

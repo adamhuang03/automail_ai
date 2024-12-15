@@ -8,7 +8,7 @@
                 "runtime": "python3.12",
                 "maxLambdaSize": "200mb",
                 "buildCommand": "pip install -r requirements.txt",
-                "includeFiles": ["lib/**"]
+                "includeFiles": ["custom_lib/**"]
             }
         }
     ],
