@@ -115,7 +115,8 @@ async def process_data(request: ProcessDataRequest):
                 username=os.getenv("LINKEDIN_USER"),
                 password=os.getenv("LINKEDIN_PASSWORD"),
                 cookies=cookies,
-                authenticate=False,
+                authenticate=True,  # Need this to be True to set the cookies
+                refresh_cookies=False,  # Don't refresh existing cookies
                 debug=True
             )
             
