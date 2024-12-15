@@ -40,17 +40,14 @@ Provide only the email as part of the output...
 EMAIL_TEMPLATE = """
 Hi {name_field},
 
-Hope you are having a great day. My name is Austin Seneres, I'm currently a second year at the University of Toronto, and incoming at Dawson Partners for the winter term as a Private Equity Analyst on their capital management team.
+I hope this email finds you well.
 
-I wanted to reach out as I'd love to learn more about {latest_firm_name} and your experience on the {personalization_field} team, especially from a Canadian. If you are available for a quick chat, that would be amazing. I understand you must be busy, so I'd be more than happy to find a time that works best for your schedule. In case it's helpful to provide more context on my background, I have attached my resume below.
+My name is Vaishika Mathisayan, and I am a finance student at Toronto Metropolitan University - I have attached my resume to provide further clarity on my background.
 
-Looking forward to hearing back.
+I found your profile on LinkedIn and I would very much like to learn more about your background. With that said, I would appreciate the opportunity to learn more about your time in the industry, specifically at CIBC.
 
-Best,
+Please let me know if you would like to have a quick chat in the coming weeks. I'd be happy to work around your schedule.
 
-Austin Seneres
-BCom Candidate 2027
-Rotman Commerce | University of Toronto
-Tel: +1 (647) 867-3883
-Email: austin.seneres@mail.utoronto.ca
+Kind regards,
+Vaishika
 """
