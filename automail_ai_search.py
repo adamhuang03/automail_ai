@@ -587,28 +587,28 @@ def extract_linkedin_data(results: list):
                 })
                 accumulator.append(urn_id)
 
-    with open("v2_output/results.json", "w") as f:
+    with open("z.3)output/results.json", "w") as f:
         json.dump(results, f, indent=4)
     
     # Create DataFrame
     df = pd.DataFrame(data)
     
     # Save to CSV
-    df.to_csv("v2_output/linkedin_data.csv", index=False)
-    print(f"Saved {len(data)} records to v2_output/linkedin_data.csv")
+    df.to_csv("z.3)output/linkedin_data.csv", index=False)
+    print(f"Saved {len(data)} records to z.3)output/linkedin_data.csv")
 
     # Save accumulator to JSON
-    if os.path.exists("v2_output/accumulator.json"):
-        with open("v2_output/accumulator.json", "r") as f:
+    if os.path.exists("z.2)craft_input/accumulator.json"):
+        with open("z.2)craft_input/accumulator.json", "r") as f:
             existing_urn_ids = json.load(f)
         existing_urn_ids.extend(accumulator)
-        with open("v2_output/accumulator.json", "w") as f:
+        with open("z.2)craft_input/accumulator.json", "w") as f:
             json.dump(existing_urn_ids, f, indent=4)
     else:
-        with open("v2_output/accumulator.json", "w") as f:
+        with open("z.2)craft_input/accumulator.json", "w") as f:
             json.dump(accumulator, f, indent=4)
 
-    print(f"Saved {len(accumulator)} records to v2_output/accumulator.json")
+    print(f"Saved {len(accumulator)} records to z.2)craft_input/accumulator.json")
 
 if __name__ == "__main__":
     # this is good for 1 firm search at a time
@@ -650,49 +650,51 @@ If they went to the University of Waterloo, please use template 2. If they went 
     linkedin = LinkedinWrapper(linkedin_user, linkedin_password, debug=True)
     # ==================================================================
 
-    # search_targets = prepare_search_parameters(
-    #     prompt=prompt,
-    #     openai_client=openai
-    # )
+    search_targets = prepare_search_parameters(
+        prompt=prompt,
+        openai_client=openai
+    )
 
-    # params = search_targets[0].copy()
-    # params['include_cad_schools'] = params['additional_filters']['include_cad_schools_on_fill_search']
-    # params['positions'] = params['additional_filters']['positions']
-    # params.pop("companies")
-    # params.pop("additional_filters")
-    # params_clean = params 
-    # search_targets_clean = search_targets[1]
+    params = search_targets[0].copy()
+    params['include_cad_schools'] = params['additional_filters']['include_cad_schools_on_fill_search']
+    params['positions'] = params['additional_filters']['positions']
+    params.pop("companies")
+    params.pop("additional_filters")
+    params_clean = params 
+    search_targets_clean = search_targets[1]
 
-    # # Debugging: Print prepared search targets
-    # logger.info("Prepared search targets: %s", search_targets[1])
-    # with open("v2_search/search_targets.json", "w") as f:
-    #     json.dump(search_targets_clean, f, indent=4)
-    # with open("v2_search/params.json", "w") as f:
-    #     json.dump(params_clean, f, indent=4)
+    # Debugging: Print prepared search targets
+    logger.info("Prepared search targets: %s", search_targets[1])
+    with open("z.1)search_input/search_targets.json", "w") as f:
+        json.dump(search_targets_clean, f, indent=4)
+    with open("z.1)search_input/search_targets_adjusted.json", "w") as f:
+        json.dump(search_targets_clean, f, indent=4)
+    with open("z.1)search_input/params.json", "w") as f:
+        json.dump(params_clean, f, indent=4)
 
     # ==================================================================
 
-    pause = input("Update search_targets.json in v2_search/adjusted. Press enter to continue...")
+    pause = input("Update search_targets.json in z.1)search_input/adjusted. Press enter to continue...")
     
-    with open("v2_search/adjusted/search_targets.json", "r") as f:
+    with open("z.1)search_input/search_targets_adjusted.json", "r") as f:
         search = json.load(f)
 
     updated_search = get_company_ids(linkedin, search)
-    with open("v2_search/adjusted_2/search_targets.json", "w") as f:
+    with open("z.1)search_input/search_targets_final.json", "w") as f:
         json.dump(updated_search, f, indent=4)
 
     # ==================================================================
 
     pause = input("Ensure params.json and search_targets.json are correct. Press enter to continue...")
 
-    with open("v2_search/adjusted_2/search_targets.json", "r") as f:
+    with open("z.1)search_input/search_targets_final.json", "r") as f:
         search = json.load(f)
-    with open("v2_search/params.json", "r") as f:
+    with open("z.1)search_input/params.json", "r") as f:
         params = json.load(f)
 
     existing_urn_ids = []
-    if os.path.exists("v2_output/accumulator.json"):
-        with open("v2_output/accumulator.json", "r") as f:
+    if os.path.exists("z.2)input/accumulator.json"):
+        with open("z.2)input/accumulator.json", "r") as f:
             existing_urn_ids = json.load(f)
 
     school_urn_id = "85465247"

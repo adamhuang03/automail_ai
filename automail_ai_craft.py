@@ -114,7 +114,8 @@ def draft_email(
     openai: OpenAI,
     user_profile: dict,
     candidate_profile: dict,
-    keyword_industry: str
+    keyword_industry: str,
+    email_template: str
 ) -> str:
     messages = [
         {"role": "system", "content": EMAIL_SYSTEM_PROMPT},
@@ -126,9 +127,9 @@ def draft_email(
         {json.dumps(candidate_profile, indent=2)}
 
         Num: 1
-        Role:
+        Role: {keyword_industry}
         Email template:
-        {EMAIL_TEMPLATE}
+        {email_template}
         """}
     ]
     
@@ -211,7 +212,8 @@ if __name__ == "__main__":
             openai=openai,
             user_profile=user_profile,
             candidate_profile=enriched_person,
-            keyword_industry=keyword_industry
+            keyword_industry=keyword_industry,
+            email_template=EMAIL_TEMPLATE
         )
         emails.append(email)
 
