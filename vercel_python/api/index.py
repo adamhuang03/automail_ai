@@ -122,7 +122,7 @@ async def process_data(request: ProcessDataRequest):
             logger.info("Starting parallel profile enrichment with both clients")
             
             async def process_client(client, urls, client_name, start_time):
-                results = await multi_enrich_persons(
+                results = multi_enrich_persons(
                     linkedin=client,
                     values=urls,
                     url_value=True

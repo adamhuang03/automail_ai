@@ -17,7 +17,7 @@ logger = logging.getLogger(__name__)
 from prompt.email import EMAIL_SYSTEM_PROMPT, EMAIL_TEMPLATE
 
 # function to enrich each person in a json, toggle for urn_id or url
-async def enrich_person(
+def enrich_person(
     linkedin: LinkedinWrapper,
     value: str,
     url_value: bool = False
@@ -33,7 +33,7 @@ async def enrich_person(
         id = value
         logger.info("Extracting profile using urn_id: %s", value)
     
-    person = await linkedin.get_profile(id)
+    person = linkedin.get_profile(id)
 
     if not person:
         logger.warning("No profile data returned for value: %s", value)
@@ -93,16 +93,12 @@ async def enrich_person(
     logger.info("Successfully enriched profile data")
     return cleaned_person
 
-async def multi_enrich_persons(
+def multi_enrich_persons(
     linkedin: LinkedinWrapper,
     values: List[str],
     url_value: bool = False
 ) -> List[dict]:
-    # Create tasks for each profile enrichment
-    tasks = [enrich_person(linkedin, value, url_value) for value in values]
-    # Run tasks concurrently and gather results
-    results = await asyncio.gather(*tasks)
-    return results
+    return [enrich_person(linkedin, value, url_value) for value in values]
 
 async def draft_emails_batch(
     openai: OpenAI,
@@ -233,11 +229,11 @@ if __name__ == "__main__":
     # Get the 1st column
     list_of_urns = [row[0] for row in csv_data]
     
-    multi_result_enriched = asyncio.run(multi_enrich_persons(
+    multi_result_enriched = multi_enrich_persons(
         linkedin=linkedin,
         values=list_of_urns,
         url_value=False
-    ))
+    )
 
     with open("data/user_profile_vaishika.json", "r") as f:
         user_profile = json.load(f)
