@@ -1,56 +1,6 @@
-[
-    [
-        "user_profile_id",
-        "user_prompt_id",
-        "urn_id",
-        "linkedin_url",
-        "to_email",
-        "subject",
-        "body"
-    ],
-    [
-        "ddfe5eb1-3311-4334-9261-fad47c8bb7aa",
-        "d6745f21-8a89-407d-82a6-bbc4f8bab350",
-        "",
-        "https://www.linkedin.com/in/taras-koval/",
-        "taras.koval@moelis.com",
-        "Canadian Student Reaching Out",
-        ""
-    ],
-    [
-        "ddfe5eb1-3311-4334-9261-fad47c8bb7aa",
-        "d6745f21-8a89-407d-82a6-bbc4f8bab350",
-        "",
-        "https://www.linkedin.com/in/owen-weiss-b7b969163/",
-        "owen.weiss@moelis.com",
-        "Canadian Student Reaching Out",
-        ""
-    ],
-    [
-        "ddfe5eb1-3311-4334-9261-fad47c8bb7aa",
-        "d6745f21-8a89-407d-82a6-bbc4f8bab350",
-        "",
-        "https://www.linkedin.com/in/nickson-maywa-cfa/",
-        "nickson.maywa@moelis.com",
-        "Canadian Student Reaching Out",
-        ""
-    ],
-    [
-        "ddfe5eb1-3311-4334-9261-fad47c8bb7aa",
-        "d6745f21-8a89-407d-82a6-bbc4f8bab350",
-        "",
-        "https://www.linkedin.com/in/gurnoorkm/?originalSubdomain=ca",
-        "gurnoor.minhas@moelis.com",
-        "Canadian Student Reaching Out",
-        ""
-    ],
-    [
-        "ddfe5eb1-3311-4334-9261-fad47c8bb7aa",
-        "d6745f21-8a89-407d-82a6-bbc4f8bab350",
-        "",
-        "https://www.linkedin.com/in/ahmedmo/",
-        "ahmed.o.mohamed@moelis.com",
-        "Canadian Student Reaching Out",
-        ""
-    ]
-]
+{
+    "data": {
+        "status": 401
+    },
+    "included": []
+}

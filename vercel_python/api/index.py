@@ -86,13 +86,13 @@ async def process_data(request: ProcessDataRequest):
             else:
                 logger.warning("No valid cookies found in repository")
                 cookies_1 = None
-            cookies_2 = cookie_repo.get(os.getenv("LINKEDIN_USER_2"))
-            if cookies_2 and isinstance(cookies_2, RequestsCookieJar):
-                logger.info("Successfully loaded cookies from repository")
-                logger.info(f"Cookie names: {[cookie.name for cookie in cookies_2]}")
-            else:
-                logger.warning("No valid cookies found in repository")
-                cookies_2 = None
+            # cookies_2 = cookie_repo.get(os.getenv("LINKEDIN_USER_2"))
+            # if cookies_2 and isinstance(cookies_2, RequestsCookieJar):
+            #     logger.info("Successfully loaded cookies from repository")
+            #     logger.info(f"Cookie names: {[cookie.name for cookie in cookies_2]}")
+            # else:
+            #     logger.warning("No valid cookies found in repository")
+            #     cookies_2 = None
 
             # Initialize LinkedIn client
             yield json.dumps({"status": "progress", "message": f"Initializing LinkedIn client (t={int(time.time() - start_time)}s)"}) + "\n"
@@ -105,14 +105,14 @@ async def process_data(request: ProcessDataRequest):
                 refresh_cookies=False,  # Don't refresh existing cookies
                 debug=True
             )
-            linkedin_client_2 = LinkedinWrapper(
-                username=os.getenv("LINKEDIN_USER_2"),
-                password=os.getenv("LINKEDIN_PASSWORD_2"),
-                cookies=cookies_2,
-                authenticate=True,  # Need this to be True to set the cookies
-                refresh_cookies=False,  # Don't refresh existing cookies
-                debug=True
-            )
+            # linkedin_client_2 = LinkedinWrapper(
+            #     username=os.getenv("LINKEDIN_USER_2"),
+            #     password=os.getenv("LINKEDIN_PASSWORD_2"),
+            #     cookies=cookies_2,
+            #     authenticate=True,  # Need this to be True to set the cookies
+            #     refresh_cookies=False,  # Don't refresh existing cookies
+            #     debug=True
+            # )
             
             # Log cookie information
             # cookies = linkedin_client._cookies()
@@ -161,14 +161,14 @@ async def process_data(request: ProcessDataRequest):
             # Create and run tasks in parallel
             tasks = [
                 process_client(linkedin_client, urls_client1, "Client 1"),
-                process_client(linkedin_client_2, urls_client2, "Client 2")
+                # process_client(linkedin_client_2, urls_client2, "Client 2")
             ]
             
             # Wait for both tasks to complete
             results = await asyncio.gather(*tasks)
             
             # Combine results from both clients
-            multi_result_enriched = results[0] + results[1]
+            multi_result_enriched = results[0] # + results[1]
             
             yield json.dumps({"status": "progress", "message": f"Successfully enriched total {len(multi_result_enriched)} profiles (t={int(time.time() - start_time)}s)"}) + "\n"
             logger.info(f"Successfully enriched total {len(multi_result_enriched)} profiles")
