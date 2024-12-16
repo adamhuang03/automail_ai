@@ -79,13 +79,20 @@ async def process_data(request: ProcessDataRequest):
             cookie_dir = 'custom_lib/'
 
             cookie_repo = CookieRepository(cookies_dir=cookie_dir)
-            cookies = cookie_repo.get(os.getenv("LINKEDIN_USER"))
-            if cookies and isinstance(cookies, RequestsCookieJar):
+            cookies_1 = cookie_repo.get(os.getenv("LINKEDIN_USER"))
+            if cookies_1 and isinstance(cookies_1, RequestsCookieJar):
                 logger.info("Successfully loaded cookies from repository")
-                logger.info(f"Cookie names: {[cookie.name for cookie in cookies]}")
+                logger.info(f"Cookie names: {[cookie.name for cookie in cookies_1]}")
             else:
                 logger.warning("No valid cookies found in repository")
-                cookies = None
+                cookies_1 = None
+            cookies_2 = cookie_repo.get(os.getenv("LINKEDIN_USER_2"))
+            if cookies_2 and isinstance(cookies_2, RequestsCookieJar):
+                logger.info("Successfully loaded cookies from repository")
+                logger.info(f"Cookie names: {[cookie.name for cookie in cookies_2]}")
+            else:
+                logger.warning("No valid cookies found in repository")
+                cookies_2 = None
 
             # Initialize LinkedIn client
             yield json.dumps({"status": "progress", "message": f"Initializing LinkedIn client (t={int(time.time() - start_time)}s)"}) + "\n"
@@ -93,19 +100,27 @@ async def process_data(request: ProcessDataRequest):
             linkedin_client = LinkedinWrapper(
                 username=os.getenv("LINKEDIN_USER"),
                 password=os.getenv("LINKEDIN_PASSWORD"),
-                cookies=cookies,
+                cookies=cookies_1,
+                authenticate=True,  # Need this to be True to set the cookies
+                refresh_cookies=False,  # Don't refresh existing cookies
+                debug=True
+            )
+            linkedin_client_2 = LinkedinWrapper(
+                username=os.getenv("LINKEDIN_USER_2"),
+                password=os.getenv("LINKEDIN_PASSWORD_2"),
+                cookies=cookies_2,
                 authenticate=True,  # Need this to be True to set the cookies
                 refresh_cookies=False,  # Don't refresh existing cookies
                 debug=True
             )
             
             # Log cookie information
-            cookies = linkedin_client._cookies()
-            if cookies:
-                cookie_names = [cookie.name for cookie in cookies]
-                logger.info(f"LinkedIn cookies found: {', '.join(cookie_names)}")
-            else:
-                logger.warning("No LinkedIn cookies available")
+            # cookies = linkedin_client._cookies()
+            # if cookies:
+            #     cookie_names = [cookie.name for cookie in cookies]
+            #     logger.info(f"LinkedIn cookies found: {', '.join(cookie_names)}")
+            # else:
+            #     logger.warning("No LinkedIn cookies available")
             
             yield json.dumps({"status": "progress", "message": f"Starting profile enrichment (t={int(time.time() - start_time)}s)"}) + "\n"
             logger.info(f"Enriching user profile: {request.user_linkedin_url}")
@@ -122,18 +137,41 @@ async def process_data(request: ProcessDataRequest):
             
             # Get the URNs (first column)
             list_of_urls = [row[3] for row in csv_data_list[1:]]  # Skip header
-            yield json.dumps({"status": "progress", "message": f"Found {len(list_of_urls)} URLs to process (t={int(time.time() - start_time)}s)"}) + "\n"
-            logger.info(f"Found {len(list_of_urls)} URLs to process")
+            total_urls = len(list_of_urls)
+            mid_point = total_urls // 2
             
-            # Enrich the profiles using the imported function
-            logger.info("Starting bulk profile enrichment")
-            multi_result_enriched = multi_enrich_persons(
-                linkedin=linkedin_client,
-                values=list_of_urls,
-                url_value=True
-            )
-            yield json.dumps({"status": "progress", "message": f"Successfully enriched {len(multi_result_enriched)} profiles (t={int(time.time() - start_time)}s)"}) + "\n"
-            logger.info(f"Successfully enriched {len(multi_result_enriched)} profiles")
+            urls_client1 = list_of_urls[:mid_point]
+            urls_client2 = list_of_urls[mid_point:]
+            
+            yield json.dumps({"status": "progress", "message": f"Found {total_urls} URLs to process, splitting between 2 clients (t={int(time.time() - start_time)}s)"}) + "\n"
+            logger.info(f"Found {total_urls} URLs to process, splitting {len(urls_client1)} and {len(urls_client2)} between clients")
+            
+            # Create async tasks for both clients
+            logger.info("Starting parallel profile enrichment with both clients")
+            
+            async def process_client(client, urls, client_name):
+                results = multi_enrich_persons(
+                    linkedin=client,
+                    values=urls,
+                    url_value=True
+                )
+                yield json.dumps({"status": "progress", "message": f"{client_name} enriched {len(results)} profiles (t={int(time.time() - start_time)}s)"}) + "\n"
+                return results
+            
+            # Create and run tasks in parallel
+            tasks = [
+                process_client(linkedin_client, urls_client1, "Client 1"),
+                process_client(linkedin_client_2, urls_client2, "Client 2")
+            ]
+            
+            # Wait for both tasks to complete
+            results = await asyncio.gather(*tasks)
+            
+            # Combine results from both clients
+            multi_result_enriched = results[0] + results[1]
+            
+            yield json.dumps({"status": "progress", "message": f"Successfully enriched total {len(multi_result_enriched)} profiles (t={int(time.time() - start_time)}s)"}) + "\n"
+            logger.info(f"Successfully enriched total {len(multi_result_enriched)} profiles")
             
             # Send checkpoint before email drafting
             yield json.dumps({"status": "drafting", "message": f"Starting email drafting (t={int(time.time() - start_time)}s)"}) + "\n"

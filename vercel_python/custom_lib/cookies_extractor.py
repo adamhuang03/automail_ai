@@ -29,7 +29,7 @@ def cookie_extractor():
 
     new_repo = CookieRepository() # can adjust the cookie path here ...
     # new_repo.save(cookie_jar, 'email_or_username')
-    new_repo.save(cookie_jar, 'productionadamh@gmail.com')
+    new_repo.save(cookie_jar, 'tryautomail@gmail.com')
 
     return new_repo
 
