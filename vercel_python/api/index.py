@@ -115,7 +115,7 @@ async def process_data(request: ProcessDataRequest):
             # Get the URNs (first column)
             list_of_urls = [row[3] for row in csv_data_list[1:]]  # Skip header
             
-            yield json.dumps({"status": "progress", "message": f"Found {len(list_of_urls)} URLs to process, splitting between 2 clients (t={int(time.time() - start_time)}s)"}) + "\n"
+            yield json.dumps({"status": "progress", "message": f"Found {len(list_of_urls)} URLs to process, splitting between 1 client(s) (t={int(time.time() - start_time)}s)"}) + "\n"
             logger.info(f"Found {len(list_of_urls)} URLs to process, splitting {len(list_of_urls)} between clients")
             
             # Create async tasks for both clients
