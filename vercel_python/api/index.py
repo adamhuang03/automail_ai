@@ -168,7 +168,8 @@ async def process_data(request: ProcessDataRequest):
                 user_profile=user_profile,
                 candidate_profiles=multi_result_enriched,
                 keyword_industry=request.keyword_industry,
-                email_template=request.email_template
+                email_template=request.email_template,
+                batch_size=10
             )
             
             logger.info(f"Successfully drafted {len(emails)} emails in batches")
