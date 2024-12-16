@@ -178,12 +178,16 @@ async def process_data(request: ProcessDataRequest):
                     }) + "\n"
             
             logger.info(f"Successfully drafted {len(emails)} emails")
+            # Send checkpoint before email drafting
+            yield json.dumps({"status": "drafting", "message": "Adding enriched data to CSV"}) + "\n"
             
             # Add enriched data to CSV
             logger.info("Adding enriched data to CSV")
             for i in range(len(csv_data_list[1:])):  # Skip header
                 email_data = emails[i]
                 csv_data_list[i+1][6] = email_data
+            
+            yield json.dumps({"status": "drafting", "message": "Preparing final CSV"}) + "\n"
             
             # Prepare final CSV response
             output_csv = StringIO()
