@@ -78,8 +78,8 @@ async def process_data(request: ProcessDataRequest):
             openai_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
             cookie_dir = 'custom_lib/'
 
-            cookie_repo = CookieRepository(cookies_dir=cookie_dir)
-            cookies_1 = cookie_repo.get(os.getenv("LINKEDIN_USER"))
+            cookie_repo_1 = CookieRepository(cookies_dir=cookie_dir)
+            cookies_1 = cookie_repo_1.get(os.getenv("LINKEDIN_USER"))
             if cookies_1 and isinstance(cookies_1, RequestsCookieJar):
                 logger.info("Successfully loaded cookies from repository")
                 logger.info(f"Cookie names: {[cookie.name for cookie in cookies_1]}")
