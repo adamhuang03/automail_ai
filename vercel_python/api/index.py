@@ -10,6 +10,7 @@ from io import StringIO
 import logging
 import json
 import time
+import asyncio
 
 import sys
 from pathlib import Path
@@ -138,17 +139,60 @@ async def process_data(request: ProcessDataRequest):
             
             # Process emails using batch processing
             logger.info("Starting batch email drafting")
-            emails = await draft_emails_batch(
-                openai=openai_client,
-                user_profile=user_profile,
-                candidate_profiles=multi_result_enriched,
-                keyword_industry=request.keyword_industry,
-                email_template=request.email_template,
-                batch_size=10
-            )
             
-            yield json.dumps({"status": "progress", "message": f"Successfully drafted {len(emails)} emails in batches (t={int(time.time() - start_time)}s)"}) + "\n"
-            logger.info(f"Successfully drafted {len(emails)} emails in batches")
+            all_emails = []
+            total_profiles = len(multi_result_enriched)
+            batch_size = 10
+            
+            for i in range(0, total_profiles, batch_size):
+                batch = multi_result_enriched[i:i + batch_size]
+                current_batch_size = len(batch)
+                logger.info(f"Processing batch {i//batch_size + 1} with {current_batch_size} profiles")
+                yield json.dumps({
+                    "status": "progress", 
+                    "message": f"Processing email batch {i//batch_size + 1}/{(total_profiles + batch_size - 1)//batch_size} (t={int(time.time() - start_time)}s)"
+                }) + "\n"
+                
+                # Create tasks for the batch
+                tasks = []
+                for candidate_profile in batch:
+                    messages = [
+                        {"role": "system", "content": EMAIL_SYSTEM_PROMPT},
+                        {"role": "user", "content": f"""
+                            User Profile:
+                    {json.dumps(user_profile, indent=2)}
+
+                    Candidate Profile:
+                    {json.dumps(candidate_profile, indent=2)}
+
+                    Num: 1
+                    Role: {request.keyword_industry}
+                    Email template:
+                    {request.email_template}
+                    """}
+                    ]
+                    
+                    tasks.append(
+                        openai_client.chat.completions.create(
+                            model="gpt-4o-mini",
+                            messages=messages,
+                            temperature=0.7,
+                            max_tokens=500
+                        )
+                    )
+                
+                # Process batch concurrently
+                batch_responses = await asyncio.gather(*tasks)
+                batch_emails = [response.choices[0].message.content for response in batch_responses]
+                all_emails.extend(batch_emails)
+                
+                logger.info(f"Completed batch {i//batch_size + 1}, total emails: {len(all_emails)}/{total_profiles}")
+                yield json.dumps({
+                    "status": "progress",
+                    "message": f"Completed {len(all_emails)}/{total_profiles} emails (t={int(time.time() - start_time)}s)"
+                }) + "\n"
+            
+            emails = all_emails
             
             # Send checkpoint before email drafting
             yield json.dumps({"status": "drafting", "message": f"Adding enriched data to CSV (t={int(time.time() - start_time)}s)"}) + "\n"
