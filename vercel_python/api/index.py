@@ -156,7 +156,7 @@ async def process_data(request: ProcessDataRequest):
                     url_value=True
                 )
                 yield json.dumps({"status": "progress", "message": f"{client_name} enriched {len(results)} profiles (t={int(time.time() - start_time)}s)"}) + "\n"
-                return results
+                return await results
             
             # Create and run tasks in parallel
             tasks = [
