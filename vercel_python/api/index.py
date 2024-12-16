@@ -4,7 +4,7 @@ from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 import json
 import os
-from openai import OpenAI
+from openai import AsyncOpenAI
 import csv
 from io import StringIO
 import logging
@@ -75,7 +75,9 @@ async def process_data(request: ProcessDataRequest):
             # Initialize OpenAI client
             yield json.dumps({"status": "progress", "message": f"Initializing OpenAI client (t={int(time.time() - start_time)}s)"}) + "\n"
             logger.info("Initializing OpenAI client")
-            openai_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+            openai_client = AsyncOpenAI(
+                api_key=os.getenv("OPENAI_API_KEY")
+            )
             cookie_dir = 'custom_lib/'
 
             cookie_repo_1 = CookieRepository(cookies_dir=cookie_dir)
@@ -167,16 +169,16 @@ async def process_data(request: ProcessDataRequest):
                         {"role": "system", "content": EMAIL_SYSTEM_PROMPT},
                         {"role": "user", "content": f"""
                             User Profile:
-                    {json.dumps(user_profile, indent=2)}
+                        {json.dumps(user_profile, indent=2)}
 
-                    Candidate Profile:
-                    {json.dumps(candidate_profile, indent=2)}
+                        Candidate Profile:
+                        {json.dumps(candidate_profile, indent=2)}
 
-                    Num: 1
-                    Role: {request.keyword_industry}
-                    Email template:
-                    {request.email_template}
-                    """}
+                        Num: 1
+                        Role: {request.keyword_industry}
+                        Email template:
+                        {request.email_template}
+                        """}
                     ]
                     
                     tasks.append(
