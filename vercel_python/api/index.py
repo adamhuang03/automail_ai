@@ -9,6 +9,7 @@ import csv
 from io import StringIO
 import logging
 import json
+import time
 
 import sys
 from pathlib import Path
@@ -55,14 +56,14 @@ class ProcessDataRequest(BaseModel):
 @app.post("/process-data")
 async def process_data(request: ProcessDataRequest):
     async def generate_response():
+        start_time = time.time()
         try:
             # Send initial checkpoint
-            yield json.dumps({"status": "started", "message": "Request received"}) + "\n"
+            yield json.dumps({"status": "started", "message": f"Request received (t=0s)"}) + "\n"
             yield json.dumps({"status": "started", "message": f"CSV Data:\n{request.csv_data}\n"}) + "\n"
             yield json.dumps({"status": "started", "message": f"Industry: {request.keyword_industry}\n"}) + "\n"
             yield json.dumps({"status": "started", "message": f"LinkedIn URL: {request.user_linkedin_url}\n"}) + "\n"
             yield json.dumps({"status": "started", "message": f"Email Template: {request.email_template}\n"}) + "\n"
-            
             
             logger.info(f"Starting process_data with industry: {request}")
             
@@ -70,49 +71,10 @@ async def process_data(request: ProcessDataRequest):
             load_dotenv()
 
             # Initialize OpenAI client
+            yield json.dumps({"status": "progress", "message": f"Initializing OpenAI client (t={int(time.time() - start_time)}s)"}) + "\n"
             logger.info("Initializing OpenAI client")
             openai_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
             cookie_dir = 'custom_lib/'
-            
-            # Load cookies from .jr file using CookieRepository
-            # try:
-            #     cookie_file = os.path.join(cookie_dir, f"{os.getenv('LINKEDIN_USER')}.jr")
-            #     logger.info(f"Looking for cookie file at: {cookie_file}")
-            #     logger.info(f"Current working directory: {os.getcwd()}")
-                
-            #     # Check if directory exists
-            #     if os.path.exists(cookie_dir):
-            #         logger.info(f"Directory {cookie_dir} exists")
-            #         files = os.listdir(cookie_dir)
-            #         logger.info(f"Files in {cookie_dir}: {files}")
-            #     else:
-            #         logger.error(f"Directory {cookie_dir} does not exist")
-            #         # List contents of current directory
-            #         files = os.listdir('.')
-            #         logger.info(f"Files in current directory: {files}")
-
-            #     # Check if file exists
-            #     if os.path.exists(cookie_file):
-            #         logger.info(f"Cookie file found at {cookie_file}")
-            #         file_size = os.path.getsize(cookie_file)
-            #         logger.info(f"Cookie file size: {file_size} bytes")
-            #     else:
-            #         logger.error(f"Cookie file not found at {cookie_file}")
-
-            #     cookie_repo = CookieRepository(cookies_dir=cookie_dir)
-            #     cookies = cookie_repo.get(os.getenv("LINKEDIN_USER"))
-            #     if cookies and isinstance(cookies, RequestsCookieJar):
-            #         logger.info("Successfully loaded cookies from repository")
-            #         logger.info(f"Cookie names: {[cookie.name for cookie in cookies]}")
-            #     else:
-            #         logger.warning("No valid cookies found in repository")
-            #         cookies = None
-            # except Exception as e:
-            #     logger.error(f"Error loading cookies: {str(e)}")
-            #     logger.error(f"Error type: {type(e)}")
-            #     import traceback
-            #     logger.error(f"Traceback: {traceback.format_exc()}")
-            #     cookies = None
 
             cookie_repo = CookieRepository(cookies_dir=cookie_dir)
             cookies = cookie_repo.get(os.getenv("LINKEDIN_USER"))
@@ -124,6 +86,7 @@ async def process_data(request: ProcessDataRequest):
                 cookies = None
 
             # Initialize LinkedIn client
+            yield json.dumps({"status": "progress", "message": f"Initializing LinkedIn client (t={int(time.time() - start_time)}s)"}) + "\n"
             logger.info("Initializing LinkedIn client")
             linkedin_client = LinkedinWrapper(
                 username=os.getenv("LINKEDIN_USER"),
@@ -142,6 +105,7 @@ async def process_data(request: ProcessDataRequest):
             else:
                 logger.warning("No LinkedIn cookies available")
             
+            yield json.dumps({"status": "progress", "message": f"Starting profile enrichment (t={int(time.time() - start_time)}s)"}) + "\n"
             logger.info(f"Enriching user profile: {request.user_linkedin_url}")
             user_profile = enrich_person(
                 linkedin=linkedin_client,
@@ -156,6 +120,7 @@ async def process_data(request: ProcessDataRequest):
             
             # Get the URNs (first column)
             list_of_urls = [row[3] for row in csv_data_list[1:]]  # Skip header
+            yield json.dumps({"status": "progress", "message": f"Found {len(list_of_urls)} URLs to process (t={int(time.time() - start_time)}s)"}) + "\n"
             logger.info(f"Found {len(list_of_urls)} URLs to process")
             
             # Enrich the profiles using the imported function
@@ -165,10 +130,11 @@ async def process_data(request: ProcessDataRequest):
                 values=list_of_urls,
                 url_value=True
             )
+            yield json.dumps({"status": "progress", "message": f"Successfully enriched {len(multi_result_enriched)} profiles (t={int(time.time() - start_time)}s)"}) + "\n"
             logger.info(f"Successfully enriched {len(multi_result_enriched)} profiles")
             
             # Send checkpoint before email drafting
-            yield json.dumps({"status": "drafting", "message": "Starting email drafting"}) + "\n"
+            yield json.dumps({"status": "drafting", "message": f"Starting email drafting (t={int(time.time() - start_time)}s)"}) + "\n"
             
             # Process emails using batch processing
             logger.info("Starting batch email drafting")
@@ -181,10 +147,11 @@ async def process_data(request: ProcessDataRequest):
                 batch_size=10
             )
             
+            yield json.dumps({"status": "progress", "message": f"Successfully drafted {len(emails)} emails in batches (t={int(time.time() - start_time)}s)"}) + "\n"
             logger.info(f"Successfully drafted {len(emails)} emails in batches")
             
             # Send checkpoint before email drafting
-            yield json.dumps({"status": "drafting", "message": "Adding enriched data to CSV"}) + "\n"
+            yield json.dumps({"status": "drafting", "message": f"Adding enriched data to CSV (t={int(time.time() - start_time)}s)"}) + "\n"
             
             # Add enriched data to CSV
             logger.info("Adding enriched data to CSV")
@@ -192,7 +159,7 @@ async def process_data(request: ProcessDataRequest):
                 email_data = emails[i]
                 csv_data_list[i+1][6] = email_data
             
-            yield json.dumps({"status": "drafting", "message": "Preparing final CSV"}) + "\n"
+            yield json.dumps({"status": "drafting", "message": f"Preparing final CSV (t={int(time.time() - start_time)}s)"}) + "\n"
             
             # Prepare final CSV response
             output_csv = StringIO()
@@ -202,7 +169,7 @@ async def process_data(request: ProcessDataRequest):
             # Send final CSV data
             yield json.dumps({
                 "status": "completed",
-                "message": "Process completed",
+                "message": f"Process completed (t={int(time.time() - start_time)}s)",
                 "csv_data": output_csv.getvalue()
             }) + "\n"
             
@@ -210,7 +177,7 @@ async def process_data(request: ProcessDataRequest):
             logger.error(f"Error in process_data: {str(e)}", exc_info=True)
             yield json.dumps({
                 "status": "error",
-                "message": str(e)
+                "message": f"Error (t={int(time.time() - start_time)}s): {str(e)}"
             }) + "\n"
     
     return StreamingResponse(
