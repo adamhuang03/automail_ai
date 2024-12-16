@@ -185,7 +185,7 @@ async def process_data(request: ProcessDataRequest):
                         openai_client.chat.completions.create(
                             model="gpt-4o-mini",
                             messages=messages,
-                            temperature=0.7,
+                            temperature=0.3,
                             max_tokens=500
                         )
                     )
