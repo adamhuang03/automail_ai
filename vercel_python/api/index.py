@@ -114,6 +114,15 @@ async def process_data(request: ProcessDataRequest):
             #     logger.error(f"Traceback: {traceback.format_exc()}")
             #     cookies = None
 
+            cookie_repo = CookieRepository(cookies_dir=cookie_dir)
+            cookies = cookie_repo.get(os.getenv("LINKEDIN_USER"))
+            if cookies and isinstance(cookies, RequestsCookieJar):
+                logger.info("Successfully loaded cookies from repository")
+                logger.info(f"Cookie names: {[cookie.name for cookie in cookies]}")
+            else:
+                logger.warning("No valid cookies found in repository")
+                cookies = None
+
             # Initialize LinkedIn client
             logger.info("Initializing LinkedIn client")
             linkedin_client = LinkedinWrapper(
