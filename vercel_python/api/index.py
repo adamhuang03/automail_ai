@@ -149,29 +149,25 @@ async def process_data(request: ProcessDataRequest):
             # Create async tasks for both clients
             logger.info("Starting parallel profile enrichment with both clients")
             
-            async def process_client(client, urls, client_name):
-                results = multi_enrich_persons(
+            async def process_client(client, urls, client_name, start_time):
+                results = await multi_enrich_persons(
                     linkedin=client,
                     values=urls,
                     url_value=True
                 )
                 yield json.dumps({"status": "progress", "message": f"{client_name} enriched {len(results)} profiles (t={int(time.time() - start_time)}s)"}) + "\n"
-                return await results
+                yield results  # Yield the results as the last item
             
-            # Create and run tasks in parallel
-            tasks = [
-                process_client(linkedin_client, urls_client1, "Client 1"),
-                # process_client(linkedin_client_2, urls_client2, "Client 2")
-            ]
+            # Process URLs with first client
+            logger.info("Starting profile enrichment with client")
+            multi_result_enriched = None
+            async for item in process_client(linkedin_client, urls_client1, "Client 1", start_time):
+                if isinstance(item, str):  # If it's a progress message
+                    yield item
+                else:  # If it's the results
+                    multi_result_enriched = item
             
-            # Wait for both tasks to complete
-            results = await asyncio.gather(*tasks)
-            
-            # Combine results from both clients
-            multi_result_enriched = results[0] # + results[1]
-            
-            yield json.dumps({"status": "progress", "message": f"Successfully enriched total {len(multi_result_enriched)} profiles (t={int(time.time() - start_time)}s)"}) + "\n"
-            logger.info(f"Successfully enriched total {len(multi_result_enriched)} profiles")
+            yield json.dumps({"status": "progress", "message": f"Successfully enriched {len(multi_result_enriched)} profiles (t={int(time.time() - start_time)}s)"}) + "\n"
             
             # Send checkpoint before email drafting
             yield json.dumps({"status": "drafting", "message": f"Starting email drafting (t={int(time.time() - start_time)}s)"}) + "\n"
