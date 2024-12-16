@@ -4,6 +4,7 @@ import logging
 import json
 import os
 from openai import OpenAI
+# import asyncio
 
 
 # Configure logging
@@ -98,6 +99,53 @@ def multi_enrich_persons(
     url_value: bool = False
 ) -> List[dict]:
     return [enrich_person(linkedin, value, url_value) for value in values]
+
+# async def draft_emails_batch(
+#     openai: OpenAI,
+#     user_profile: dict,
+#     candidate_profiles: List[dict],
+#     keyword_industry: str,
+#     email_template: str,
+#     batch_size: int = 5
+# ) -> List[str]:
+#     async def process_batch(batch):
+#         tasks = []
+#         for candidate_profile in batch:
+#             messages = [
+#                 {"role": "system", "content": EMAIL_SYSTEM_PROMPT},
+#                 {"role": "user", "content": f"""
+#                         User Profile:
+#                 {json.dumps(user_profile, indent=2)}
+
+#                 Candidate Profile:
+#                 {json.dumps(candidate_profile, indent=2)}
+
+#                 Num: 1
+#                 Role: {keyword_industry}
+#                 Email template:
+#                 {email_template}
+#                 """}
+#             ]
+            
+#             tasks.append(
+#                 openai.chat.completions.create(
+#                     model="gpt-4o-mini",
+#                     messages=messages,
+#                     temperature=0.7,
+#                     max_tokens=500
+#                 )
+#             )
+        
+#         responses = await asyncio.gather(*tasks)
+#         return [response.choices[0].message.content for response in responses]
+
+#     all_emails = []
+#     for i in range(0, len(candidate_profiles), batch_size):
+#         batch = candidate_profiles[i:i + batch_size]
+#         emails = await process_batch(batch)
+#         all_emails.extend(emails)
+    
+#     return all_emails
 
 def draft_email(
     openai: OpenAI,
@@ -194,17 +242,13 @@ if __name__ == "__main__":
         params = json.load(f)
         keyword_industry = params["keyword_industry"]
 
-    emails = []
-    
-    for enriched_person in multi_result_enriched:
-        email = draft_email(
-            openai=openai,
-            user_profile=user_profile,
-            candidate_profile=enriched_person,
-            keyword_industry=keyword_industry,
-            email_template=EMAIL_TEMPLATE
-        )
-        emails.append(email)
+    emails = asyncio.run(draft_emails_batch(
+        openai=openai,
+        user_profile=user_profile,
+        candidate_profiles=multi_result_enriched,
+        keyword_industry=keyword_industry,
+        email_template=EMAIL_TEMPLATE
+    ))
 
     # Add the enriched data to the csv data
     for i in range(len(csv_data)):

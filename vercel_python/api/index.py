@@ -27,7 +27,7 @@ if not logger.hasHandlers():  # Avoid adding handlers multiple times
     logger.addHandler(console_handler)
 
 # Import from the custom_lib directory relative to vercel_python
-from custom_lib.automail_ai_craft import draft_email, enrich_person, multi_enrich_persons
+from custom_lib.automail_ai_craft import draft_email, enrich_person, multi_enrich_persons, draft_emails_batch
 from custom_lib.linkedin_wrapper import LinkedinWrapper
 from requests.cookies import RequestsCookieJar
 from linkedin_api.cookie_repository import CookieRepository
@@ -74,45 +74,45 @@ async def process_data(request: ProcessDataRequest):
             openai_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
             
             # Load cookies from .jr file using CookieRepository
-            try:
-                cookie_dir = 'custom_lib/'
-                cookie_file = os.path.join(cookie_dir, f"{os.getenv('LINKEDIN_USER')}.jr")
-                logger.info(f"Looking for cookie file at: {cookie_file}")
-                logger.info(f"Current working directory: {os.getcwd()}")
+            # try:
+            #     cookie_dir = 'custom_lib/'
+            #     cookie_file = os.path.join(cookie_dir, f"{os.getenv('LINKEDIN_USER')}.jr")
+            #     logger.info(f"Looking for cookie file at: {cookie_file}")
+            #     logger.info(f"Current working directory: {os.getcwd()}")
                 
-                # Check if directory exists
-                if os.path.exists(cookie_dir):
-                    logger.info(f"Directory {cookie_dir} exists")
-                    files = os.listdir(cookie_dir)
-                    logger.info(f"Files in {cookie_dir}: {files}")
-                else:
-                    logger.error(f"Directory {cookie_dir} does not exist")
-                    # List contents of current directory
-                    files = os.listdir('.')
-                    logger.info(f"Files in current directory: {files}")
+            #     # Check if directory exists
+            #     if os.path.exists(cookie_dir):
+            #         logger.info(f"Directory {cookie_dir} exists")
+            #         files = os.listdir(cookie_dir)
+            #         logger.info(f"Files in {cookie_dir}: {files}")
+            #     else:
+            #         logger.error(f"Directory {cookie_dir} does not exist")
+            #         # List contents of current directory
+            #         files = os.listdir('.')
+            #         logger.info(f"Files in current directory: {files}")
 
-                # Check if file exists
-                if os.path.exists(cookie_file):
-                    logger.info(f"Cookie file found at {cookie_file}")
-                    file_size = os.path.getsize(cookie_file)
-                    logger.info(f"Cookie file size: {file_size} bytes")
-                else:
-                    logger.error(f"Cookie file not found at {cookie_file}")
+            #     # Check if file exists
+            #     if os.path.exists(cookie_file):
+            #         logger.info(f"Cookie file found at {cookie_file}")
+            #         file_size = os.path.getsize(cookie_file)
+            #         logger.info(f"Cookie file size: {file_size} bytes")
+            #     else:
+            #         logger.error(f"Cookie file not found at {cookie_file}")
 
-                cookie_repo = CookieRepository(cookies_dir=cookie_dir)
-                cookies = cookie_repo.get(os.getenv("LINKEDIN_USER"))
-                if cookies and isinstance(cookies, RequestsCookieJar):
-                    logger.info("Successfully loaded cookies from repository")
-                    logger.info(f"Cookie names: {[cookie.name for cookie in cookies]}")
-                else:
-                    logger.warning("No valid cookies found in repository")
-                    cookies = None
-            except Exception as e:
-                logger.error(f"Error loading cookies: {str(e)}")
-                logger.error(f"Error type: {type(e)}")
-                import traceback
-                logger.error(f"Traceback: {traceback.format_exc()}")
-                cookies = None
+            #     cookie_repo = CookieRepository(cookies_dir=cookie_dir)
+            #     cookies = cookie_repo.get(os.getenv("LINKEDIN_USER"))
+            #     if cookies and isinstance(cookies, RequestsCookieJar):
+            #         logger.info("Successfully loaded cookies from repository")
+            #         logger.info(f"Cookie names: {[cookie.name for cookie in cookies]}")
+            #     else:
+            #         logger.warning("No valid cookies found in repository")
+            #         cookies = None
+            # except Exception as e:
+            #     logger.error(f"Error loading cookies: {str(e)}")
+            #     logger.error(f"Error type: {type(e)}")
+            #     import traceback
+            #     logger.error(f"Traceback: {traceback.format_exc()}")
+            #     cookies = None
 
             # Initialize LinkedIn client
             logger.info("Initializing LinkedIn client")
@@ -161,28 +161,18 @@ async def process_data(request: ProcessDataRequest):
             # Send checkpoint before email drafting
             yield json.dumps({"status": "drafting", "message": "Starting email drafting"}) + "\n"
             
-            # Process emails using the imported function
-            logger.info("Starting email drafting")
-            emails = []
-            for i, enriched_person in enumerate(multi_result_enriched, 1):
-                logger.debug(f"Drafting email {i}/{len(multi_result_enriched)}")
-                email = draft_email(
-                    openai=openai_client,
-                    user_profile=user_profile,
-                    candidate_profile=enriched_person,
-                    keyword_industry=request.keyword_industry,
-                    email_template=request.email_template
-                )
-                emails.append(email)
-                
-                # Send progress update every few emails
-                if i % 5 == 0 or i == len(multi_result_enriched):
-                    yield json.dumps({
-                        "status": "progress",
-                        "message": f"Drafted {i}/{len(multi_result_enriched)} emails"
-                    }) + "\n"
+            # Process emails using batch processing
+            logger.info("Starting batch email drafting")
+            emails = await draft_emails_batch(
+                openai=openai_client,
+                user_profile=user_profile,
+                candidate_profiles=multi_result_enriched,
+                keyword_industry=request.keyword_industry,
+                email_template=request.email_template
+            )
             
-            logger.info(f"Successfully drafted {len(emails)} emails")
+            logger.info(f"Successfully drafted {len(emails)} emails in batches")
+            
             # Send checkpoint before email drafting
             yield json.dumps({"status": "drafting", "message": "Adding enriched data to CSV"}) + "\n"
             
