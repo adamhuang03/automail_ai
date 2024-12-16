@@ -86,13 +86,6 @@ async def process_data(request: ProcessDataRequest):
             else:
                 logger.warning("No valid cookies found in repository")
                 cookies_1 = None
-            # cookies_2 = cookie_repo.get(os.getenv("LINKEDIN_USER_2"))
-            # if cookies_2 and isinstance(cookies_2, RequestsCookieJar):
-            #     logger.info("Successfully loaded cookies from repository")
-            #     logger.info(f"Cookie names: {[cookie.name for cookie in cookies_2]}")
-            # else:
-            #     logger.warning("No valid cookies found in repository")
-            #     cookies_2 = None
 
             # Initialize LinkedIn client
             yield json.dumps({"status": "progress", "message": f"Initializing LinkedIn client (t={int(time.time() - start_time)}s)"}) + "\n"
@@ -105,22 +98,6 @@ async def process_data(request: ProcessDataRequest):
                 refresh_cookies=False,  # Don't refresh existing cookies
                 debug=True
             )
-            # linkedin_client_2 = LinkedinWrapper(
-            #     username=os.getenv("LINKEDIN_USER_2"),
-            #     password=os.getenv("LINKEDIN_PASSWORD_2"),
-            #     cookies=cookies_2,
-            #     authenticate=True,  # Need this to be True to set the cookies
-            #     refresh_cookies=False,  # Don't refresh existing cookies
-            #     debug=True
-            # )
-            
-            # Log cookie information
-            # cookies = linkedin_client._cookies()
-            # if cookies:
-            #     cookie_names = [cookie.name for cookie in cookies]
-            #     logger.info(f"LinkedIn cookies found: {', '.join(cookie_names)}")
-            # else:
-            #     logger.warning("No LinkedIn cookies available")
             
             yield json.dumps({"status": "progress", "message": f"Starting profile enrichment (t={int(time.time() - start_time)}s)"}) + "\n"
             logger.info(f"Enriching user profile: {request.user_linkedin_url}")
@@ -137,14 +114,9 @@ async def process_data(request: ProcessDataRequest):
             
             # Get the URNs (first column)
             list_of_urls = [row[3] for row in csv_data_list[1:]]  # Skip header
-            total_urls = len(list_of_urls)
-            mid_point = total_urls // 2
             
-            urls_client1 = list_of_urls[:mid_point]
-            urls_client2 = list_of_urls[mid_point:]
-            
-            yield json.dumps({"status": "progress", "message": f"Found {total_urls} URLs to process, splitting between 2 clients (t={int(time.time() - start_time)}s)"}) + "\n"
-            logger.info(f"Found {total_urls} URLs to process, splitting {len(urls_client1)} and {len(urls_client2)} between clients")
+            yield json.dumps({"status": "progress", "message": f"Found {len(list_of_urls)} URLs to process, splitting between 2 clients (t={int(time.time() - start_time)}s)"}) + "\n"
+            logger.info(f"Found {len(list_of_urls)} URLs to process, splitting {len(list_of_urls)} between clients")
             
             # Create async tasks for both clients
             logger.info("Starting parallel profile enrichment with both clients")
@@ -161,7 +133,7 @@ async def process_data(request: ProcessDataRequest):
             # Process URLs with first client
             logger.info("Starting profile enrichment with client")
             multi_result_enriched = None
-            async for item in process_client(linkedin_client, urls_client1, "Client 1", start_time):
+            async for item in process_client(linkedin_client, list_of_urls, "Client 1", start_time):
                 if isinstance(item, str):  # If it's a progress message
                     yield item
                 else:  # If it's the results
