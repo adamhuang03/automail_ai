@@ -30,6 +30,7 @@ if not logger.hasHandlers():  # Avoid adding handlers multiple times
 
 # Import from the custom_lib directory relative to vercel_python
 from custom_lib.automail_ai_craft import draft_email, enrich_person, multi_enrich_persons, draft_emails_batch
+from prompt.email import EMAIL_SYSTEM_PROMPT
 from custom_lib.linkedin_wrapper import LinkedinWrapper
 from requests.cookies import RequestsCookieJar
 from linkedin_api.cookie_repository import CookieRepository
