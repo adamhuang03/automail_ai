@@ -58,6 +58,11 @@ async def process_data(request: ProcessDataRequest):
         try:
             # Send initial checkpoint
             yield json.dumps({"status": "started", "message": "Request received"}) + "\n"
+            yield json.dumps({"status": "started", "message": f"CSV Data:\n{request.csv_data}\n"}) + "\n"
+            yield json.dumps({"status": "started", "message": f"Industry: {request.keyword_industry}\n"}) + "\n"
+            yield json.dumps({"status": "started", "message": f"LinkedIn URL: {request.user_linkedin_url}\n"}) + "\n"
+            yield json.dumps({"status": "started", "message": f"Email Template: {request.email_template}\n"}) + "\n"
+            
             
             logger.info(f"Starting process_data with industry: {request}")
             
