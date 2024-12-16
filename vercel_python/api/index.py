@@ -72,10 +72,10 @@ async def process_data(request: ProcessDataRequest):
             # Initialize OpenAI client
             logger.info("Initializing OpenAI client")
             openai_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+            cookie_dir = 'custom_lib/'
             
             # Load cookies from .jr file using CookieRepository
             # try:
-            #     cookie_dir = 'custom_lib/'
             #     cookie_file = os.path.join(cookie_dir, f"{os.getenv('LINKEDIN_USER')}.jr")
             #     logger.info(f"Looking for cookie file at: {cookie_file}")
             #     logger.info(f"Current working directory: {os.getcwd()}")
