@@ -2,10 +2,10 @@ OPENAI_EXTRACTION_PROMPT = """
 From the given input, please extract:
 - Target number of people for all companies, if not specified, default to 10
     - If given a range, use the lower bound
-- Key industry to search for
+- Key industry to search for. If multiple industries mentioned, use the first one.
 - Companies to search for, if not specified, default to "any"
 - Specific locations, if not specified, default to "any"
-- Implied job positions in particular. Industry can be excluded from the position string.
+- Implied job position in particular. If multiple positions mentioned, use the first one.
 - If canadian people mentioned, then include_cad_schools_on_fill_search should be true
 
 Return a JSON with the following structure:
@@ -24,7 +24,7 @@ Return a JSON with the following structure:
         }
     ],
     "additional_filters": {
-        "positions": [str],
+        "position": str,
         "include_cad_schools_on_fill_search": bool
     }
 }

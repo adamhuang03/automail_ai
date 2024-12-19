@@ -2,7 +2,7 @@ from re import search
 from typing import List, Tuple, Optional
 
 from httpx import Limits
-from lib.linkedin_wrapper import LinkedinWrapper
+from custom_lib.linkedin_wrapper import LinkedinWrapper
 import math
 import logging
 import traceback
@@ -14,13 +14,13 @@ from dataclasses import dataclass, asdict
 from pathlib import Path
 
 # Configure logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-)
+# logging.basicConfig(
+#     level=logging.INFO,
+#     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+# )
 logger = logging.getLogger(__name__)
 
-from prompt import OPENAI_EXTRACTION_PROMPT, POST_PROMPT_INSTR
+from prompt.extraction import OPENAI_EXTRACTION_PROMPT, POST_PROMPT_INSTR
 
 def parse_input_prompt(prompt: str, openai_client: OpenAI) -> dict:
     """
@@ -50,7 +50,7 @@ def parse_input_prompt(prompt: str, openai_client: OpenAI) -> dict:
             json_str = json_str.split("```")[1].strip()
             
         parsed_data = json.loads(json_str)
-        logger.info("Successfully parsed prompt with OpenAI")
+        # logger.info("Successfully parsed prompt with OpenAI")
         return parsed_data
         
     except Exception as e:
@@ -76,133 +76,36 @@ def parse_input_prompt(prompt: str, openai_client: OpenAI) -> dict:
             }
         }
 
-def prepare_search_parameters(
-    # count: int,
-    # current_company: List[str] = None,
-    # locations: List[str] = None,
-    prompt: str = None,
-    openai_client: Optional[OpenAI] = None
+def convert_parms_to_targets(
+    parsed_data: dict
 ) -> Tuple[any, any]:
-    """
-    Prepare search parameters and calculate target distribution for companies and locations.
+    company_location_targets = []
+    total_target = parsed_data["target_total"]
+    companies = parsed_data["companies"]
+    logger.info("Target total: %d, Number of companies: %d", total_target, len(companies))
     
-    Args:
-        count: Total number of results to retrieve
-        current_company: List of company URNs
-        locations: List of location URNs
-        prompt: Optional prompt string to use OpenAI for parameter extraction
-        openai_client: Optional OpenAI client for prompt parsing
+    # If no companies specified in prompt, use "any"
+    if not companies:
+        logger.info("No specific companies found in prompt, using 'any'")
+        company_location_targets = [("any", [("any", total_target)])]
+    else:
+        for company in companies:
+            company_locations = []
+            logger.debug("Processing company: %s", company["name"])
+            # If no locations specified for company, use "any"
+            if not company["locations"]:
+                target = company["target_per_company"] if "target_per_company" in company else total_target // len(companies)
+                logger.info("No locations specified for %s, using 'any' with target: %d", company["name"], target)
+                company_locations = [("any", target)]
+            else:
+                for loc in company["locations"]:
+                    company_locations.append((loc["location"], loc["target_per_location"]))
+                    logger.debug("Added location for %s: %s with target: %d", 
+                                company["name"], loc["location"], loc["target_per_location"])
+            company_location_targets.append((company["name"], company_locations))
     
-    Returns:
-        List of tuples containing (company_urn, [(location_urn, target_count)])
-    """
-    if prompt and openai_client:
-        # Use prompt-based parameter extraction
-        logger.info("Starting prompt-based parameter extraction")
-        parsed_data = parse_input_prompt(prompt, openai_client)
-        logger.debug("Parsed data from prompt: %s", parsed_data)
-        company_location_targets = []
-        
-        total_target = parsed_data["target_total"]
-        companies = parsed_data["companies"]
-        logger.info("Target total: %d, Number of companies: %d", total_target, len(companies))
-        
-        # If no companies specified in prompt, use "any"
-        if not companies:
-            logger.info("No specific companies found in prompt, using 'any'")
-            company_location_targets = [("any", [("any", total_target)])]
-        else:
-            for company in companies:
-                company_locations = []
-                logger.debug("Processing company: %s", company["name"])
-                # If no locations specified for company, use "any"
-                if not company["locations"]:
-                    target = company["target_per_company"] if "target_per_company" in company else total_target // len(companies)
-                    logger.info("No locations specified for %s, using 'any' with target: %d", company["name"], target)
-                    company_locations = [("any", target)]
-                else:
-                    for loc in company["locations"]:
-                        company_locations.append((loc["location"], loc["target_per_location"]))
-                        logger.debug("Added location for %s: %s with target: %d", 
-                                   company["name"], loc["location"], loc["target_per_location"])
-                company_location_targets.append((company["name"], company_locations))
-        
-        logger.info("Prepared search targets from prompt: %s", company_location_targets)
-        return (parsed_data, company_location_targets)
-    
-    # # Fall back to original logic if no prompt or OpenAI client provided
-    # logger.info("Preparing search parameters with count=%d, companies=%s, locations=%s",
-    #            count, current_company, locations)
-    
-    # locations = locations or []
-    # current_company = current_company or []
-    # company_location_targets = []
-    
-    # if not current_company:
-    #     # If no companies specified, proceed with location-only logic
-    #     location_targets = []
-    #     if not locations:
-    #         location_targets = [("any", count)]
-    #         logger.info("No locations provided, setting single target: ('any', %d)", count)
-    #     else:
-    #         base_per_location = count // len(locations)
-    #         remainder = count % len(locations)
-            
-    #         for i, loc in enumerate(locations):
-    #             target = base_per_location + (1 if i < remainder else 0)
-    #             location_targets.append((loc, target))
-    #     company_location_targets = [("any", location_targets)]
-    #     logger.info("No companies provided, using location-only targets: %s", location_targets)
-    # else:
-    #     # Handle company-based distribution
-    #     if len(current_company) * (len(locations) if locations else 1) > count:
-    #         # If total combinations exceed count, distribute by company first
-    #         base_per_company = count // len(current_company)
-    #         company_remainder = count % len(current_company)
-            
-    #         # Take only as many companies as needed based on count
-    #         for i, company in enumerate(current_company[:count]):
-    #             company_target = base_per_company + (1 if i < company_remainder else 0)
-                
-    #             # Now distribute within each company by location
-    #             company_location_list = []
-    #             if not locations:
-    #                 company_location_list = [("any", company_target)]
-    #             else:
-    #                 base_per_location = company_target // len(locations)
-    #                 location_remainder = company_target % len(locations)
-                    
-    #                 for j, loc in enumerate(locations):
-    #                     location_target = base_per_location + (1 if j < location_remainder else 0)
-    #                     if location_target > 0:
-    #                         company_location_list.append((loc, location_target))
-                
-    #             company_location_targets.append((company, company_location_list))
-    #     else:
-    #         # If combinations don't exceed count, use all companies
-    #         base_per_company = count // len(current_company)
-    #         company_remainder = count % len(current_company)
-            
-    #         for i, company in enumerate(current_company):
-    #             company_target = base_per_company + (1 if i < company_remainder else 0)
-                
-    #             # Distribute within company by location
-    #             company_location_list = []
-    #             if not locations:
-    #                 company_location_list = [("any", company_target)]
-    #             else:
-    #                 base_per_location = company_target // len(locations)
-    #                 location_remainder = company_target % len(locations)
-                    
-    #                 for j, loc in enumerate(locations):
-    #                     location_target = base_per_location + (1 if j < location_remainder else 0)
-    #                     if location_target > 0:
-    #                         company_location_list.append((loc, location_target))
-                
-    #             company_location_targets.append((company, company_location_list))
-    
-    # logger.info("Prepared search targets: %s", company_location_targets)
-    # return company_location_targets
+    logger.info("Prepared search targets from prompt: %s", company_location_targets)
+    return (company_location_targets)
 
 def get_location_ids(
     linkedin: LinkedinWrapper,
@@ -245,6 +148,57 @@ def get_location_ids(
     
     logger.info("Completed location ID resolution. Final adjusted locations: %s", adjusted_locations)
     return adjusted_locations
+
+def get_company_locations_id(
+    linkedin: LinkedinWrapper,
+    search_target: Tuple[str, List[Tuple[str, int]]],
+) -> Tuple[str, List[Tuple[str, int]]]:
+    """
+    Get company URN and location IDs for a single company-locations pair.
+    
+    Args:
+        linkedin: LinkedinWrapper instance
+        search_target: Tuple of (company_name, [(location, target_count)])
+    
+    Returns:
+        Tuple of (company_id, [(location_id, target_count)]) with names replaced by IDs
+    """
+    company_name, locations = search_target
+    logger.info("Processing company: %s with locations: %s", company_name, locations)
+
+    # Handle 'any' company case
+    if company_name == "any":
+        logger.info("Company is 'any', skipping search")
+        adjusted_locations = get_location_ids(linkedin, locations)
+        return ("any", adjusted_locations)
+        
+    try:
+        # Search for company using LinkedIn API
+        logger.info("Searching LinkedIn for company: %s", company_name)
+        search_results = linkedin.search_companies(
+            keywords=[company_name],
+            limit=10,
+            offset=0
+        )
+        
+        if not search_results:
+            logger.warning("No results found for company: %s, using original name", company_name)
+            company_id = company_name
+        else:
+            # Use the first result's URN ID
+            company_id = search_results[0]["urn_id"]
+            company_found_name = search_results[0]["name"]
+            logger.info("Found company ID for %s (matched with: %s): %s", 
+                        company_name, company_found_name, company_id)
+        
+        # Resolve location IDs for this company
+        adjusted_locations = get_location_ids(linkedin, locations)
+        return (company_id, adjusted_locations)
+
+    except Exception as e:
+        logger.error(f"Error processing company {company_name}: {str(e)}")
+        # Return original company name and locations if there's an error
+        return (company_name, locations)
 
 def get_company_ids(
     linkedin: LinkedinWrapper,
@@ -548,12 +502,12 @@ def search_people(
         )
 
         # Debugging: Print prepared search targets
-        logger.info("Prepared search targets: %s", search_targets)
+        logger.info("Prepared search targets: %s", search_targets[1])
         
         # Step 2: Execute search with prepared parameters
         return execute_search(
             linkedin=linkedin,
-            search_targets=search_targets,
+            search_targets=search_targets[1],
             search_keyword=search_keyword,
             school_urn_id=school_urn_id,
             existing_urn_ids=existing_urn_ids,

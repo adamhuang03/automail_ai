@@ -2,7 +2,7 @@ from re import search
 from typing import List, Tuple, Optional
 
 from httpx import Limits
-from lib.linkedin_wrapper import LinkedinWrapper
+from custom_lib.linkedin_wrapper import LinkedinWrapper
 import math
 import logging
 import traceback
@@ -20,7 +20,7 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-from prompt import OPENAI_EXTRACTION_PROMPT, POST_PROMPT_INSTR
+from prompt.extraction import OPENAI_EXTRACTION_PROMPT, POST_PROMPT_INSTR
 
 def parse_input_prompt(prompt: str, openai_client: OpenAI) -> dict:
     """

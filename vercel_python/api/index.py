@@ -4,13 +4,19 @@ from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 import json
 import os
-from openai import AsyncOpenAI
+from openai import AsyncOpenAI, OpenAI
 import csv
 from io import StringIO
 import logging
 import json
 import time
 import asyncio
+from fastapi.responses import JSONResponse
+import traceback
+from dotenv import load_dotenv
+from contextlib import asynccontextmanager
+
+load_dotenv()
 
 import sys
 from pathlib import Path
@@ -30,7 +36,7 @@ if not logger.hasHandlers():  # Avoid adding handlers multiple times
 
 # Import from the custom_lib directory relative to vercel_python
 from custom_lib.automail_ai_craft import enrich_person, multi_enrich_persons
-from custom_lib.automail_ai_search import search_people
+from custom_lib.automail_ai_search_v2 import parse_input_prompt, convert_parms_to_targets, get_company_locations_id
 from prompt.email import EMAIL_SYSTEM_PROMPT
 from custom_lib.linkedin_wrapper import LinkedinWrapper
 from requests.cookies import RequestsCookieJar
@@ -38,9 +44,48 @@ from linkedin_api.cookie_repository import CookieRepository
 
 # uvicorn vercel_python.api.index:app --reload --log-level info
 
-app = FastAPI()
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Initialize LinkedIn client at startup
+    try:
+        cookie_dir = 'custom_lib/'
+        cookie_repo = CookieRepository(cookies_dir=cookie_dir)
+        cookies = cookie_repo.get(os.getenv("LINKEDIN_USER"))
+        if cookies and isinstance(cookies, RequestsCookieJar):
+            logger.info("Successfully loaded cookies from repository")
+            logger.info(f"Cookie names: {[cookie.name for cookie in cookies]}")
+        else:
+            logger.warning("No valid cookies found in repository")
+            cookies = None
 
-# Add CORS middleware
+        logger.info("Initializing LinkedIn client")
+        linkedin_client = LinkedinWrapper(
+            username=os.getenv("LINKEDIN_USER"),
+            password=os.getenv("LINKEDIN_PASSWORD"),
+            cookies=cookies,
+            authenticate=True,
+            refresh_cookies=False,
+            debug=True
+        )
+        
+        # Store in app state
+        app.state.linkedin_client = linkedin_client
+        logger.info("LinkedIn client initialized and stored in app state")
+    except Exception as e:
+        logger.error(f"Failed to initialize LinkedIn client: {str(e)}")
+        logger.error(f"Traceback: {traceback.format_exc()}")
+        # Don't raise the exception - let the app start anyway
+        # We'll handle the missing client in the routes
+    
+    yield  # Server is running
+    
+    # Cleanup (if needed) when the server shuts down
+    if hasattr(app.state, 'linkedin_client'):
+        pass  # No need to close the client
+
+app = FastAPI(lifespan=lifespan)
+
+# Configure CORS
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -56,24 +101,55 @@ class ProcessDataRequest(BaseModel):
     user_linkedin_url: str
     email_template: str
 
+class PromptExtractionRequest(BaseModel):
+    input: str
+
+class CompanyLocationsRequest(BaseModel):
+    input: list
+
 @app.post("/extract-prompt-data")
-async def extract_prompt_data(request: ProcessDataRequest):
+async def extract_prompt_data(request: PromptExtractionRequest) -> dict:
+    logger.info(f"Received prompt: {request.input}")
     try: 
         # Send initial checkpoint
-        openai_client = AsyncOpenAI(
+        openai_client = OpenAI(
             api_key=os.getenv("OPENAI_API_KEY")
         )
-        response = openai_client.chat.completions.create(
-            model="gpt-4o-mini",
-            messages=messages,
-            temperature=0.3,
-            max_tokens=500
-        )
+        logger.info("Created OpenAI client")
+        output = parse_input_prompt(prompt=request.input, openai_client=openai_client)
+        logger.info(f"Successfully parsed prompt with OpenAI: {output}")
+        company_location_targets = convert_parms_to_targets(output)
+        logger.info(f"Successfully converted parameters to targets: {company_location_targets}")
+        return JSONResponse(content={
+            "params": output,
+            "targets": company_location_targets
+        }, media_type="application/json")
 
     except Exception as e:
+        logger.error(f"Error in extract_prompt_data: {str(e)}")
+        logger.error(f"Traceback: {traceback.format_exc()}")
         raise HTTPException(status_code=500, detail=str(e))
 
-    return request
+@app.post("/get-company-locations-id")
+async def get_ids(request: CompanyLocationsRequest) -> dict:
+    logger.info(f"Received prompt: {request.input}")
+    try:
+        if not hasattr(app.state, 'linkedin_client'):
+            raise HTTPException(status_code=500, detail="LinkedIn client not initialized")
+            
+        # # Use the client from app state
+        linkedin_client = app.state.linkedin_client
+
+        result = get_company_locations_id(
+            linkedin=linkedin_client, search_target=request.input)
+
+        # Your existing logic here using linkedin_client
+        return JSONResponse(content=result, media_type="application/json")
+
+    except Exception as e:
+        logger.error(f"Error in get_company_locations_id: {str(e)}")
+        logger.error(f"Traceback: {traceback.format_exc()}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 @app.post("/process-data")
 async def process_data(request: ProcessDataRequest):
@@ -100,26 +176,11 @@ async def process_data(request: ProcessDataRequest):
             )
             cookie_dir = 'custom_lib/'
 
-            cookie_repo_1 = CookieRepository(cookies_dir=cookie_dir)
-            cookies_1 = cookie_repo_1.get(os.getenv("LINKEDIN_USER"))
-            if cookies_1 and isinstance(cookies_1, RequestsCookieJar):
-                logger.info("Successfully loaded cookies from repository")
-                logger.info(f"Cookie names: {[cookie.name for cookie in cookies_1]}")
-            else:
-                logger.warning("No valid cookies found in repository")
-                cookies_1 = None
-
-            # Initialize LinkedIn client
-            yield json.dumps({"status": "progress", "message": f"Initializing LinkedIn client (t={int(time.time() - start_time)}s)"}) + "\n"
-            logger.info("Initializing LinkedIn client")
-            linkedin_client = LinkedinWrapper(
-                username=os.getenv("LINKEDIN_USER"),
-                password=os.getenv("LINKEDIN_PASSWORD"),
-                cookies=cookies_1,
-                authenticate=True,  # Need this to be True to set the cookies
-                refresh_cookies=False,  # Don't refresh existing cookies
-                debug=True
-            )
+            if not hasattr(app.state, 'linkedin_client'):
+                raise HTTPException(status_code=500, detail="LinkedIn client not initialized")
+            
+            # Use the client from app state
+            linkedin_client = app.state.linkedin_client
             
             yield json.dumps({"status": "progress", "message": f"Starting profile enrichment (t={int(time.time() - start_time)}s)"}) + "\n"
             logger.info(f"Enriching user profile: {request.user_linkedin_url}")
