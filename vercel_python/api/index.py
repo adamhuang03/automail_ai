@@ -29,7 +29,8 @@ if not logger.hasHandlers():  # Avoid adding handlers multiple times
     logger.addHandler(console_handler)
 
 # Import from the custom_lib directory relative to vercel_python
-from custom_lib.automail_ai_craft import draft_email, enrich_person, multi_enrich_persons, draft_emails_batch
+from custom_lib.automail_ai_craft import enrich_person, multi_enrich_persons
+from custom_lib.automail_ai_search import search_people
 from prompt.email import EMAIL_SYSTEM_PROMPT
 from custom_lib.linkedin_wrapper import LinkedinWrapper
 from requests.cookies import RequestsCookieJar
@@ -54,6 +55,25 @@ class ProcessDataRequest(BaseModel):
     keyword_industry: str
     user_linkedin_url: str
     email_template: str
+
+@app.post("/extract-prompt-data")
+async def extract_prompt_data(request: ProcessDataRequest):
+    try: 
+        # Send initial checkpoint
+        openai_client = AsyncOpenAI(
+            api_key=os.getenv("OPENAI_API_KEY")
+        )
+        response = openai_client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=messages,
+            temperature=0.3,
+            max_tokens=500
+        )
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+    return request
 
 @app.post("/process-data")
 async def process_data(request: ProcessDataRequest):
