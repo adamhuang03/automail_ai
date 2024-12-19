@@ -143,8 +143,14 @@ async def get_ids(request: CompanyLocationsRequest) -> dict:
         result = get_company_locations_id(
             linkedin=linkedin_client, search_target=request.input)
 
+        result_cleaned = []
+        for company_id, locations in result:
+            for location in locations:
+                result_cleaned.append([company_id, location[0], location[1]])
+        
+
         # Your existing logic here using linkedin_client
-        return JSONResponse(content=result, media_type="application/json")
+        return JSONResponse(content=result_cleaned, media_type="application/json")
 
     except Exception as e:
         logger.error(f"Error in get_company_locations_id: {str(e)}")

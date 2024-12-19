@@ -366,6 +366,121 @@ def execute_search(
     
     return search_results
 
+def execute_single_search(
+    linkedin: LinkedinWrapper,
+    company_urn: str,
+    location_urn: str,
+    search_keyword: str = "",
+    school_urn_id: str = "",
+    existing_urn_ids: List[str] = None,
+    offset: int = 0,
+    target_count: int = 10,
+    use_cad: bool = False
+) -> Tuple[str, List[Tuple[str, int, int, List[dict]]]]:
+    """
+    Execute LinkedIn search for a single company-location pair, with intelligent fallback searches.
+    
+    Args:
+        linkedin: LinkedinWrapper instance
+        company_urn: Company URN to search for
+        location_urn: Location URN to search for
+        search_keyword: Role/keyword to search for
+        school_urn_id: School URN ID
+        existing_urn_ids: List of URN IDs to exclude
+        offset: Search offset
+        target_count: Number of results to target
+        use_cad: Whether to use Canadian schools for fill search
+    
+    Returns:
+        Tuple of (company_urn, [(location_urn, target_count, actual_count, people_list)])
+    """
+    logger.info(f"Starting single search execution for company: {company_urn}, location: {location_urn}")
+    existing_urn_ids = existing_urn_ids or []
+    all_results = []
+    total_found = 0
+
+    # Step 1: Normal search with all filters
+    search_params = {
+        "keywords": search_keyword,
+        "schools": [school_urn_id] if school_urn_id else None,
+        "regions": [location_urn] if location_urn != "any" else None,
+        "current_company": [company_urn] if company_urn != "any" else None,
+        "limit": target_count,
+        "offset": offset
+    }
+
+    try:
+        logger.info("Step 1 - Executing normal search with params: %s", search_params)
+        results = linkedin.search_people(**search_params)
+        
+        for person in results:
+            if total_found >= target_count:
+                break
+            if person.get("urn_id") not in existing_urn_ids:
+                all_results.append((person, school_urn_id))
+                existing_urn_ids.append(person.get("urn_id"))
+                total_found += 1
+        
+        logger.info(f"Step 1 - Found {total_found} people")
+    except Exception as e:
+        logger.error(f"Error in normal search: {str(e)}")
+        logger.error(traceback.format_exc())
+
+    # Step 2: If target not met, do fill search
+    if total_found < target_count:
+        remaining_count = target_count - total_found
+        
+        if use_cad:
+            # Load CAD schools for fill search
+            try:
+                logger.debug("Loading CAD schools from data/cad_schools.json")
+                cad_schools = json.loads(open("data/cad_schools.json", "r").read())
+                cad_school_values = list(cad_schools.values())
+                if school_urn_id in cad_school_values:
+                    cad_school_values.remove(school_urn_id)
+                
+                fill_params = {
+                    "keywords": search_keyword,
+                    "schools": cad_school_values,
+                    "regions": [location_urn] if location_urn != "any" else None,
+                    "current_company": [company_urn] if company_urn != "any" else None,
+                    "limit": remaining_count,
+                    "offset": offset,
+                    "or_schools": True
+                }
+            except Exception as e:
+                logger.error(f"Error loading CAD schools: {str(e)}")
+                use_cad = False
+        else:
+            # Remove school filter for fill search
+            fill_params = {
+                "keywords": search_keyword,
+                "regions": [location_urn] if location_urn != "any" else None,
+                "current_company": [company_urn] if company_urn != "any" else None,
+                "limit": remaining_count,
+                "offset": offset
+            }
+
+        try:
+            logger.info(f"Step 2 - Executing {'CAD' if use_cad else 'general'} fill search with params: {fill_params}")
+            results = linkedin.search_people(**fill_params)
+            
+            for person in results:
+                if total_found >= target_count:
+                    break
+                if person.get("urn_id") not in existing_urn_ids:
+                    all_results.append((person, "from_cad_school" if use_cad else None))
+                    existing_urn_ids.append(person.get("urn_id"))
+                    total_found += 1
+            
+            logger.info(f"Step 2 - Found {total_found} people total after fill search")
+        except Exception as e:
+            logger.error(f"Error in fill search: {str(e)}")
+            logger.error(traceback.format_exc())
+
+    # Format results in the same way as execute_search
+    return (company_urn, [(location_urn, target_count, total_found, all_results)])
+
 def _handle_cad_school_search(
     linkedin: LinkedinWrapper,
     search_results: List[Tuple[str, List[Tuple[str, int, int, List[dict]]]]],

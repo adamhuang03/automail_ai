@@ -34,4 +34,5 @@ POST_PROMPT_INSTR = """
     Requirements:
     - Include all companies and locations in the search.
     - For each location, automatically set each location to 10 (even for "any"), regardless of what is specified in the input.
+    - 
 """
