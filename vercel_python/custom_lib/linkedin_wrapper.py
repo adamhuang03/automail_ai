@@ -221,6 +221,9 @@ class LinkedinWrapper(BaseLinkedin):
         res = self._fetch(f"/identity/profiles/{public_id or urn_id}/profileView")
 
         data = res.json()
+        with open('test.json', 'w') as f:
+            import json
+            json.dump(data, f, indent=4)
 
         if data and "status" in data and data["status"] != 200:
             self.logger.info("request failed with status %d", data["status"])

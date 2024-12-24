@@ -1,3 +1,4 @@
+from re import search
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
@@ -36,7 +37,8 @@ if not logger.hasHandlers():  # Avoid adding handlers multiple times
 
 # Import from the custom_lib directory relative to vercel_python
 from custom_lib.automail_ai_craft import enrich_person, multi_enrich_persons
-from custom_lib.automail_ai_search_v2 import parse_input_prompt, convert_parms_to_targets, get_company_locations_id
+from custom_lib.automail_ai_search_v2 import parse_input_prompt, convert_parms_to_targets, get_company_locations_id, execute_single_search
+from custom_lib.rocketreach_test import search_and_generate_emails
 from prompt.email import EMAIL_SYSTEM_PROMPT
 from custom_lib.linkedin_wrapper import LinkedinWrapper
 from requests.cookies import RequestsCookieJar
@@ -107,6 +109,30 @@ class PromptExtractionRequest(BaseModel):
 class CompanyLocationsRequest(BaseModel):
     input: list
 
+class ExecutionSearch(BaseModel):
+    company_urn: str
+    company_name_for_passthrough: str
+    location_urn: str
+    search_keyword: str = ""
+    school_urn_id: str = ""
+    existing_public_ids: list = None
+    offset: int = 0
+    target_count: int = 10
+    use_cad: bool = False
+
+class EmailAddressRequest(BaseModel):
+    names: list
+    company: str
+
+class DraftEmailsRequest(BaseModel):
+    url_list: list
+    keyword_industry: str
+    user_linkedin_url: str
+    email_template: str
+
+class SchoolIdRequest(BaseModel):
+    linkedin_url: str
+
 @app.post("/extract-prompt-data")
 async def extract_prompt_data(request: PromptExtractionRequest) -> dict:
     logger.info(f"Received prompt: {request.input}")
@@ -142,20 +168,268 @@ async def get_ids(request: CompanyLocationsRequest) -> dict:
 
         result = get_company_locations_id(
             linkedin=linkedin_client, search_target=request.input)
+        logger.info(f"Successfully got company locations: {result}")
 
-        result_cleaned = []
-        for company_id, locations in result:
+        target_list = []
+        company_id, locations, company_name = result
+        if locations:
             for location in locations:
-                result_cleaned.append([company_id, location[0], location[1]])
-        
+                target_list.append([company_id, location[0], location[1], company_name])
+        else:
+            target_list.append([company_id, "", 0, company_name])
 
         # Your existing logic here using linkedin_client
-        return JSONResponse(content=result_cleaned, media_type="application/json")
+        return JSONResponse(content={
+            "result": result,
+            "targets": target_list
+        }, media_type="application/json")
 
     except Exception as e:
         logger.error(f"Error in get_company_locations_id: {str(e)}")
         logger.error(f"Traceback: {traceback.format_exc()}")
         raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/execute-single-search")
+async def get_execution_search(request: ExecutionSearch) -> dict:
+    logger.info(f"Received prompt: {request}")
+    try:
+        if not hasattr(app.state, 'linkedin_client'):
+            raise HTTPException(status_code=500, detail="LinkedIn client not initialized")
+            
+        # # Use the client from app state
+        linkedin_client = app.state.linkedin_client
+
+        result = execute_single_search(
+            linkedin=linkedin_client,
+            company_name_for_passthrough=request.company_name_for_passthrough,
+            company_urn=request.company_urn,
+            location_urn=request.location_urn,
+            search_keyword=request.search_keyword,
+            school_urn_id=request.school_urn_id,
+            existing_public_ids=request.existing_public_ids,
+            offset=request.offset,
+            target_count=request.target_count,
+            use_cad=request.use_cad,
+        )
+        logger.info(f"Successfully executed single search: {result}")   
+
+        # Your existing logic here using linkedin_client
+        return JSONResponse(content={
+            "result": result
+        }, media_type="application/json")
+
+    except Exception as e:
+        logger.error(f"Error in get_company_locations_id: {str(e)}")
+        logger.error(f"Traceback: {traceback.format_exc()}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/format-email-addresses")
+async def get_email_addresses(request: EmailAddressRequest) -> dict:
+    logger.info(f"Received prompt: {request}")
+    try:
+        openai_client = AsyncOpenAI(
+            api_key=os.getenv("OPENAI_API_KEY")
+        )
+        logger.info("Created OpenAI client")
+
+        emails = await search_and_generate_emails(
+            async_openai_client=openai_client,
+            company=request.company,
+            names=request.names
+        )
+        logger.info(f"Successfully generated email addresses: {emails}")
+
+        # Your existing logic here using linkedin_client
+        return JSONResponse(content={
+            "format": emails[0],
+            "result": emails[1]
+        }, media_type="application/json")
+
+    except Exception as e:
+        logger.error(f"Error in get_company_locations_id: {str(e)}")
+        logger.error(f"Traceback: {traceback.format_exc()}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/get-school-id") # TBD
+async def get_school_id(request: SchoolIdRequest) -> dict:
+    logger.info(f"Received prompt: {request}")
+    try:
+        if not hasattr(app.state, 'linkedin_client'):
+            raise HTTPException(status_code=500, detail="LinkedIn client not initialized")
+            
+        # # Use the client from app state
+        linkedin_client = app.state.linkedin_client
+
+        result = enrich_person(
+            linkedin=linkedin_client,
+            value=request.linkedin_url,
+            url_value=True
+        )
+        logger.info(f"Successfully enriched person: {result}")
+        education_set = result.get("education", [])
+
+        # Your existing logic here using linkedin_client
+        return JSONResponse(content={
+            "result": education_set
+        }, media_type="application/json")
+
+    except Exception as e:
+        logger.error(f"Error in get_company_locations_id: {str(e)}")
+        logger.error(f"Traceback: {traceback.format_exc()}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/draft-emails")
+async def draft_emails(request: DraftEmailsRequest):
+    async def generate_response():
+        start_time = time.time()
+        try:
+            # Send initial checkpoint
+            yield json.dumps({"status": "started", "message": f"Request received (t=0s)"}) + "\n"
+            yield json.dumps({"status": "started", "message": f"Url List:\n{request.url_list}\n"}) + "\n"
+            yield json.dumps({"status": "started", "message": f"Industry: {request.keyword_industry}\n"}) + "\n"
+            yield json.dumps({"status": "started", "message": f"LinkedIn URL: {request.user_linkedin_url}\n"}) + "\n"
+            yield json.dumps({"status": "started", "message": f"Email Template: {request.email_template}\n"}) + "\n"
+            
+            logger.info(f"Starting process_data with industry: {request}")
+            
+            from dotenv import load_dotenv
+            load_dotenv()
+
+            # Initialize OpenAI client
+            yield json.dumps({"status": "progress", "message": f"Initializing OpenAI client (t={int(time.time() - start_time)}s)"}) + "\n"
+            logger.info("Initializing OpenAI client")
+            openai_client = AsyncOpenAI(
+                api_key=os.getenv("OPENAI_API_KEY")
+            )
+
+            if not hasattr(app.state, 'linkedin_client'):
+                raise HTTPException(status_code=500, detail="LinkedIn client not initialized")
+            
+            # Use the client from app state
+            linkedin_client = app.state.linkedin_client
+            
+            yield json.dumps({"status": "progress", "message": f"Starting profile enrichment (t={int(time.time() - start_time)}s)"}) + "\n"
+            logger.info(f"Enriching user profile: {request.user_linkedin_url}")
+            user_profile = enrich_person(
+                linkedin=linkedin_client,
+                value=request.user_linkedin_url,
+                url_value=True
+            )
+            
+            # Get the URNs (first column)
+            list_of_urls = request.url_list
+            
+            yield json.dumps({"status": "progress", "message": f"Found {len(list_of_urls)} URLs to process, splitting between 1 client(s) (t={int(time.time() - start_time)}s)"}) + "\n"
+            logger.info(f"Found {len(list_of_urls)} URLs to process, splitting {len(list_of_urls)} between clients")
+            
+            # Create async tasks for both clients
+            logger.info("Starting parallel profile enrichment with both clients")
+            
+            async def process_client(client, urls, client_name, start_time):
+                results = multi_enrich_persons(
+                    linkedin=client,
+                    values=urls,
+                    url_value=True
+                )
+                yield json.dumps({"status": "progress", "message": f"{client_name} enriched {len(results)} profiles (t={int(time.time() - start_time)}s)"}) + "\n"
+                yield results  # Yield the results as the last item
+            
+            # Process URLs with first client
+            logger.info("Starting profile enrichment with client")
+            multi_result_enriched = None
+            async for item in process_client(linkedin_client, list_of_urls, "Client 1", start_time):
+                if isinstance(item, str):  # If it's a progress message
+                    yield item
+                else:  # If it's the results
+                    multi_result_enriched = item
+                    # Remove education from results
+                    for person in multi_result_enriched:
+                        person.pop('education', None)
+                
+            yield json.dumps({"status": "progress", "message": f"Successfully enriched {len(multi_result_enriched)} profiles (t={int(time.time() - start_time)}s)"}) + "\n"
+            
+            # Send checkpoint before email drafting
+            yield json.dumps({"status": "drafting", "message": f"Starting email drafting (t={int(time.time() - start_time)}s)"}) + "\n"
+            
+            # Process emails using batch processing
+            logger.info("Starting batch email drafting")
+            
+            all_emails = []
+            total_profiles = len(multi_result_enriched)
+            batch_size = 10
+            
+            for i in range(0, total_profiles, batch_size):
+                batch = multi_result_enriched[i:i + batch_size]
+                current_batch_size = len(batch)
+                logger.info(f"Processing batch {i//batch_size + 1} with {current_batch_size} profiles")
+                yield json.dumps({
+                    "status": "progress", 
+                    "message": f"Processing email batch {i//batch_size + 1}/{(total_profiles + batch_size - 1)//batch_size} (t={int(time.time() - start_time)}s)"
+                }) + "\n"
+                
+                # Create tasks for the batch
+                tasks = []
+                for candidate_profile in batch:
+                    messages = [
+                        {"role": "system", "content": EMAIL_SYSTEM_PROMPT},
+                        {"role": "user", "content": f"""
+                            User Profile:
+                        {json.dumps(user_profile, indent=2)}
+
+                        Candidate Profile:
+                        {json.dumps(candidate_profile, indent=2)}
+
+                        Num: 1
+                        Role: {request.keyword_industry}
+                        Email template:
+                        {request.email_template}
+                        """}
+                    ]
+                    
+                    tasks.append(
+                        openai_client.chat.completions.create(
+                            model="gpt-4o-mini",
+                            messages=messages,
+                            temperature=0.3,
+                            max_tokens=500
+                        )
+                    )
+                
+                # Process batch concurrently
+                batch_responses = await asyncio.gather(*tasks)
+                batch_emails = [response.choices[0].message.content for response in batch_responses]
+                all_emails.extend(batch_emails)
+                
+                logger.info(f"Completed batch {i//batch_size + 1}, total emails: {len(all_emails)}/{total_profiles}")
+                yield json.dumps({
+                    "status": "progress",
+                    "message": f"Completed {len(all_emails)}/{total_profiles} emails (t={int(time.time() - start_time)}s)"
+                }) + "\n"
+            
+            yield json.dumps({"status": "drafting", "message": f"Preparing final CSV (t={int(time.time() - start_time)}s)"}) + "\n"
+            
+            # Send final CSV data
+            yield json.dumps({
+                "status": "completed",
+                "message": f"Process completed (t={int(time.time() - start_time)}s)",
+                "emails": all_emails
+            }) + "\n"
+            
+        except Exception as e:
+            logger.error(f"Error in process_data: {str(e)}", exc_info=True)
+            yield json.dumps({
+                "status": "error",
+                "message": f"Error (t={int(time.time() - start_time)}s): {str(e)}"
+            }) + "\n"
+    
+    return StreamingResponse(
+        generate_response(),
+        media_type="text/event-stream"
+    )
+
+@app.get("/")
+async def root():
+    return {"message": "AutoMail AI API is running"}
 
 @app.post("/process-data")
 async def process_data(request: ProcessDataRequest):

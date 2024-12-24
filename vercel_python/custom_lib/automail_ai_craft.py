@@ -34,7 +34,6 @@ def enrich_person(
         logger.info("Extracting profile using urn_id: %s", value)
     
     person = linkedin.get_profile(id)
-
     if not person:
         logger.warning("No profile data returned for value: %s", value)
         return {}
@@ -69,11 +68,22 @@ def enrich_person(
         }
         cleaned_person["experiences"].append(cleaned_exp)
     
+    def get_urn_from_school_urn_list(raw_string: str) -> str:
+        """
+        Return the URN of a raw group update
+
+        Example: urn:li:fs_miniProfile:<id>
+        Example: urn:li:fs_updateV2:(<urn>,GROUP_FEED,EMPTY,DEFAULT,false)
+        """
+        string = raw_string.split("(")[1].split(",")[1]
+        return string[:len(string)-1]
+    
     # Add education
     education_count = len(person.get("education", []))
     logger.info("Processing %d education entries", education_count)
     for edu in person.get("education", []):
         cleaned_edu = {
+            "school_urn_id": get_urn_from_school_urn_list(edu.get("entityUrn")),
             "school": edu.get("schoolName"),
             "activities": edu.get("activities"),
             "grade": edu.get("grade"),
@@ -223,41 +233,48 @@ if __name__ == "__main__":
     # Multi enrichement
 
     # Read csv
-    csv_file = "v2_output/linkedin_data.csv"
-    with open(csv_file, "r") as f:
-        csv_data = [line.strip().split(",") for line in f.readlines()]
-    # Get the 1st column
-    list_of_urns = [row[0] for row in csv_data]
+    # csv_file = "v2_output/linkedin_data.csv"
+    # with open(csv_file, "r") as f:
+    #     csv_data = [line.strip().split(",") for line in f.readlines()]
+    # # Get the 1st column
+    # list_of_urns = [row[0] for row in csv_data]
     
-    multi_result_enriched = multi_enrich_persons(
-        linkedin=linkedin,
-        values=list_of_urns,
-        url_value=False
-    )
+    # multi_result_enriched = multi_enrich_persons(
+    #     linkedin=linkedin,
+    #     values=list_of_urns,
+    #     url_value=False
+    # )
 
-    with open("data/user_profile_vaishika.json", "r") as f:
-        user_profile = json.load(f)
+    # with open("data/user_profile_vaishika.json", "r") as f:
+    #     user_profile = json.load(f)
 
-    with open("v2_search/params.json", "r") as f:
-        params = json.load(f)
-        keyword_industry = params["keyword_industry"]
+    # with open("v2_search/params.json", "r") as f:
+    #     params = json.load(f)
+    #     keyword_industry = params["keyword_industry"]
 
-    emails = asyncio.run(draft_emails_batch(
-        openai=openai,
-        user_profile=user_profile,
-        candidate_profiles=multi_result_enriched,
-        keyword_industry=keyword_industry,
-        email_template=EMAIL_TEMPLATE
-    ))
+    # emails = asyncio.run(draft_emails_batch(
+    #     openai=openai,
+    #     user_profile=user_profile,
+    #     candidate_profiles=multi_result_enriched,
+    #     keyword_industry=keyword_industry,
+    #     email_template=EMAIL_TEMPLATE
+    # ))
 
-    # Add the enriched data to the csv data
-    for i in range(len(csv_data)):
-        csv_data[i].append(json.dumps(emails[i]))
+    # # Add the enriched data to the csv data
+    # for i in range(len(csv_data)):
+    #     csv_data[i].append(json.dumps(emails[i]))
     
-    # Save the csv data
-    with open("v2_output/linkedin_data_w_enriched.csv", "w") as f:
-        f.write("urn_id,url,email\n")
-        f.write("\n".join([",".join(row) for row in csv_data]))
-
+    # # Save the csv data
+    # with open("v2_output/linkedin_data_w_enriched.csv", "w") as f:
+    #     f.write("urn_id,url,email\n")
+    #     f.write("\n".join([",".join(row) for row in csv_data]))
 
     # ==================================================================
+
+    result = enrich_person(
+        linkedin=linkedin,
+        value="https://www.linkedin.com/in/vaishika-mathisayan/?originalSubdomain=ca",
+        url_value=True
+    )
+
+    print(json.dumps(result, indent=4))

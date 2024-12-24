@@ -5,7 +5,7 @@ From the given input, please extract:
 - Key industry to search for. If multiple industries mentioned, use the first one.
 - Companies to search for, if not specified, default to "any"
 - Specific locations, if not specified, default to "any"
-- Implied job position in particular. If multiple positions mentioned, use the first one.
+- Implied job position, if not specified or not a role-based word, default to "". If multiple positions mentioned, use the first one.
 - If canadian people mentioned, then include_cad_schools_on_fill_search should be true
 
 Return a JSON with the following structure:
@@ -32,6 +32,6 @@ Return a JSON with the following structure:
 
 POST_PROMPT_INSTR = """
     Requirements:
-    - Include all companies and locations in the search.
+    - Include all companies and locations in the search. Fix any typos in the input, including missing spaces.
     - For each location, automatically set each location to 10 (even for "any"), regardless of what is specified in the input.
 """
