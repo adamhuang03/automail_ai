@@ -85,6 +85,35 @@ async def lifespan(app: FastAPI):
     if hasattr(app.state, 'linkedin_client'):
         pass  # No need to close the client
 
+# Vercel version
+
+def init_linkedin_client():
+    try:
+        cookie_dir = 'custom_lib/'
+        cookie_repo = CookieRepository(cookies_dir=cookie_dir)
+        cookies = cookie_repo.get(os.getenv("LINKEDIN_USER"))
+        if cookies and isinstance(cookies, RequestsCookieJar):
+            logger.info("Successfully loaded cookies from repository")
+            logger.info(f"Cookie names: {[cookie.name for cookie in cookies]}")
+        else:
+            logger.warning("No valid cookies found in repository")
+            cookies = None
+
+        logger.info("Initializing LinkedIn client")
+        linkedin_client = LinkedinWrapper(
+            username=os.getenv("LINKEDIN_USER"),
+            password=os.getenv("LINKEDIN_PASSWORD"),
+            cookies=cookies,
+            authenticate=True,
+            refresh_cookies=False,
+            debug=True
+        )
+        return linkedin_client
+    except Exception as e:
+        logger.error(f"Failed to initialize LinkedIn client: {str(e)}")
+        logger.error(f"Traceback: {traceback.format_exc()}")
+        return None
+
 app = FastAPI(lifespan=lifespan)
 
 # Configure CORS
@@ -160,11 +189,15 @@ async def extract_prompt_data(request: PromptExtractionRequest) -> dict:
 async def get_ids(request: CompanyLocationsRequest) -> dict:
     logger.info(f"Received prompt: {request.input}")
     try:
-        if not hasattr(app.state, 'linkedin_client'):
-            raise HTTPException(status_code=500, detail="LinkedIn client not initialized")
+        # if not hasattr(app.state, 'linkedin_client'):
+        #     raise HTTPException(status_code=500, detail="LinkedIn client not initialized")
             
-        # # Use the client from app state
-        linkedin_client = app.state.linkedin_client
+        # # # Use the client from app state
+        # linkedin_client = app.state.linkedin_client
+
+        linkedin_client = init_linkedin_client()
+        if not linkedin_client:
+            raise HTTPException(status_code=500, detail="Failed to initialize LinkedIn client")
 
         result = get_company_locations_id(
             linkedin=linkedin_client, search_target=request.input)
@@ -193,11 +226,15 @@ async def get_ids(request: CompanyLocationsRequest) -> dict:
 async def get_execution_search(request: ExecutionSearch) -> dict:
     logger.info(f"Received prompt: {request}")
     try:
-        if not hasattr(app.state, 'linkedin_client'):
-            raise HTTPException(status_code=500, detail="LinkedIn client not initialized")
+        # if not hasattr(app.state, 'linkedin_client'):
+        #     raise HTTPException(status_code=500, detail="LinkedIn client not initialized")
             
-        # # Use the client from app state
-        linkedin_client = app.state.linkedin_client
+        # # # Use the client from app state
+        # linkedin_client = app.state.linkedin_client
+
+        linkedin_client = init_linkedin_client()
+        if not linkedin_client:
+            raise HTTPException(status_code=500, detail="Failed to initialize LinkedIn client")
 
         result = execute_single_search(
             linkedin=linkedin_client,
@@ -254,11 +291,15 @@ async def get_email_addresses(request: EmailAddressRequest) -> dict:
 async def get_school_id(request: SchoolIdRequest) -> dict:
     logger.info(f"Received prompt: {request}")
     try:
-        if not hasattr(app.state, 'linkedin_client'):
-            raise HTTPException(status_code=500, detail="LinkedIn client not initialized")
+        # if not hasattr(app.state, 'linkedin_client'):
+        #     raise HTTPException(status_code=500, detail="LinkedIn client not initialized")
             
-        # # Use the client from app state
-        linkedin_client = app.state.linkedin_client
+        # # # Use the client from app state
+        # linkedin_client = app.state.linkedin_client
+
+        linkedin_client = init_linkedin_client()
+        if not linkedin_client:
+            raise HTTPException(status_code=500, detail="Failed to initialize LinkedIn client")
 
         result = enrich_person(
             linkedin=linkedin_client,
@@ -302,11 +343,15 @@ async def draft_emails(request: DraftEmailsRequest):
                 api_key=os.getenv("OPENAI_API_KEY")
             )
 
-            if not hasattr(app.state, 'linkedin_client'):
-                raise HTTPException(status_code=500, detail="LinkedIn client not initialized")
+            # if not hasattr(app.state, 'linkedin_client'):
+            #     raise HTTPException(status_code=500, detail="LinkedIn client not initialized")
             
-            # Use the client from app state
-            linkedin_client = app.state.linkedin_client
+            # # Use the client from app state
+            # linkedin_client = app.state.linkedin_client
+
+            linkedin_client = init_linkedin_client()
+            if not linkedin_client:
+                raise HTTPException(status_code=500, detail="Failed to initialize LinkedIn client")
             
             yield json.dumps({"status": "progress", "message": f"Starting profile enrichment (t={int(time.time() - start_time)}s)"}) + "\n"
             logger.info(f"Enriching user profile: {request.user_linkedin_url}")
