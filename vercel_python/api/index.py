@@ -141,6 +141,9 @@ class CompanyLocationsRequest(BaseModel):
 class GetCompanyRequest(BaseModel):
     company_public_id: str
 
+class StandardInputRequest(BaseModel):
+    input: str
+
 class ExecutionSearch(BaseModel):
     company_urn: str
     company_name_for_passthrough: str
@@ -388,6 +391,35 @@ async def get_company(request: GetCompanyRequest) -> dict:
         # Your existing logic here using linkedin_client
         return JSONResponse(content={
             "result": result
+        }, media_type="application/json")
+
+    except Exception as e:
+        logger.error(f"Error in get_company_locations_id: {str(e)}")
+        logger.error(f"Traceback: {traceback.format_exc()}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/get-company-id") # TBD
+async def get_company_id(request: StandardInputRequest) -> dict:
+    logger.info(f"Received prompt: {request}")
+    try:
+        linkedin_client = init_linkedin_client()
+        if not linkedin_client:
+            raise HTTPException(status_code=500, detail="Failed to initialize LinkedIn client")
+
+        search_results = linkedin.search_companies(
+            keywords=[request.input],
+            limit=10,
+            offset=0
+        )        
+        # Use the first result's URN ID
+        company_id = search_results[0]["urn_id"]
+        company_found_name = search_results[0]["name"]
+
+        logger.info(f"Successfully found company: {company_id} for company name: {company_found_name}")
+
+        # Your existing logic here using linkedin_client
+        return JSONResponse(content={
+            "result": [company_id, company_found_name]
         }, media_type="application/json")
 
     except Exception as e:
