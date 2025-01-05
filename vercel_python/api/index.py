@@ -36,7 +36,7 @@ if not logger.hasHandlers():  # Avoid adding handlers multiple times
     logger.addHandler(console_handler)
 
 # Import from the custom_lib directory relative to vercel_python
-from custom_lib.automail_ai_craft import enrich_person, multi_enrich_persons
+from custom_lib.automail_ai_craft import enrich_person, enrich_person_more, multi_enrich_persons
 from custom_lib.automail_ai_search_v2 import parse_input_prompt, convert_parms_to_targets, get_company_locations_id, execute_single_search
 from custom_lib.rocketreach_test import search_and_generate_emails
 from prompt.email import EMAIL_SYSTEM_PROMPT
@@ -346,30 +346,24 @@ async def enrich_profile(request: EnrichProfileRequest) -> dict:
         logger.error(f"Traceback: {traceback.format_exc()}")
         raise HTTPException(status_code=500, detail=str(e))
 
-@app.post("/selenium") # TBD
-async def test_selenium(request: EnrichProfileRequest) -> dict:
+@app.post("/enrich-profile-more") # TBD
+async def enrich_profile_more(request: EnrichProfileRequest) -> dict:
     logger.info(f"Received prompt: {request}")
     try:
 
-        from selenium import webdriver
-        from selenium.webdriver.chrome.options import Options
+        linkedin_client = init_linkedin_client()
+        if not linkedin_client:
+            raise HTTPException(status_code=500, detail="Failed to initialize LinkedIn client")
 
-        chrome_options = Options()
-        chrome_options.add_argument("--headless")
-
-        driver = webdriver.Chrome(options=chrome_options)
-
-        # Navigate to the page
-        driver.get(request.linkedin_url)
-
-        # Grab the page source
-        html = driver.page_source
-
-        driver.quit()
+        result = enrich_person_more(
+            linkedin=linkedin_client,
+            value=request.linkedin_url,
+            url_value=True
+        )
 
         # Your existing logic here using linkedin_client
         return JSONResponse(content={
-            "result": html
+            "result": result
         }, media_type="application/json")
 
     except Exception as e:

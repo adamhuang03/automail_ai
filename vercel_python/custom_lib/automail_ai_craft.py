@@ -189,6 +189,84 @@ def draft_email(
 
     return response.choices[0].message.content  
 
+def enrich_person_more(
+    linkedin: LinkedinWrapper,
+    value: str,
+    url_value: bool = False
+) -> dict:
+    logger.info("Starting profile enrichment for value: %s (url_value=%s)", value, url_value)
+    
+    # Create a cleaned person dictionary with relevant fields
+    if url_value:
+        url = value.split('?')[0].rstrip('/')
+        id = url.split('/')[-1]
+        logger.info("Extracting profile using public_id: %s", id)
+    else:
+        id = value
+        logger.info("Extracting profile using urn_id: %s", value)
+    
+    person = linkedin.get_profile(id)
+
+    if not person:
+        logger.warning("No profile data returned for value: %s", value)
+        return {}
+    
+    logger.info("Successfully retrieved profile for %s %s", 
+                person.get("firstName", "Unknown"), 
+                person.get("lastName", "Unknown"))
+    
+    cleaned_person = {
+        "personal": {
+            "first_name": person.get("firstName"),
+            "last_name": person.get("lastName"),
+            "headline": person.get("headline"),
+            "location": person.get("locationName"),
+            "city": person.get("geoLocationName"),
+            "industry": person.get("industryName")
+        },
+        "experiences": [],
+        "education": [],
+        "skills": [skill['name'] for skill in person.get("skills", [])]
+    }
+    
+    # Add experiences
+    experience_count = len(person.get("experience", []))
+    logger.info("Processing %d experiences", experience_count)
+    for exp in person.get("experience", []):
+        cleaned_exp = {
+            "title": exp.get("title"),
+            "company": exp.get("companyName"),
+            "company_public_id": exp.get("companyPublicId"),
+            "description": exp.get("description"),
+            "start_date": exp.get("startDate"),
+            "end_date": exp.get("endDate")
+        }
+        cleaned_person["experiences"].append(cleaned_exp)
+    
+    # Add education
+    education_count = len(person.get("education", []))
+    logger.info("Processing %d education entries", education_count)
+    for edu in person.get("education", []):
+        cleaned_edu = {
+            "school": edu.get("schoolName"),
+            "activities": edu.get("activities"),
+            "grade": edu.get("grade"),
+            "start_date": edu.get("timePeriod", {}).get("startDate"),
+            "end_date": edu.get("timePeriod", {}).get("endDate")
+        }
+        cleaned_person["education"].append(cleaned_edu)
+    
+    # Add identifier based on parameter
+    if url_value:
+        cleaned_person["id"] = person.get("public_id")
+        logger.info("Added public_id to profile")
+    else:
+        cleaned_person["id"] = person.get("profile_urn")
+        logger.info("Added profile_urn to profile")
+    
+    logger.info("Successfully enriched profile data")
+    return cleaned_person
+
 
 if __name__ == "__main__":
 
@@ -281,3 +359,8 @@ if __name__ == "__main__":
         json.dump(result, f, indent=4)
 
     # print(json.dumps(result, indent=4))
+
+    # ==================================================================
+
+    
+

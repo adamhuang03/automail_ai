@@ -1,4 +1,4 @@
-import requests, json
+import requests, json, time
 from bs4 import BeautifulSoup
 from linkedin_api.linkedin import default_evade 
 
@@ -82,82 +82,95 @@ def get_first_google_result_link(query):
     #     return link_tag['href']
 
     # print("No link found in the search results.")
-    
 
-def get_company_description_box(url):
+
+def get_company_description_box(crunchbase_url):
+    # Call function only if no supabase
     # Fetch the page content
     default_evade()
     
-    session = requests.Session()
+    # url = "https://api.scrapingant.com/v2/general"
+    # params = {
+    #     "url": crunchbase_url,
+    #     "x-api-key": "662456c077a34243875bff69fa8cbfde"
+    # }
+
+    # print(url, params)
+    # response = requests.get(url, params=params)
+    # response.raise_for_status()
+
+    # soup = BeautifulSoup(response.text, 'html.parser')
     
-    # Set the cookies that are required
-    cookies = {
-        'cb_analytics_consent': 'granted',
-        'featureFlagOverride': '{}',
-        '__cflb': '02DiuJLCopmWEhtqNz3x2VesGhPn4wGcJcgi5GVtXAogG',
-    }
-    
-    session.cookies.update(cookies)
-    
-    response = session.get(url, headers=headers_more_real, timeout=30)
-    response.raise_for_status()
-    soup = BeautifulSoup(response.text, 'html.parser')
+    # with open('crunchbase_page.txt', 'w') as f:
+    #     f.write(response.text)
+
+    with open('crunchbase_page.txt', 'r') as f:
+        html_content = f.read()
+
+    soup = BeautifulSoup(html_content, 'html.parser')
     
     # Find the profile-section element
     profile_section = soup.find('profile-section')
-    if not profile_section:
-        return None
+    # if not profile_section:
+    #     return None
 
-    # Find the section-card within the profile-section
-    section_card = profile_section.find('section-card')
-    if not section_card:
-        return None
+    # # Find the section-card within the profile-section
+    # section_card = profile_section.find('section-card')
+    # if not section_card:
+    #     return None
     
-    # Extract the text content from the section-card
-    description = section_card.get_text(strip=True)
-    if not description:
-        return None
+    # # Extract the text content from the section-card
+    # description = section_card.get_text(strip=True)
+    # if not description:
+    #     return None
     
-    return description
+    return profile_section
 
 # Example usage:
 
 if __name__ == "__main__":
-    # Example search
-    input_companies = [
-        # "Moelis",
-        # "Morgan Stanley",
-        # "GitHub",
-        # "Google",
-        # "Microsoft",
-        # "Apple",
-        # "Facebook",
-        # "Twitter",
-        "Homebase",
-        # "Amazon",
-        # "Tesla",
-        # "Netflix",
-        # "Spotify",
-        # "Airbnb",
-        # "Uber",
-        # "Lyft",
-        # "Snapchat",
-        # "Instagram",
-        # "TikTok",
-        # "Pinterest",
-        # "Reddit",
-    ]
-    for company in input_companies:
-        query = structure_crunchbase_query(company)
-        first_link = get_first_google_result_link(query)
-        if first_link:
-            print("First link found:", first_link)
-            result = get_company_description_box(first_link)
-            if result:
-                print(f"For URL: {first_link}")
-                print(f"Company Description: {result}")
-                print("-" * 50)
-            else:
-                print("Could not find description for", first_link)
-        else:
-            print("No link found.")
+    # # Example search
+    # input_companies = [
+    #     # "Moelis",
+    #     # "Morgan Stanley",
+    #     # "GitHub",
+    #     # "Google",
+    #     # "Microsoft",
+    #     # "Apple",
+    #     # "Facebook",
+    #     # "Twitter",
+    #     # "Homebase",
+    #     # "Amazon",
+    #     "Tesla",
+    #     # "Netflix",
+    #     # "Spotify",
+    #     # "Airbnb",
+    #     # "Uber",
+    #     # "Lyft",
+    #     # "Snapchat",
+    #     # "Instagram",
+    #     # "TikTok",
+    #     # "Pinterest",
+    #     # "Reddit",
+    # ]
+    # for company in input_companies:
+    #     start_time = time.time()
+    #     query = structure_crunchbase_query(company)
+    #     first_link = get_first_google_result_link(query)
+    #     if first_link:
+    #         print("First link found:", first_link)
+    #         result = get_company_description_box(first_link)
+    #         end_time = time.time()
+    #         duration_seconds = end_time - start_time
+    #         print("Duraction:", duration_seconds)
+    #         if result:
+    #             print(f"For URL: {first_link}")
+    #             print(f"Company Description: {result}")
+    #             print("-" * 50)
+    #         else:
+    #             print("Could not find description for", first_link)
+    #     else:
+    #         print("No link found.")
+
+    result = get_company_description_box("")
+    print(result)

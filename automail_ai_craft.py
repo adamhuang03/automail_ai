@@ -150,6 +150,7 @@ def enrich_person_more(
         cleaned_exp = {
             "title": exp.get("title"),
             "company": exp.get("companyName"),
+            "company_public_id": exp.get("companyPublicId"),
             "description": exp.get("description"),
             "start_date": exp.get("startDate"),
             "end_date": exp.get("endDate")

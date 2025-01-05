@@ -51,6 +51,7 @@ class LinkedinWrapper(BaseLinkedin):
         ] = None,
         current_company: Optional[List[str]] = None,
         past_companies: Optional[List[str]] = None,
+        or_past_companies: bool = False,
         nonprofit_interests: Optional[List[str]] = None,
         profile_languages: Optional[List[str]] = None,
         regions: Optional[List[str]] = None,
@@ -81,6 +82,8 @@ class LinkedinWrapper(BaseLinkedin):
         :type current_company: list, optional
         :param past_companies: A list of company URN IDs (str)
         :type past_companies: list, optional
+        :param or_past_companies: Boolean to determine if you want to search for profiles with any of the companies in the list
+        :type or_past_companies: bool, optional
         :param regions: A list of geo URN IDs (str)
         :type regions: list, optional
         :param industries: A list of industry URN IDs (str)
@@ -137,7 +140,10 @@ class LinkedinWrapper(BaseLinkedin):
             stringify = " | ".join(current_company)
             filters.append(f"(key:currentCompany,value:List({stringify}))")
         if past_companies:
-            stringify = " | ".join(past_companies)
+            if or_past_companies:
+                stringify = ",".join(past_companies)
+            else:
+                stringify = " | ".join(past_companies)
             filters.append(f"(key:pastCompany,value:List({stringify}))")
         if profile_languages:
             stringify = " | ".join(profile_languages)
@@ -276,12 +282,14 @@ class LinkedinWrapper(BaseLinkedin):
         for experience in enriched_experiences:
             if "miniCompany" in experience:
                 company_name = experience.get("name", "")
+                company_public_id = experience.get("miniCompany", {}).get("universalName", "")
             
                 # Process each position within the company
                 for position in experience.get("positions", []):
                     experience_entry = {
                         "title": position.get("title", "No title available"),
                         "companyName": company_name,
+                        "companyPublicId": company_public_id,
                         "description": position.get("description", "No description available"),
                         "startDate": None,
                         "endDate": None
