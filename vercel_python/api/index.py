@@ -138,6 +138,9 @@ class PromptExtractionRequest(BaseModel):
 class CompanyLocationsRequest(BaseModel):
     input: list
 
+class GetCompanyRequest(BaseModel):
+    company_public_id: str
+
 class ExecutionSearch(BaseModel):
     company_urn: str
     company_name_for_passthrough: str
@@ -360,6 +363,27 @@ async def enrich_profile_more(request: EnrichProfileRequest) -> dict:
             value=request.linkedin_url,
             url_value=True
         )
+
+        # Your existing logic here using linkedin_client
+        return JSONResponse(content={
+            "result": result
+        }, media_type="application/json")
+
+    except Exception as e:
+        logger.error(f"Error in get_company_locations_id: {str(e)}")
+        logger.error(f"Traceback: {traceback.format_exc()}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/get-company") # TBD
+async def get_company(request: GetCompanyRequest) -> dict:
+    logger.info(f"Received prompt: {request}")
+    try:
+
+        linkedin_client = init_linkedin_client()
+        if not linkedin_client:
+            raise HTTPException(status_code=500, detail="Failed to initialize LinkedIn client")
+
+        result = linkedin_client.get_company(public_id=request.company_public_id)
 
         # Your existing logic here using linkedin_client
         return JSONResponse(content={
