@@ -1,0 +1,105 @@
+{
+    "personal": {
+        "first_name": "Rachel",
+        "last_name": "Levitt",
+        "headline": "Strategic Finance Manager at Loopio",
+        "location": "Canada",
+        "city": "Toronto, Ontario",
+        "industry": "Computer Software"
+    },
+    "experiences": [
+        {
+            "title": "Strategic Finance Manager",
+            "company": "Loopio",
+            "description": "No description available",
+            "start_date": {
+                "month": 7,
+                "year": 2023
+            },
+            "end_date": null
+        },
+        {
+            "title": "Investment Banking Associate",
+            "company": "Goldman Sachs",
+            "description": "No description available",
+            "start_date": {
+                "month": 7,
+                "year": 2021
+            },
+            "end_date": {
+                "month": 6,
+                "year": 2023
+            }
+        },
+        {
+            "title": "Investment Banking Analyst",
+            "company": "Canaccord Genuity - Global Capital Markets",
+            "description": "No description available",
+            "start_date": {
+                "month": 9,
+                "year": 2018
+            },
+            "end_date": {
+                "month": 4,
+                "year": 2021
+            }
+        },
+        {
+            "title": "Investment Banking Summer Analyst",
+            "company": "Canaccord Genuity - Global Capital Markets",
+            "description": "No description available",
+            "start_date": {
+                "month": 5,
+                "year": 2017
+            },
+            "end_date": {
+                "month": 8,
+                "year": 2017
+            }
+        },
+        {
+            "title": "Investor Relations Summer Associate",
+            "company": "CIBC",
+            "description": "No description available",
+            "start_date": {
+                "month": 5,
+                "year": 2016
+            },
+            "end_date": {
+                "month": 8,
+                "year": 2016
+            }
+        }
+    ],
+    "education": [
+        {
+            "school": "University of Toronto - University of Trinity College",
+            "activities": "Association of Canadian Intercollegiate Investment Clubs (U of T Chapter Head), Toronto Student Investment Counsel (formerly Hart House Investment Club) (Associate), Rotman Commerce Finance Association (Events Committee), Rotman Commerce Innovation Group (President), Trinity College Women in Leadership (Treasurer and Rotman Commerce Mentor), Trinity College Orientation Committee (Treasurer), Rotman Commerce NYC Finance Trip 2016",
+            "grade": null,
+            "start_date": {
+                "year": 2014
+            },
+            "end_date": {
+                "year": 2018
+            }
+        },
+        {
+            "school": "Branksome Hall",
+            "activities": "Head of Peer Support, President of Social Justice Club",
+            "grade": null,
+            "start_date": {
+                "year": 2008
+            },
+            "end_date": {
+                "year": 2014
+            }
+        }
+    ],
+    "skills": [
+        "Teamwork",
+        "Leadership",
+        "Public Speaking",
+        "Economics"
+    ],
+    "id": "rachel-levitt-bb0922b5"
+}

@@ -1,0 +1,1845 @@
+[
+    {
+        "template": "UNIVERSAL",
+        "actorNavigationContext": null,
+        "trackingUrn": "urn:li:member:686116450",
+        "controlName": null,
+        "interstitialComponent": null,
+        "primaryActions": [],
+        "entityCustomTrackingInfo": {
+            "memberDistance": "DISTANCE_3",
+            "_type": "com.linkedin.voyager.dash.search.EntityCustomTrackingInfo",
+            "privacySettingsInjectionHolder": null,
+            "_recipeType": "com.linkedin.4caf791202c7b71e3874d4551f078f32",
+            "nameMatch": false
+        },
+        "title": {
+            "textDirection": "FIRST_STRONG",
+            "_type": "com.linkedin.voyager.dash.common.text.TextViewModel",
+            "text": "Nicole Hua",
+            "attributesV2": [],
+            "_recipeType": "com.linkedin.6a224ca38654a84754a1eb3e97c0f846",
+            "accessibilityTextAttributesV2": [],
+            "accessibilityText": "View Nicole Hua\u2019s profile"
+        },
+        "overflowActions": [],
+        "searchActionType": null,
+        "actorInsights": [],
+        "insightsResolutionResults": [],
+        "badgeIcon": null,
+        "entityUrn": "urn:li:fsd_entityResultViewModel:(urn:li:fsd_profile:ACoAACjlTmIBjrEizIDlpNQZk48ItZyriPvecSY,SEARCH_SRP,DEFAULT)",
+        "showAdditionalCluster": false,
+        "ringStatus": null,
+        "primarySubtitle": {
+            "textDirection": "USER_LOCALE",
+            "_type": "com.linkedin.voyager.dash.common.text.TextViewModel",
+            "text": "Commercial Banking - Associate at CIBC",
+            "attributesV2": [],
+            "_recipeType": "com.linkedin.6a224ca38654a84754a1eb3e97c0f846",
+            "accessibilityTextAttributesV2": [],
+            "accessibilityText": null
+        },
+        "badgeText": {
+            "textDirection": "USER_LOCALE",
+            "_type": "com.linkedin.voyager.dash.common.text.TextViewModel",
+            "text": "\u2022 3rd+",
+            "attributesV2": [],
+            "_recipeType": "com.linkedin.6a224ca38654a84754a1eb3e97c0f846",
+            "accessibilityTextAttributesV2": [],
+            "accessibilityText": "3rd+ degree connection"
+        },
+        "trackingId": "ubRh1HNUTVamazjIpDREDQ==",
+        "summary": {
+            "textDirection": "USER_LOCALE",
+            "_type": "com.linkedin.voyager.dash.common.text.TextViewModel",
+            "text": "Current: Commercial Banking Associate at CIBC",
+            "attributesV2": [
+                {
+                    "start": 20,
+                    "length": 7,
+                    "_type": "com.linkedin.voyager.dash.common.text.TextAttribute",
+                    "detailData": {
+                        "jobPostingName": null,
+                        "hyperlink": null,
+                        "profileFamiliarName": null,
+                        "color": null,
+                        "companyName": null,
+                        "icon": null,
+                        "epoch": null,
+                        "systemImage": null,
+                        "textLink": null,
+                        "listItemStyle": null,
+                        "groupName": null,
+                        "hyperlinkOpenExternally": null,
+                        "listStyle": null,
+                        "profileFullName": null,
+                        "stringFieldReference": null,
+                        "learningCourseName": null,
+                        "profileMention": null,
+                        "style": "BOLD",
+                        "schoolName": null,
+                        "hashtag": null
+                    },
+                    "_recipeType": "com.linkedin.b8a09c2c7547138a1c3aebdda8a94e12"
+                }
+            ],
+            "_recipeType": "com.linkedin.6a224ca38654a84754a1eb3e97c0f846",
+            "accessibilityTextAttributesV2": [],
+            "accessibilityText": null
+        },
+        "addEntityToSearchHistory": true,
+        "actorNavigationUrl": null,
+        "image": {
+            "_type": "com.linkedin.voyager.dash.common.image.ImageViewModel",
+            "attributes": [
+                {
+                    "scalingType": null,
+                    "_type": "com.linkedin.voyager.dash.common.image.ImageAttribute",
+                    "detailData": {
+                        "profilePictureWithoutFrame": null,
+                        "profilePictureWithRingStatus": null,
+                        "companyLogo": null,
+                        "icon": null,
+                        "systemImage": null,
+                        "nonEntityGroupLogo": null,
+                        "vectorImage": null,
+                        "nonEntityProfessionalEventLogo": null,
+                        "profilePicture": null,
+                        "imageUrl": null,
+                        "professionalEventLogo": null,
+                        "nonEntityCompanyLogo": null,
+                        "nonEntitySchoolLogo": null,
+                        "groupLogo": null,
+                        "schoolLogo": null,
+                        "ghostImage": null,
+                        "nonEntityProfilePicture": {
+                            "_type": "com.linkedin.voyager.dash.common.image.NonEntityProfilePicture",
+                            "ringStatus": null,
+                            "_recipeType": "com.linkedin.4b009c1d6ea192a94bda77fb9ace3a7d",
+                            "vectorImage": {
+                                "_type": "com.linkedin.common.VectorImage",
+                                "attribution": null,
+                                "_recipeType": "com.linkedin.28db8575bcf1c65bdc4bc15948d50ee9",
+                                "digitalmediaAsset": null,
+                                "artifacts": [
+                                    {
+                                        "width": 100,
+                                        "_type": "com.linkedin.common.VectorArtifact",
+                                        "_recipeType": "com.linkedin.f0f435b4425ee2990eba8f0a4d614944",
+                                        "fileIdentifyingUrlPathSegment": "https://media.licdn.com/dms/image/v2/D5603AQFsuMTvrcpsIw/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1694635165816?e=1740009600&v=beta&t=O2AX-ag9bevRh0qaRj_R7Gp2zPSpqHMvlqjbyFqQPLs",
+                                        "expiresAt": 1740009600000,
+                                        "height": 100
+                                    }
+                                ],
+                                "rootUrl": ""
+                            },
+                            "profile": {
+                                "_recipeType": "com.linkedin.e0372afc4a18480b00ca7e4906904fd7",
+                                "_type": "com.linkedin.voyager.dash.identity.profile.Profile",
+                                "entityUrn": "urn:li:fsd_profile:ACoAACjlTmIBjrEizIDlpNQZk48ItZyriPvecSY"
+                            }
+                        }
+                    },
+                    "tintColor": null,
+                    "_recipeType": "com.linkedin.eb94fbb1518f790c4545aafdf571c64e",
+                    "tapTargets": [],
+                    "displayAspectRatio": null
+                }
+            ],
+            "actionTarget": null,
+            "_recipeType": "com.linkedin.fe5b8a3ac5a4a165c17f53b7eae4209b",
+            "accessibilityTextAttributes": [],
+            "totalCount": null,
+            "accessibilityText": "Nicole Hua"
+        },
+        "lazyLoadedActions": {
+            "_recipeType": "com.linkedin.92ece182782ae4412e712925cd97f9fe",
+            "_type": "com.linkedin.voyager.dash.search.LazyLoadedActions",
+            "entityUrn": "urn:li:fsd_lazyLoadedActions:(urn:li:fsd_profileActions:(ACoAACjlTmIBjrEizIDlpNQZk48ItZyriPvecSY,SEARCH_STATEFUL_SUPPLEMENTARY,EMPTY_CONTEXT_ENTITY_URN),PEOPLE,SEARCH_SRP)"
+        },
+        "secondarySubtitle": {
+            "textDirection": "USER_LOCALE",
+            "_type": "com.linkedin.voyager.dash.common.text.TextViewModel",
+            "text": "Toronto, ON",
+            "attributesV2": [],
+            "_recipeType": "com.linkedin.6a224ca38654a84754a1eb3e97c0f846",
+            "accessibilityTextAttributesV2": [],
+            "accessibilityText": null
+        },
+        "_type": "com.linkedin.voyager.dash.search.EntityResultViewModel",
+        "navigationUrl": "https://www.linkedin.com/in/nicole-hua?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAACjlTmIBjrEizIDlpNQZk48ItZyriPvecSY",
+        "entityEmbeddedObject": null,
+        "unreadIndicatorDetails": null,
+        "_recipeType": "com.linkedin.cf4b25c18907ea8eafe915c8bfa24109",
+        "target": null,
+        "actorTrackingUrn": null,
+        "navigationContext": {
+            "_type": "com.linkedin.voyager.dash.search.NavigationContext",
+            "openExternally": false,
+            "_recipeType": "com.linkedin.55ee9afd4182671fe7e271f615659525",
+            "url": "https://www.linkedin.com/in/nicole-hua?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAACjlTmIBjrEizIDlpNQZk48ItZyriPvecSY"
+        }
+    },
+    {
+        "template": "UNIVERSAL",
+        "actorNavigationContext": null,
+        "trackingUrn": "urn:li:member:216255604",
+        "controlName": null,
+        "interstitialComponent": null,
+        "primaryActions": [],
+        "entityCustomTrackingInfo": {
+            "memberDistance": "DISTANCE_3",
+            "_type": "com.linkedin.voyager.dash.search.EntityCustomTrackingInfo",
+            "privacySettingsInjectionHolder": null,
+            "_recipeType": "com.linkedin.4caf791202c7b71e3874d4551f078f32",
+            "nameMatch": false
+        },
+        "title": {
+            "textDirection": "FIRST_STRONG",
+            "_type": "com.linkedin.voyager.dash.common.text.TextViewModel",
+            "text": "Jarred Seider",
+            "attributesV2": [],
+            "_recipeType": "com.linkedin.6a224ca38654a84754a1eb3e97c0f846",
+            "accessibilityTextAttributesV2": [],
+            "accessibilityText": "View Jarred Seider\u2019s profile"
+        },
+        "overflowActions": [],
+        "searchActionType": null,
+        "actorInsights": [],
+        "insightsResolutionResults": [],
+        "badgeIcon": null,
+        "entityUrn": "urn:li:fsd_entityResultViewModel:(urn:li:fsd_profile:ACoAAAzjzHQBZ-N-G3r5K5UwGXT9YOgaX9TzpTM,SEARCH_SRP,DEFAULT)",
+        "showAdditionalCluster": false,
+        "ringStatus": null,
+        "primarySubtitle": {
+            "textDirection": "USER_LOCALE",
+            "_type": "com.linkedin.voyager.dash.common.text.TextViewModel",
+            "text": "Director, Mid-Market Investment Banking at CIBC",
+            "attributesV2": [],
+            "_recipeType": "com.linkedin.6a224ca38654a84754a1eb3e97c0f846",
+            "accessibilityTextAttributesV2": [],
+            "accessibilityText": null
+        },
+        "badgeText": {
+            "textDirection": "USER_LOCALE",
+            "_type": "com.linkedin.voyager.dash.common.text.TextViewModel",
+            "text": "\u2022 3rd+",
+            "attributesV2": [],
+            "_recipeType": "com.linkedin.6a224ca38654a84754a1eb3e97c0f846",
+            "accessibilityTextAttributesV2": [],
+            "accessibilityText": "3rd+ degree connection"
+        },
+        "trackingId": "Pkh/y2idSFq0CKRKs2k+BQ==",
+        "summary": {
+            "textDirection": "USER_LOCALE",
+            "_type": "com.linkedin.voyager.dash.common.text.TextViewModel",
+            "text": "Past: Associate, Mid-Market Investment Banking at CIBC",
+            "attributesV2": [
+                {
+                    "start": 28,
+                    "length": 10,
+                    "_type": "com.linkedin.voyager.dash.common.text.TextAttribute",
+                    "detailData": {
+                        "jobPostingName": null,
+                        "hyperlink": null,
+                        "profileFamiliarName": null,
+                        "color": null,
+                        "companyName": null,
+                        "icon": null,
+                        "epoch": null,
+                        "systemImage": null,
+                        "textLink": null,
+                        "listItemStyle": null,
+                        "groupName": null,
+                        "hyperlinkOpenExternally": null,
+                        "listStyle": null,
+                        "profileFullName": null,
+                        "stringFieldReference": null,
+                        "learningCourseName": null,
+                        "profileMention": null,
+                        "style": "BOLD",
+                        "schoolName": null,
+                        "hashtag": null
+                    },
+                    "_recipeType": "com.linkedin.b8a09c2c7547138a1c3aebdda8a94e12"
+                },
+                {
+                    "start": 39,
+                    "length": 7,
+                    "_type": "com.linkedin.voyager.dash.common.text.TextAttribute",
+                    "detailData": {
+                        "jobPostingName": null,
+                        "hyperlink": null,
+                        "profileFamiliarName": null,
+                        "color": null,
+                        "companyName": null,
+                        "icon": null,
+                        "epoch": null,
+                        "systemImage": null,
+                        "textLink": null,
+                        "listItemStyle": null,
+                        "groupName": null,
+                        "hyperlinkOpenExternally": null,
+                        "listStyle": null,
+                        "profileFullName": null,
+                        "stringFieldReference": null,
+                        "learningCourseName": null,
+                        "profileMention": null,
+                        "style": "BOLD",
+                        "schoolName": null,
+                        "hashtag": null
+                    },
+                    "_recipeType": "com.linkedin.b8a09c2c7547138a1c3aebdda8a94e12"
+                }
+            ],
+            "_recipeType": "com.linkedin.6a224ca38654a84754a1eb3e97c0f846",
+            "accessibilityTextAttributesV2": [],
+            "accessibilityText": null
+        },
+        "addEntityToSearchHistory": true,
+        "actorNavigationUrl": null,
+        "image": {
+            "_type": "com.linkedin.voyager.dash.common.image.ImageViewModel",
+            "attributes": [
+                {
+                    "scalingType": null,
+                    "_type": "com.linkedin.voyager.dash.common.image.ImageAttribute",
+                    "detailData": {
+                        "profilePictureWithoutFrame": null,
+                        "profilePictureWithRingStatus": null,
+                        "companyLogo": null,
+                        "icon": null,
+                        "systemImage": null,
+                        "nonEntityGroupLogo": null,
+                        "vectorImage": null,
+                        "nonEntityProfessionalEventLogo": null,
+                        "profilePicture": null,
+                        "imageUrl": null,
+                        "professionalEventLogo": null,
+                        "nonEntityCompanyLogo": null,
+                        "nonEntitySchoolLogo": null,
+                        "groupLogo": null,
+                        "schoolLogo": null,
+                        "ghostImage": null,
+                        "nonEntityProfilePicture": {
+                            "_type": "com.linkedin.voyager.dash.common.image.NonEntityProfilePicture",
+                            "ringStatus": null,
+                            "_recipeType": "com.linkedin.4b009c1d6ea192a94bda77fb9ace3a7d",
+                            "vectorImage": {
+                                "_type": "com.linkedin.common.VectorImage",
+                                "attribution": null,
+                                "_recipeType": "com.linkedin.28db8575bcf1c65bdc4bc15948d50ee9",
+                                "digitalmediaAsset": null,
+                                "artifacts": [
+                                    {
+                                        "width": 100,
+                                        "_type": "com.linkedin.common.VectorArtifact",
+                                        "_recipeType": "com.linkedin.f0f435b4425ee2990eba8f0a4d614944",
+                                        "fileIdentifyingUrlPathSegment": "https://media.licdn.com/dms/image/v2/C5603AQFaOGNROwIaqQ/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1575482072073?e=1740009600&v=beta&t=m6fWMFsLULS8iMmRKE_U3ukbp2HcS0BxGf6c7WDOYT4",
+                                        "expiresAt": 1740009600000,
+                                        "height": 100
+                                    }
+                                ],
+                                "rootUrl": ""
+                            },
+                            "profile": {
+                                "_recipeType": "com.linkedin.e0372afc4a18480b00ca7e4906904fd7",
+                                "_type": "com.linkedin.voyager.dash.identity.profile.Profile",
+                                "entityUrn": "urn:li:fsd_profile:ACoAAAzjzHQBZ-N-G3r5K5UwGXT9YOgaX9TzpTM"
+                            }
+                        }
+                    },
+                    "tintColor": null,
+                    "_recipeType": "com.linkedin.eb94fbb1518f790c4545aafdf571c64e",
+                    "tapTargets": [],
+                    "displayAspectRatio": null
+                }
+            ],
+            "actionTarget": null,
+            "_recipeType": "com.linkedin.fe5b8a3ac5a4a165c17f53b7eae4209b",
+            "accessibilityTextAttributes": [],
+            "totalCount": null,
+            "accessibilityText": "Jarred Seider"
+        },
+        "lazyLoadedActions": {
+            "_recipeType": "com.linkedin.92ece182782ae4412e712925cd97f9fe",
+            "_type": "com.linkedin.voyager.dash.search.LazyLoadedActions",
+            "entityUrn": "urn:li:fsd_lazyLoadedActions:(urn:li:fsd_profileActions:(ACoAAAzjzHQBZ-N-G3r5K5UwGXT9YOgaX9TzpTM,SEARCH_STATEFUL_SUPPLEMENTARY,EMPTY_CONTEXT_ENTITY_URN),PEOPLE,SEARCH_SRP)"
+        },
+        "secondarySubtitle": {
+            "textDirection": "USER_LOCALE",
+            "_type": "com.linkedin.voyager.dash.common.text.TextViewModel",
+            "text": "Toronto, ON",
+            "attributesV2": [],
+            "_recipeType": "com.linkedin.6a224ca38654a84754a1eb3e97c0f846",
+            "accessibilityTextAttributesV2": [],
+            "accessibilityText": null
+        },
+        "_type": "com.linkedin.voyager.dash.search.EntityResultViewModel",
+        "navigationUrl": "https://www.linkedin.com/in/jarred-seider-b0450b60?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAAAzjzHQBZ-N-G3r5K5UwGXT9YOgaX9TzpTM",
+        "entityEmbeddedObject": null,
+        "unreadIndicatorDetails": null,
+        "_recipeType": "com.linkedin.cf4b25c18907ea8eafe915c8bfa24109",
+        "target": null,
+        "actorTrackingUrn": null,
+        "navigationContext": {
+            "_type": "com.linkedin.voyager.dash.search.NavigationContext",
+            "openExternally": false,
+            "_recipeType": "com.linkedin.55ee9afd4182671fe7e271f615659525",
+            "url": "https://www.linkedin.com/in/jarred-seider-b0450b60?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAAAzjzHQBZ-N-G3r5K5UwGXT9YOgaX9TzpTM"
+        }
+    },
+    {
+        "template": "UNIVERSAL",
+        "actorNavigationContext": null,
+        "trackingUrn": "urn:li:member:609498004",
+        "controlName": null,
+        "interstitialComponent": null,
+        "primaryActions": [],
+        "entityCustomTrackingInfo": {
+            "memberDistance": "DISTANCE_3",
+            "_type": "com.linkedin.voyager.dash.search.EntityCustomTrackingInfo",
+            "privacySettingsInjectionHolder": null,
+            "_recipeType": "com.linkedin.4caf791202c7b71e3874d4551f078f32",
+            "nameMatch": false
+        },
+        "title": {
+            "textDirection": "FIRST_STRONG",
+            "_type": "com.linkedin.voyager.dash.common.text.TextViewModel",
+            "text": "Rachel Leung, CAMS",
+            "attributesV2": [],
+            "_recipeType": "com.linkedin.6a224ca38654a84754a1eb3e97c0f846",
+            "accessibilityTextAttributesV2": [],
+            "accessibilityText": "View Rachel Leung, CAMS\u2019 profile"
+        },
+        "overflowActions": [],
+        "searchActionType": null,
+        "actorInsights": [],
+        "insightsResolutionResults": [],
+        "badgeIcon": null,
+        "entityUrn": "urn:li:fsd_entityResultViewModel:(urn:li:fsd_profile:ACoAACRUM5QBQFVpn3ZMFfxRpeVPSvYypMOhxuc,SEARCH_SRP,DEFAULT)",
+        "showAdditionalCluster": false,
+        "ringStatus": null,
+        "primarySubtitle": {
+            "textDirection": "USER_LOCALE",
+            "_type": "com.linkedin.voyager.dash.common.text.TextViewModel",
+            "text": "Associate at CIBC",
+            "attributesV2": [],
+            "_recipeType": "com.linkedin.6a224ca38654a84754a1eb3e97c0f846",
+            "accessibilityTextAttributesV2": [],
+            "accessibilityText": null
+        },
+        "badgeText": {
+            "textDirection": "USER_LOCALE",
+            "_type": "com.linkedin.voyager.dash.common.text.TextViewModel",
+            "text": "\u2022 3rd+",
+            "attributesV2": [],
+            "_recipeType": "com.linkedin.6a224ca38654a84754a1eb3e97c0f846",
+            "accessibilityTextAttributesV2": [],
+            "accessibilityText": "3rd+ degree connection"
+        },
+        "trackingId": "VLQszvnUTkmGQ8f+kVXIBg==",
+        "summary": {
+            "textDirection": "USER_LOCALE",
+            "_type": "com.linkedin.voyager.dash.common.text.TextViewModel",
+            "text": "Past: KYC Case Manager, Commercial Banking at HSBC",
+            "attributesV2": [
+                {
+                    "start": 35,
+                    "length": 7,
+                    "_type": "com.linkedin.voyager.dash.common.text.TextAttribute",
+                    "detailData": {
+                        "jobPostingName": null,
+                        "hyperlink": null,
+                        "profileFamiliarName": null,
+                        "color": null,
+                        "companyName": null,
+                        "icon": null,
+                        "epoch": null,
+                        "systemImage": null,
+                        "textLink": null,
+                        "listItemStyle": null,
+                        "groupName": null,
+                        "hyperlinkOpenExternally": null,
+                        "listStyle": null,
+                        "profileFullName": null,
+                        "stringFieldReference": null,
+                        "learningCourseName": null,
+                        "profileMention": null,
+                        "style": "BOLD",
+                        "schoolName": null,
+                        "hashtag": null
+                    },
+                    "_recipeType": "com.linkedin.b8a09c2c7547138a1c3aebdda8a94e12"
+                }
+            ],
+            "_recipeType": "com.linkedin.6a224ca38654a84754a1eb3e97c0f846",
+            "accessibilityTextAttributesV2": [],
+            "accessibilityText": null
+        },
+        "addEntityToSearchHistory": true,
+        "actorNavigationUrl": null,
+        "image": {
+            "_type": "com.linkedin.voyager.dash.common.image.ImageViewModel",
+            "attributes": [
+                {
+                    "scalingType": null,
+                    "_type": "com.linkedin.voyager.dash.common.image.ImageAttribute",
+                    "detailData": {
+                        "profilePictureWithoutFrame": null,
+                        "profilePictureWithRingStatus": null,
+                        "companyLogo": null,
+                        "icon": null,
+                        "systemImage": null,
+                        "nonEntityGroupLogo": null,
+                        "vectorImage": null,
+                        "nonEntityProfessionalEventLogo": null,
+                        "profilePicture": null,
+                        "imageUrl": null,
+                        "professionalEventLogo": null,
+                        "nonEntityCompanyLogo": null,
+                        "nonEntitySchoolLogo": null,
+                        "groupLogo": null,
+                        "schoolLogo": null,
+                        "ghostImage": null,
+                        "nonEntityProfilePicture": {
+                            "_type": "com.linkedin.voyager.dash.common.image.NonEntityProfilePicture",
+                            "ringStatus": null,
+                            "_recipeType": "com.linkedin.4b009c1d6ea192a94bda77fb9ace3a7d",
+                            "vectorImage": {
+                                "_type": "com.linkedin.common.VectorImage",
+                                "attribution": null,
+                                "_recipeType": "com.linkedin.28db8575bcf1c65bdc4bc15948d50ee9",
+                                "digitalmediaAsset": null,
+                                "artifacts": [
+                                    {
+                                        "width": 100,
+                                        "_type": "com.linkedin.common.VectorArtifact",
+                                        "_recipeType": "com.linkedin.f0f435b4425ee2990eba8f0a4d614944",
+                                        "fileIdentifyingUrlPathSegment": "https://media.licdn.com/dms/image/v2/C5603AQGMVz_EF98Tkw/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1591943161302?e=1740009600&v=beta&t=n8qPR3yxQkWwZBN3Bh3u24OCfAPh41btoW6FhfAd8_A",
+                                        "expiresAt": 1740009600000,
+                                        "height": 100
+                                    }
+                                ],
+                                "rootUrl": ""
+                            },
+                            "profile": {
+                                "_recipeType": "com.linkedin.e0372afc4a18480b00ca7e4906904fd7",
+                                "_type": "com.linkedin.voyager.dash.identity.profile.Profile",
+                                "entityUrn": "urn:li:fsd_profile:ACoAACRUM5QBQFVpn3ZMFfxRpeVPSvYypMOhxuc"
+                            }
+                        }
+                    },
+                    "tintColor": null,
+                    "_recipeType": "com.linkedin.eb94fbb1518f790c4545aafdf571c64e",
+                    "tapTargets": [],
+                    "displayAspectRatio": null
+                }
+            ],
+            "actionTarget": null,
+            "_recipeType": "com.linkedin.fe5b8a3ac5a4a165c17f53b7eae4209b",
+            "accessibilityTextAttributes": [],
+            "totalCount": null,
+            "accessibilityText": "Rachel Leung, CAMS"
+        },
+        "lazyLoadedActions": {
+            "_recipeType": "com.linkedin.92ece182782ae4412e712925cd97f9fe",
+            "_type": "com.linkedin.voyager.dash.search.LazyLoadedActions",
+            "entityUrn": "urn:li:fsd_lazyLoadedActions:(urn:li:fsd_profileActions:(ACoAACRUM5QBQFVpn3ZMFfxRpeVPSvYypMOhxuc,SEARCH_STATEFUL_SUPPLEMENTARY,EMPTY_CONTEXT_ENTITY_URN),PEOPLE,SEARCH_SRP)"
+        },
+        "secondarySubtitle": {
+            "textDirection": "USER_LOCALE",
+            "_type": "com.linkedin.voyager.dash.common.text.TextViewModel",
+            "text": "Toronto, ON",
+            "attributesV2": [],
+            "_recipeType": "com.linkedin.6a224ca38654a84754a1eb3e97c0f846",
+            "accessibilityTextAttributesV2": [],
+            "accessibilityText": null
+        },
+        "_type": "com.linkedin.voyager.dash.search.EntityResultViewModel",
+        "navigationUrl": "https://www.linkedin.com/in/rachelybleung?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAACRUM5QBQFVpn3ZMFfxRpeVPSvYypMOhxuc",
+        "entityEmbeddedObject": null,
+        "unreadIndicatorDetails": null,
+        "_recipeType": "com.linkedin.cf4b25c18907ea8eafe915c8bfa24109",
+        "target": null,
+        "actorTrackingUrn": null,
+        "navigationContext": {
+            "_type": "com.linkedin.voyager.dash.search.NavigationContext",
+            "openExternally": false,
+            "_recipeType": "com.linkedin.55ee9afd4182671fe7e271f615659525",
+            "url": "https://www.linkedin.com/in/rachelybleung?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAACRUM5QBQFVpn3ZMFfxRpeVPSvYypMOhxuc"
+        }
+    },
+    {
+        "template": "UNIVERSAL",
+        "actorNavigationContext": null,
+        "trackingUrn": "urn:li:member:108899664",
+        "controlName": null,
+        "interstitialComponent": null,
+        "primaryActions": [],
+        "entityCustomTrackingInfo": {
+            "memberDistance": "DISTANCE_3",
+            "_type": "com.linkedin.voyager.dash.search.EntityCustomTrackingInfo",
+            "privacySettingsInjectionHolder": null,
+            "_recipeType": "com.linkedin.4caf791202c7b71e3874d4551f078f32",
+            "nameMatch": false
+        },
+        "title": {
+            "textDirection": "FIRST_STRONG",
+            "_type": "com.linkedin.voyager.dash.common.text.TextViewModel",
+            "text": "Zitian G.",
+            "attributesV2": [],
+            "_recipeType": "com.linkedin.6a224ca38654a84754a1eb3e97c0f846",
+            "accessibilityTextAttributesV2": [],
+            "accessibilityText": "View Zitian G.\u2019s profile"
+        },
+        "overflowActions": [],
+        "searchActionType": null,
+        "actorInsights": [],
+        "insightsResolutionResults": [],
+        "badgeIcon": null,
+        "entityUrn": "urn:li:fsd_entityResultViewModel:(urn:li:fsd_profile:ACoAAAZ9rVABE9BNbZVyGMb4LFpdY15UH07wuGg,SEARCH_SRP,DEFAULT)",
+        "showAdditionalCluster": false,
+        "ringStatus": null,
+        "primarySubtitle": {
+            "textDirection": "USER_LOCALE",
+            "_type": "com.linkedin.voyager.dash.common.text.TextViewModel",
+            "text": "Senior Private Banking Advisor at CIBC Private Wealth",
+            "attributesV2": [],
+            "_recipeType": "com.linkedin.6a224ca38654a84754a1eb3e97c0f846",
+            "accessibilityTextAttributesV2": [],
+            "accessibilityText": null
+        },
+        "badgeText": {
+            "textDirection": "USER_LOCALE",
+            "_type": "com.linkedin.voyager.dash.common.text.TextViewModel",
+            "text": "\u2022 3rd+",
+            "attributesV2": [],
+            "_recipeType": "com.linkedin.6a224ca38654a84754a1eb3e97c0f846",
+            "accessibilityTextAttributesV2": [],
+            "accessibilityText": "3rd+ degree connection"
+        },
+        "trackingId": "cwek+LkgTUCKgpWII6V0XQ==",
+        "summary": {
+            "textDirection": "USER_LOCALE",
+            "_type": "com.linkedin.voyager.dash.common.text.TextViewModel",
+            "text": "Current: Senior Private Banking Advisor, Private Wealth at CIBC",
+            "attributesV2": [
+                {
+                    "start": 24,
+                    "length": 7,
+                    "_type": "com.linkedin.voyager.dash.common.text.TextAttribute",
+                    "detailData": {
+                        "jobPostingName": null,
+                        "hyperlink": null,
+                        "profileFamiliarName": null,
+                        "color": null,
+                        "companyName": null,
+                        "icon": null,
+                        "epoch": null,
+                        "systemImage": null,
+                        "textLink": null,
+                        "listItemStyle": null,
+                        "groupName": null,
+                        "hyperlinkOpenExternally": null,
+                        "listStyle": null,
+                        "profileFullName": null,
+                        "stringFieldReference": null,
+                        "learningCourseName": null,
+                        "profileMention": null,
+                        "style": "BOLD",
+                        "schoolName": null,
+                        "hashtag": null
+                    },
+                    "_recipeType": "com.linkedin.b8a09c2c7547138a1c3aebdda8a94e12"
+                }
+            ],
+            "_recipeType": "com.linkedin.6a224ca38654a84754a1eb3e97c0f846",
+            "accessibilityTextAttributesV2": [],
+            "accessibilityText": null
+        },
+        "addEntityToSearchHistory": true,
+        "actorNavigationUrl": null,
+        "image": {
+            "_type": "com.linkedin.voyager.dash.common.image.ImageViewModel",
+            "attributes": [
+                {
+                    "scalingType": null,
+                    "_type": "com.linkedin.voyager.dash.common.image.ImageAttribute",
+                    "detailData": {
+                        "profilePictureWithoutFrame": null,
+                        "profilePictureWithRingStatus": null,
+                        "companyLogo": null,
+                        "icon": null,
+                        "systemImage": null,
+                        "nonEntityGroupLogo": null,
+                        "vectorImage": null,
+                        "nonEntityProfessionalEventLogo": null,
+                        "profilePicture": null,
+                        "imageUrl": null,
+                        "professionalEventLogo": null,
+                        "nonEntityCompanyLogo": null,
+                        "nonEntitySchoolLogo": null,
+                        "groupLogo": null,
+                        "schoolLogo": null,
+                        "ghostImage": null,
+                        "nonEntityProfilePicture": {
+                            "_type": "com.linkedin.voyager.dash.common.image.NonEntityProfilePicture",
+                            "ringStatus": null,
+                            "_recipeType": "com.linkedin.4b009c1d6ea192a94bda77fb9ace3a7d",
+                            "vectorImage": {
+                                "_type": "com.linkedin.common.VectorImage",
+                                "attribution": null,
+                                "_recipeType": "com.linkedin.28db8575bcf1c65bdc4bc15948d50ee9",
+                                "digitalmediaAsset": null,
+                                "artifacts": [
+                                    {
+                                        "width": 100,
+                                        "_type": "com.linkedin.common.VectorArtifact",
+                                        "_recipeType": "com.linkedin.f0f435b4425ee2990eba8f0a4d614944",
+                                        "fileIdentifyingUrlPathSegment": "https://media.licdn.com/dms/image/v2/C5603AQF42aHod99f8w/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1630724277939?e=1740009600&v=beta&t=sp-feurayT3Nk7GlpVSOjUjFWtEmq9PLSmoI7UsFvxo",
+                                        "expiresAt": 1740009600000,
+                                        "height": 100
+                                    }
+                                ],
+                                "rootUrl": ""
+                            },
+                            "profile": {
+                                "_recipeType": "com.linkedin.e0372afc4a18480b00ca7e4906904fd7",
+                                "_type": "com.linkedin.voyager.dash.identity.profile.Profile",
+                                "entityUrn": "urn:li:fsd_profile:ACoAAAZ9rVABE9BNbZVyGMb4LFpdY15UH07wuGg"
+                            }
+                        }
+                    },
+                    "tintColor": null,
+                    "_recipeType": "com.linkedin.eb94fbb1518f790c4545aafdf571c64e",
+                    "tapTargets": [],
+                    "displayAspectRatio": null
+                }
+            ],
+            "actionTarget": null,
+            "_recipeType": "com.linkedin.fe5b8a3ac5a4a165c17f53b7eae4209b",
+            "accessibilityTextAttributes": [],
+            "totalCount": null,
+            "accessibilityText": "Zitian G."
+        },
+        "lazyLoadedActions": {
+            "_recipeType": "com.linkedin.92ece182782ae4412e712925cd97f9fe",
+            "_type": "com.linkedin.voyager.dash.search.LazyLoadedActions",
+            "entityUrn": "urn:li:fsd_lazyLoadedActions:(urn:li:fsd_profileActions:(ACoAAAZ9rVABE9BNbZVyGMb4LFpdY15UH07wuGg,SEARCH_STATEFUL_SUPPLEMENTARY,EMPTY_CONTEXT_ENTITY_URN),PEOPLE,SEARCH_SRP)"
+        },
+        "secondarySubtitle": {
+            "textDirection": "USER_LOCALE",
+            "_type": "com.linkedin.voyager.dash.common.text.TextViewModel",
+            "text": "Toronto, ON",
+            "attributesV2": [],
+            "_recipeType": "com.linkedin.6a224ca38654a84754a1eb3e97c0f846",
+            "accessibilityTextAttributesV2": [],
+            "accessibilityText": null
+        },
+        "_type": "com.linkedin.voyager.dash.search.EntityResultViewModel",
+        "navigationUrl": "https://www.linkedin.com/in/zitian-g-78057830?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAAAZ9rVABE9BNbZVyGMb4LFpdY15UH07wuGg",
+        "entityEmbeddedObject": null,
+        "unreadIndicatorDetails": null,
+        "_recipeType": "com.linkedin.cf4b25c18907ea8eafe915c8bfa24109",
+        "target": null,
+        "actorTrackingUrn": null,
+        "navigationContext": {
+            "_type": "com.linkedin.voyager.dash.search.NavigationContext",
+            "openExternally": false,
+            "_recipeType": "com.linkedin.55ee9afd4182671fe7e271f615659525",
+            "url": "https://www.linkedin.com/in/zitian-g-78057830?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAAAZ9rVABE9BNbZVyGMb4LFpdY15UH07wuGg"
+        }
+    },
+    {
+        "template": "UNIVERSAL",
+        "actorNavigationContext": null,
+        "trackingUrn": "urn:li:member:347658674",
+        "controlName": null,
+        "interstitialComponent": null,
+        "primaryActions": [],
+        "entityCustomTrackingInfo": {
+            "memberDistance": "DISTANCE_3",
+            "_type": "com.linkedin.voyager.dash.search.EntityCustomTrackingInfo",
+            "privacySettingsInjectionHolder": null,
+            "_recipeType": "com.linkedin.4caf791202c7b71e3874d4551f078f32",
+            "nameMatch": false
+        },
+        "title": {
+            "textDirection": "FIRST_STRONG",
+            "_type": "com.linkedin.voyager.dash.common.text.TextViewModel",
+            "text": "Kay Ng",
+            "attributesV2": [],
+            "_recipeType": "com.linkedin.6a224ca38654a84754a1eb3e97c0f846",
+            "accessibilityTextAttributesV2": [],
+            "accessibilityText": "View Kay Ng\u2019s profile"
+        },
+        "overflowActions": [],
+        "searchActionType": null,
+        "actorInsights": [],
+        "insightsResolutionResults": [],
+        "badgeIcon": null,
+        "entityUrn": "urn:li:fsd_entityResultViewModel:(urn:li:fsd_profile:ACoAABS42bIBw-9wKCkp9VLA0hgQWIljkthT0IE,SEARCH_SRP,DEFAULT)",
+        "showAdditionalCluster": false,
+        "ringStatus": null,
+        "primarySubtitle": {
+            "textDirection": "USER_LOCALE",
+            "_type": "com.linkedin.voyager.dash.common.text.TextViewModel",
+            "text": "Senior Manager & Team Lead, Business Banking at CIBC",
+            "attributesV2": [],
+            "_recipeType": "com.linkedin.6a224ca38654a84754a1eb3e97c0f846",
+            "accessibilityTextAttributesV2": [],
+            "accessibilityText": null
+        },
+        "badgeText": {
+            "textDirection": "USER_LOCALE",
+            "_type": "com.linkedin.voyager.dash.common.text.TextViewModel",
+            "text": "\u2022 3rd+",
+            "attributesV2": [],
+            "_recipeType": "com.linkedin.6a224ca38654a84754a1eb3e97c0f846",
+            "accessibilityTextAttributesV2": [],
+            "accessibilityText": "3rd+ degree connection"
+        },
+        "trackingId": "7rMCxahBTNW6AFW68DLzAw==",
+        "summary": {
+            "textDirection": "USER_LOCALE",
+            "_type": "com.linkedin.voyager.dash.common.text.TextViewModel",
+            "text": "Past: Relationship Manager, Business Banking at CIBC",
+            "attributesV2": [
+                {
+                    "start": 37,
+                    "length": 7,
+                    "_type": "com.linkedin.voyager.dash.common.text.TextAttribute",
+                    "detailData": {
+                        "jobPostingName": null,
+                        "hyperlink": null,
+                        "profileFamiliarName": null,
+                        "color": null,
+                        "companyName": null,
+                        "icon": null,
+                        "epoch": null,
+                        "systemImage": null,
+                        "textLink": null,
+                        "listItemStyle": null,
+                        "groupName": null,
+                        "hyperlinkOpenExternally": null,
+                        "listStyle": null,
+                        "profileFullName": null,
+                        "stringFieldReference": null,
+                        "learningCourseName": null,
+                        "profileMention": null,
+                        "style": "BOLD",
+                        "schoolName": null,
+                        "hashtag": null
+                    },
+                    "_recipeType": "com.linkedin.b8a09c2c7547138a1c3aebdda8a94e12"
+                }
+            ],
+            "_recipeType": "com.linkedin.6a224ca38654a84754a1eb3e97c0f846",
+            "accessibilityTextAttributesV2": [],
+            "accessibilityText": null
+        },
+        "addEntityToSearchHistory": true,
+        "actorNavigationUrl": null,
+        "image": {
+            "_type": "com.linkedin.voyager.dash.common.image.ImageViewModel",
+            "attributes": [
+                {
+                    "scalingType": null,
+                    "_type": "com.linkedin.voyager.dash.common.image.ImageAttribute",
+                    "detailData": {
+                        "profilePictureWithoutFrame": null,
+                        "profilePictureWithRingStatus": null,
+                        "companyLogo": null,
+                        "icon": null,
+                        "systemImage": null,
+                        "nonEntityGroupLogo": null,
+                        "vectorImage": null,
+                        "nonEntityProfessionalEventLogo": null,
+                        "profilePicture": null,
+                        "imageUrl": null,
+                        "professionalEventLogo": null,
+                        "nonEntityCompanyLogo": null,
+                        "nonEntitySchoolLogo": null,
+                        "groupLogo": null,
+                        "schoolLogo": null,
+                        "ghostImage": null,
+                        "nonEntityProfilePicture": {
+                            "_type": "com.linkedin.voyager.dash.common.image.NonEntityProfilePicture",
+                            "ringStatus": null,
+                            "_recipeType": "com.linkedin.4b009c1d6ea192a94bda77fb9ace3a7d",
+                            "vectorImage": {
+                                "_type": "com.linkedin.common.VectorImage",
+                                "attribution": null,
+                                "_recipeType": "com.linkedin.28db8575bcf1c65bdc4bc15948d50ee9",
+                                "digitalmediaAsset": null,
+                                "artifacts": [
+                                    {
+                                        "width": 100,
+                                        "_type": "com.linkedin.common.VectorArtifact",
+                                        "_recipeType": "com.linkedin.f0f435b4425ee2990eba8f0a4d614944",
+                                        "fileIdentifyingUrlPathSegment": "https://media.licdn.com/dms/image/v2/C4D03AQEbRd9p8QFw_Q/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1535833773568?e=1740009600&v=beta&t=JM0qvBITmm55kiOTKECvRFesdcrmOnD-hOPS7UYHmlk",
+                                        "expiresAt": 1740009600000,
+                                        "height": 100
+                                    }
+                                ],
+                                "rootUrl": ""
+                            },
+                            "profile": {
+                                "_recipeType": "com.linkedin.e0372afc4a18480b00ca7e4906904fd7",
+                                "_type": "com.linkedin.voyager.dash.identity.profile.Profile",
+                                "entityUrn": "urn:li:fsd_profile:ACoAABS42bIBw-9wKCkp9VLA0hgQWIljkthT0IE"
+                            }
+                        }
+                    },
+                    "tintColor": null,
+                    "_recipeType": "com.linkedin.eb94fbb1518f790c4545aafdf571c64e",
+                    "tapTargets": [],
+                    "displayAspectRatio": null
+                }
+            ],
+            "actionTarget": null,
+            "_recipeType": "com.linkedin.fe5b8a3ac5a4a165c17f53b7eae4209b",
+            "accessibilityTextAttributes": [],
+            "totalCount": null,
+            "accessibilityText": "Kay Ng"
+        },
+        "lazyLoadedActions": {
+            "_recipeType": "com.linkedin.92ece182782ae4412e712925cd97f9fe",
+            "_type": "com.linkedin.voyager.dash.search.LazyLoadedActions",
+            "entityUrn": "urn:li:fsd_lazyLoadedActions:(urn:li:fsd_profileActions:(ACoAABS42bIBw-9wKCkp9VLA0hgQWIljkthT0IE,SEARCH_STATEFUL_SUPPLEMENTARY,EMPTY_CONTEXT_ENTITY_URN),PEOPLE,SEARCH_SRP)"
+        },
+        "secondarySubtitle": {
+            "textDirection": "USER_LOCALE",
+            "_type": "com.linkedin.voyager.dash.common.text.TextViewModel",
+            "text": "Canada",
+            "attributesV2": [],
+            "_recipeType": "com.linkedin.6a224ca38654a84754a1eb3e97c0f846",
+            "accessibilityTextAttributesV2": [],
+            "accessibilityText": null
+        },
+        "_type": "com.linkedin.voyager.dash.search.EntityResultViewModel",
+        "navigationUrl": "https://www.linkedin.com/in/kay-tszki-ng?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAABS42bIBw-9wKCkp9VLA0hgQWIljkthT0IE",
+        "entityEmbeddedObject": null,
+        "unreadIndicatorDetails": null,
+        "_recipeType": "com.linkedin.cf4b25c18907ea8eafe915c8bfa24109",
+        "target": null,
+        "actorTrackingUrn": null,
+        "navigationContext": {
+            "_type": "com.linkedin.voyager.dash.search.NavigationContext",
+            "openExternally": false,
+            "_recipeType": "com.linkedin.55ee9afd4182671fe7e271f615659525",
+            "url": "https://www.linkedin.com/in/kay-tszki-ng?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAABS42bIBw-9wKCkp9VLA0hgQWIljkthT0IE"
+        }
+    },
+    {
+        "template": "UNIVERSAL",
+        "actorNavigationContext": null,
+        "trackingUrn": "urn:li:member:822248567",
+        "controlName": null,
+        "interstitialComponent": null,
+        "primaryActions": [],
+        "entityCustomTrackingInfo": {
+            "memberDistance": "DISTANCE_3",
+            "_type": "com.linkedin.voyager.dash.search.EntityCustomTrackingInfo",
+            "privacySettingsInjectionHolder": null,
+            "_recipeType": "com.linkedin.4caf791202c7b71e3874d4551f078f32",
+            "nameMatch": false
+        },
+        "title": {
+            "textDirection": "FIRST_STRONG",
+            "_type": "com.linkedin.voyager.dash.common.text.TextViewModel",
+            "text": "Phoebe Yueh, FRM",
+            "attributesV2": [],
+            "_recipeType": "com.linkedin.6a224ca38654a84754a1eb3e97c0f846",
+            "accessibilityTextAttributesV2": [],
+            "accessibilityText": "View Phoebe Yueh, FRM\u2019s profile"
+        },
+        "overflowActions": [],
+        "searchActionType": null,
+        "actorInsights": [],
+        "insightsResolutionResults": [],
+        "badgeIcon": null,
+        "entityUrn": "urn:li:fsd_entityResultViewModel:(urn:li:fsd_profile:ACoAADEChHcB999QmM0Qvowmx3bMARaHnu_PzKo,SEARCH_SRP,DEFAULT)",
+        "showAdditionalCluster": false,
+        "ringStatus": null,
+        "primarySubtitle": {
+            "textDirection": "USER_LOCALE",
+            "_type": "com.linkedin.voyager.dash.common.text.TextViewModel",
+            "text": "Client Insights & Analytics | Data Science | Data Visualization",
+            "attributesV2": [],
+            "_recipeType": "com.linkedin.6a224ca38654a84754a1eb3e97c0f846",
+            "accessibilityTextAttributesV2": [],
+            "accessibilityText": null
+        },
+        "badgeText": {
+            "textDirection": "USER_LOCALE",
+            "_type": "com.linkedin.voyager.dash.common.text.TextViewModel",
+            "text": "\u2022 3rd+",
+            "attributesV2": [],
+            "_recipeType": "com.linkedin.6a224ca38654a84754a1eb3e97c0f846",
+            "accessibilityTextAttributesV2": [],
+            "accessibilityText": "3rd+ degree connection"
+        },
+        "trackingId": "wgPiKDS0StSSRaq7UOjJdA==",
+        "summary": {
+            "textDirection": "USER_LOCALE",
+            "_type": "com.linkedin.voyager.dash.common.text.TextViewModel",
+            "text": "Past: Corporate & Investor Relations Intern at BCI - ...-term ESG matters into investment...",
+            "attributesV2": [
+                {
+                    "start": 79,
+                    "length": 10,
+                    "_type": "com.linkedin.voyager.dash.common.text.TextAttribute",
+                    "detailData": {
+                        "jobPostingName": null,
+                        "hyperlink": null,
+                        "profileFamiliarName": null,
+                        "color": null,
+                        "companyName": null,
+                        "icon": null,
+                        "epoch": null,
+                        "systemImage": null,
+                        "textLink": null,
+                        "listItemStyle": null,
+                        "groupName": null,
+                        "hyperlinkOpenExternally": null,
+                        "listStyle": null,
+                        "profileFullName": null,
+                        "stringFieldReference": null,
+                        "learningCourseName": null,
+                        "profileMention": null,
+                        "style": "BOLD",
+                        "schoolName": null,
+                        "hashtag": null
+                    },
+                    "_recipeType": "com.linkedin.b8a09c2c7547138a1c3aebdda8a94e12"
+                }
+            ],
+            "_recipeType": "com.linkedin.6a224ca38654a84754a1eb3e97c0f846",
+            "accessibilityTextAttributesV2": [],
+            "accessibilityText": null
+        },
+        "addEntityToSearchHistory": true,
+        "actorNavigationUrl": null,
+        "image": {
+            "_type": "com.linkedin.voyager.dash.common.image.ImageViewModel",
+            "attributes": [
+                {
+                    "scalingType": null,
+                    "_type": "com.linkedin.voyager.dash.common.image.ImageAttribute",
+                    "detailData": {
+                        "profilePictureWithoutFrame": null,
+                        "profilePictureWithRingStatus": null,
+                        "companyLogo": null,
+                        "icon": null,
+                        "systemImage": null,
+                        "nonEntityGroupLogo": null,
+                        "vectorImage": null,
+                        "nonEntityProfessionalEventLogo": null,
+                        "profilePicture": null,
+                        "imageUrl": null,
+                        "professionalEventLogo": null,
+                        "nonEntityCompanyLogo": null,
+                        "nonEntitySchoolLogo": null,
+                        "groupLogo": null,
+                        "schoolLogo": null,
+                        "ghostImage": null,
+                        "nonEntityProfilePicture": {
+                            "_type": "com.linkedin.voyager.dash.common.image.NonEntityProfilePicture",
+                            "ringStatus": null,
+                            "_recipeType": "com.linkedin.4b009c1d6ea192a94bda77fb9ace3a7d",
+                            "vectorImage": {
+                                "_type": "com.linkedin.common.VectorImage",
+                                "attribution": null,
+                                "_recipeType": "com.linkedin.28db8575bcf1c65bdc4bc15948d50ee9",
+                                "digitalmediaAsset": null,
+                                "artifacts": [
+                                    {
+                                        "width": 100,
+                                        "_type": "com.linkedin.common.VectorArtifact",
+                                        "_recipeType": "com.linkedin.f0f435b4425ee2990eba8f0a4d614944",
+                                        "fileIdentifyingUrlPathSegment": "https://media.licdn.com/dms/image/v2/D5603AQHUnJn6aAAFGg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1685699071108?e=1740009600&v=beta&t=o5qFW5BlVUm21mvEHfrZqhuWM5LlxeZzrHRhHHMoPlc",
+                                        "expiresAt": 1740009600000,
+                                        "height": 100
+                                    }
+                                ],
+                                "rootUrl": ""
+                            },
+                            "profile": {
+                                "_recipeType": "com.linkedin.e0372afc4a18480b00ca7e4906904fd7",
+                                "_type": "com.linkedin.voyager.dash.identity.profile.Profile",
+                                "entityUrn": "urn:li:fsd_profile:ACoAADEChHcB999QmM0Qvowmx3bMARaHnu_PzKo"
+                            }
+                        }
+                    },
+                    "tintColor": null,
+                    "_recipeType": "com.linkedin.eb94fbb1518f790c4545aafdf571c64e",
+                    "tapTargets": [],
+                    "displayAspectRatio": null
+                }
+            ],
+            "actionTarget": null,
+            "_recipeType": "com.linkedin.fe5b8a3ac5a4a165c17f53b7eae4209b",
+            "accessibilityTextAttributes": [],
+            "totalCount": null,
+            "accessibilityText": "Phoebe Yueh, FRM"
+        },
+        "lazyLoadedActions": {
+            "_recipeType": "com.linkedin.92ece182782ae4412e712925cd97f9fe",
+            "_type": "com.linkedin.voyager.dash.search.LazyLoadedActions",
+            "entityUrn": "urn:li:fsd_lazyLoadedActions:(urn:li:fsd_profileActions:(ACoAADEChHcB999QmM0Qvowmx3bMARaHnu_PzKo,SEARCH_STATEFUL_SUPPLEMENTARY,EMPTY_CONTEXT_ENTITY_URN),PEOPLE,SEARCH_SRP)"
+        },
+        "secondarySubtitle": {
+            "textDirection": "USER_LOCALE",
+            "_type": "com.linkedin.voyager.dash.common.text.TextViewModel",
+            "text": "Toronto, ON",
+            "attributesV2": [],
+            "_recipeType": "com.linkedin.6a224ca38654a84754a1eb3e97c0f846",
+            "accessibilityTextAttributesV2": [],
+            "accessibilityText": null
+        },
+        "_type": "com.linkedin.voyager.dash.search.EntityResultViewModel",
+        "navigationUrl": "https://www.linkedin.com/in/phoebeyueh?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAADEChHcB999QmM0Qvowmx3bMARaHnu_PzKo",
+        "entityEmbeddedObject": null,
+        "unreadIndicatorDetails": null,
+        "_recipeType": "com.linkedin.cf4b25c18907ea8eafe915c8bfa24109",
+        "target": null,
+        "actorTrackingUrn": null,
+        "navigationContext": {
+            "_type": "com.linkedin.voyager.dash.search.NavigationContext",
+            "openExternally": false,
+            "_recipeType": "com.linkedin.55ee9afd4182671fe7e271f615659525",
+            "url": "https://www.linkedin.com/in/phoebeyueh?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAADEChHcB999QmM0Qvowmx3bMARaHnu_PzKo"
+        }
+    },
+    {
+        "template": "UNIVERSAL",
+        "actorNavigationContext": null,
+        "trackingUrn": "urn:li:member:625740595",
+        "controlName": null,
+        "interstitialComponent": null,
+        "primaryActions": [],
+        "entityCustomTrackingInfo": {
+            "memberDistance": "DISTANCE_3",
+            "_type": "com.linkedin.voyager.dash.search.EntityCustomTrackingInfo",
+            "privacySettingsInjectionHolder": null,
+            "_recipeType": "com.linkedin.4caf791202c7b71e3874d4551f078f32",
+            "nameMatch": false
+        },
+        "title": {
+            "textDirection": "FIRST_STRONG",
+            "_type": "com.linkedin.voyager.dash.common.text.TextViewModel",
+            "text": "Nicole Ng",
+            "attributesV2": [],
+            "_recipeType": "com.linkedin.6a224ca38654a84754a1eb3e97c0f846",
+            "accessibilityTextAttributesV2": [],
+            "accessibilityText": "View Nicole Ng\u2019s profile"
+        },
+        "overflowActions": [],
+        "searchActionType": null,
+        "actorInsights": [],
+        "insightsResolutionResults": [
+            {
+                "jobPostingInsight": null,
+                "relationshipsInsight": null,
+                "serviceProviderRatingInsight": null,
+                "simpleInsight": {
+                    "searchActionType": "SEE_MUTUAL_CONNECTIONS",
+                    "image": {
+                        "_type": "com.linkedin.voyager.dash.common.image.ImageViewModel",
+                        "attributes": [
+                            {
+                                "scalingType": null,
+                                "_type": "com.linkedin.voyager.dash.common.image.ImageAttribute",
+                                "detailData": {
+                                    "profilePictureWithoutFrame": null,
+                                    "profilePictureWithRingStatus": null,
+                                    "companyLogo": null,
+                                    "icon": "IC_PEOPLE_16DP",
+                                    "systemImage": null,
+                                    "nonEntityGroupLogo": null,
+                                    "vectorImage": null,
+                                    "nonEntityProfessionalEventLogo": null,
+                                    "profilePicture": null,
+                                    "imageUrl": null,
+                                    "professionalEventLogo": null,
+                                    "nonEntityCompanyLogo": null,
+                                    "nonEntitySchoolLogo": null,
+                                    "groupLogo": null,
+                                    "schoolLogo": null,
+                                    "ghostImage": null,
+                                    "nonEntityProfilePicture": null
+                                },
+                                "tintColor": null,
+                                "_recipeType": "com.linkedin.eb94fbb1518f790c4545aafdf571c64e",
+                                "tapTargets": [],
+                                "displayAspectRatio": null
+                            }
+                        ],
+                        "actionTarget": null,
+                        "_recipeType": "com.linkedin.fe5b8a3ac5a4a165c17f53b7eae4209b",
+                        "accessibilityTextAttributes": [],
+                        "totalCount": null,
+                        "accessibilityText": null
+                    },
+                    "subtitle": null,
+                    "_type": "com.linkedin.voyager.dash.search.SimpleInsight",
+                    "controlName": null,
+                    "navigationUrl": null,
+                    "title": {
+                        "textDirection": "USER_LOCALE",
+                        "_type": "com.linkedin.voyager.dash.common.text.TextViewModel",
+                        "text": "3K followers",
+                        "attributesV2": [],
+                        "_recipeType": "com.linkedin.6a224ca38654a84754a1eb3e97c0f846",
+                        "accessibilityTextAttributesV2": [],
+                        "accessibilityText": null
+                    },
+                    "_recipeType": "com.linkedin.bd9a707a5b119c1f331373113f57344a"
+                },
+                "jobPostingFooterInsight": null,
+                "socialActivityCountsInsight": null,
+                "labelsInsight": null
+            }
+        ],
+        "badgeIcon": null,
+        "entityUrn": "urn:li:fsd_entityResultViewModel:(urn:li:fsd_profile:ACoAACVMCzMBdG-SE--tq5jHbTEUODWmaA2Yruk,SEARCH_SRP,DEFAULT)",
+        "showAdditionalCluster": false,
+        "ringStatus": null,
+        "primarySubtitle": {
+            "textDirection": "USER_LOCALE",
+            "_type": "com.linkedin.voyager.dash.common.text.TextViewModel",
+            "text": "Associate, Strategy & Corporate Development",
+            "attributesV2": [],
+            "_recipeType": "com.linkedin.6a224ca38654a84754a1eb3e97c0f846",
+            "accessibilityTextAttributesV2": [],
+            "accessibilityText": null
+        },
+        "badgeText": {
+            "textDirection": "USER_LOCALE",
+            "_type": "com.linkedin.voyager.dash.common.text.TextViewModel",
+            "text": "\u2022 3rd+",
+            "attributesV2": [],
+            "_recipeType": "com.linkedin.6a224ca38654a84754a1eb3e97c0f846",
+            "accessibilityTextAttributesV2": [],
+            "accessibilityText": "3rd+ degree connection"
+        },
+        "trackingId": "Zljb4sc7TWScx2u9CjxbFg==",
+        "summary": {
+            "textDirection": "USER_LOCALE",
+            "_type": "com.linkedin.voyager.dash.common.text.TextViewModel",
+            "text": "Past: Investment Banking Analyst at Wells Fargo",
+            "attributesV2": [
+                {
+                    "start": 6,
+                    "length": 10,
+                    "_type": "com.linkedin.voyager.dash.common.text.TextAttribute",
+                    "detailData": {
+                        "jobPostingName": null,
+                        "hyperlink": null,
+                        "profileFamiliarName": null,
+                        "color": null,
+                        "companyName": null,
+                        "icon": null,
+                        "epoch": null,
+                        "systemImage": null,
+                        "textLink": null,
+                        "listItemStyle": null,
+                        "groupName": null,
+                        "hyperlinkOpenExternally": null,
+                        "listStyle": null,
+                        "profileFullName": null,
+                        "stringFieldReference": null,
+                        "learningCourseName": null,
+                        "profileMention": null,
+                        "style": "BOLD",
+                        "schoolName": null,
+                        "hashtag": null
+                    },
+                    "_recipeType": "com.linkedin.b8a09c2c7547138a1c3aebdda8a94e12"
+                },
+                {
+                    "start": 17,
+                    "length": 7,
+                    "_type": "com.linkedin.voyager.dash.common.text.TextAttribute",
+                    "detailData": {
+                        "jobPostingName": null,
+                        "hyperlink": null,
+                        "profileFamiliarName": null,
+                        "color": null,
+                        "companyName": null,
+                        "icon": null,
+                        "epoch": null,
+                        "systemImage": null,
+                        "textLink": null,
+                        "listItemStyle": null,
+                        "groupName": null,
+                        "hyperlinkOpenExternally": null,
+                        "listStyle": null,
+                        "profileFullName": null,
+                        "stringFieldReference": null,
+                        "learningCourseName": null,
+                        "profileMention": null,
+                        "style": "BOLD",
+                        "schoolName": null,
+                        "hashtag": null
+                    },
+                    "_recipeType": "com.linkedin.b8a09c2c7547138a1c3aebdda8a94e12"
+                }
+            ],
+            "_recipeType": "com.linkedin.6a224ca38654a84754a1eb3e97c0f846",
+            "accessibilityTextAttributesV2": [],
+            "accessibilityText": null
+        },
+        "addEntityToSearchHistory": true,
+        "actorNavigationUrl": null,
+        "image": {
+            "_type": "com.linkedin.voyager.dash.common.image.ImageViewModel",
+            "attributes": [
+                {
+                    "scalingType": null,
+                    "_type": "com.linkedin.voyager.dash.common.image.ImageAttribute",
+                    "detailData": {
+                        "profilePictureWithoutFrame": null,
+                        "profilePictureWithRingStatus": null,
+                        "companyLogo": null,
+                        "icon": null,
+                        "systemImage": null,
+                        "nonEntityGroupLogo": null,
+                        "vectorImage": null,
+                        "nonEntityProfessionalEventLogo": null,
+                        "profilePicture": null,
+                        "imageUrl": null,
+                        "professionalEventLogo": null,
+                        "nonEntityCompanyLogo": null,
+                        "nonEntitySchoolLogo": null,
+                        "groupLogo": null,
+                        "schoolLogo": null,
+                        "ghostImage": null,
+                        "nonEntityProfilePicture": {
+                            "_type": "com.linkedin.voyager.dash.common.image.NonEntityProfilePicture",
+                            "ringStatus": null,
+                            "_recipeType": "com.linkedin.4b009c1d6ea192a94bda77fb9ace3a7d",
+                            "vectorImage": {
+                                "_type": "com.linkedin.common.VectorImage",
+                                "attribution": null,
+                                "_recipeType": "com.linkedin.28db8575bcf1c65bdc4bc15948d50ee9",
+                                "digitalmediaAsset": null,
+                                "artifacts": [
+                                    {
+                                        "width": 100,
+                                        "_type": "com.linkedin.common.VectorArtifact",
+                                        "_recipeType": "com.linkedin.f0f435b4425ee2990eba8f0a4d614944",
+                                        "fileIdentifyingUrlPathSegment": "https://media.licdn.com/dms/image/v2/D4E03AQG5u7hLh9hglg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1699310470716?e=1740009600&v=beta&t=JQEqa7cI-h1z_ctApWJv-n_78Kh6_PfjhZotOnxgnas",
+                                        "expiresAt": 1740009600000,
+                                        "height": 100
+                                    }
+                                ],
+                                "rootUrl": ""
+                            },
+                            "profile": {
+                                "_recipeType": "com.linkedin.e0372afc4a18480b00ca7e4906904fd7",
+                                "_type": "com.linkedin.voyager.dash.identity.profile.Profile",
+                                "entityUrn": "urn:li:fsd_profile:ACoAACVMCzMBdG-SE--tq5jHbTEUODWmaA2Yruk"
+                            }
+                        }
+                    },
+                    "tintColor": null,
+                    "_recipeType": "com.linkedin.eb94fbb1518f790c4545aafdf571c64e",
+                    "tapTargets": [],
+                    "displayAspectRatio": null
+                }
+            ],
+            "actionTarget": null,
+            "_recipeType": "com.linkedin.fe5b8a3ac5a4a165c17f53b7eae4209b",
+            "accessibilityTextAttributes": [],
+            "totalCount": null,
+            "accessibilityText": "Nicole Ng"
+        },
+        "lazyLoadedActions": {
+            "_recipeType": "com.linkedin.92ece182782ae4412e712925cd97f9fe",
+            "_type": "com.linkedin.voyager.dash.search.LazyLoadedActions",
+            "entityUrn": "urn:li:fsd_lazyLoadedActions:(urn:li:fsd_profileActions:(ACoAACVMCzMBdG-SE--tq5jHbTEUODWmaA2Yruk,SEARCH_STATEFUL_SUPPLEMENTARY,EMPTY_CONTEXT_ENTITY_URN),PEOPLE,SEARCH_SRP)"
+        },
+        "secondarySubtitle": {
+            "textDirection": "USER_LOCALE",
+            "_type": "com.linkedin.voyager.dash.common.text.TextViewModel",
+            "text": "Greater Toronto Area, Canada",
+            "attributesV2": [],
+            "_recipeType": "com.linkedin.6a224ca38654a84754a1eb3e97c0f846",
+            "accessibilityTextAttributesV2": [],
+            "accessibilityText": null
+        },
+        "_type": "com.linkedin.voyager.dash.search.EntityResultViewModel",
+        "navigationUrl": "https://www.linkedin.com/in/nicole-hng?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAACVMCzMBdG-SE--tq5jHbTEUODWmaA2Yruk",
+        "entityEmbeddedObject": null,
+        "unreadIndicatorDetails": null,
+        "_recipeType": "com.linkedin.cf4b25c18907ea8eafe915c8bfa24109",
+        "target": null,
+        "actorTrackingUrn": null,
+        "navigationContext": {
+            "_type": "com.linkedin.voyager.dash.search.NavigationContext",
+            "openExternally": false,
+            "_recipeType": "com.linkedin.55ee9afd4182671fe7e271f615659525",
+            "url": "https://www.linkedin.com/in/nicole-hng?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAACVMCzMBdG-SE--tq5jHbTEUODWmaA2Yruk"
+        }
+    },
+    {
+        "template": "UNIVERSAL",
+        "actorNavigationContext": null,
+        "trackingUrn": "urn:li:member:headless",
+        "controlName": null,
+        "interstitialComponent": null,
+        "primaryActions": [],
+        "entityCustomTrackingInfo": {
+            "memberDistance": "OUT_OF_NETWORK",
+            "_type": "com.linkedin.voyager.dash.search.EntityCustomTrackingInfo",
+            "privacySettingsInjectionHolder": null,
+            "_recipeType": "com.linkedin.4caf791202c7b71e3874d4551f078f32",
+            "nameMatch": false
+        },
+        "title": {
+            "textDirection": "USER_LOCALE",
+            "_type": "com.linkedin.voyager.dash.common.text.TextViewModel",
+            "text": "LinkedIn Member",
+            "attributesV2": [],
+            "_recipeType": "com.linkedin.6a224ca38654a84754a1eb3e97c0f846",
+            "accessibilityTextAttributesV2": [],
+            "accessibilityText": null
+        },
+        "overflowActions": [],
+        "searchActionType": null,
+        "actorInsights": [],
+        "insightsResolutionResults": [],
+        "badgeIcon": null,
+        "entityUrn": "urn:li:fsd_entityResultViewModel:(urn:li:fsd_profile:ACoAJX-7cQkBcsWlRsCWQ4grRQpuarJWIvYrAVU,SEARCH_SRP,DEFAULT)",
+        "showAdditionalCluster": false,
+        "ringStatus": null,
+        "primarySubtitle": {
+            "textDirection": "USER_LOCALE",
+            "_type": "com.linkedin.voyager.dash.common.text.TextViewModel",
+            "text": "Director, Private Wealth Client Solutions at CIBC",
+            "attributesV2": [],
+            "_recipeType": "com.linkedin.6a224ca38654a84754a1eb3e97c0f846",
+            "accessibilityTextAttributesV2": [],
+            "accessibilityText": null
+        },
+        "badgeText": null,
+        "trackingId": "URN5mXrMT+GqGGDJftMYLQ==",
+        "actorNavigationUrl": null,
+        "addEntityToSearchHistory": false,
+        "summary": null,
+        "image": {
+            "_type": "com.linkedin.voyager.dash.common.image.ImageViewModel",
+            "attributes": [
+                {
+                    "scalingType": null,
+                    "_type": "com.linkedin.voyager.dash.common.image.ImageAttribute",
+                    "detailData": {
+                        "profilePictureWithoutFrame": null,
+                        "profilePictureWithRingStatus": null,
+                        "companyLogo": null,
+                        "icon": null,
+                        "systemImage": null,
+                        "nonEntityGroupLogo": null,
+                        "vectorImage": null,
+                        "nonEntityProfessionalEventLogo": null,
+                        "profilePicture": null,
+                        "imageUrl": null,
+                        "professionalEventLogo": null,
+                        "nonEntityCompanyLogo": null,
+                        "nonEntitySchoolLogo": null,
+                        "groupLogo": null,
+                        "schoolLogo": null,
+                        "ghostImage": null,
+                        "nonEntityProfilePicture": {
+                            "_type": "com.linkedin.voyager.dash.common.image.NonEntityProfilePicture",
+                            "ringStatus": null,
+                            "_recipeType": "com.linkedin.4b009c1d6ea192a94bda77fb9ace3a7d",
+                            "vectorImage": {
+                                "_type": "com.linkedin.common.VectorImage",
+                                "attribution": null,
+                                "_recipeType": "com.linkedin.28db8575bcf1c65bdc4bc15948d50ee9",
+                                "digitalmediaAsset": null,
+                                "artifacts": [
+                                    {
+                                        "width": 100,
+                                        "_type": "com.linkedin.common.VectorArtifact",
+                                        "_recipeType": "com.linkedin.f0f435b4425ee2990eba8f0a4d614944",
+                                        "fileIdentifyingUrlPathSegment": "https://media.licdn.com/dms/image/v2/C4E03AQFTl9HlLUXPYA/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1635945427378?e=1740009600&v=beta&t=G02_QsjWgBsb5nY9nMo4fmkPC-xf4xoWkg3K_BHdayo",
+                                        "expiresAt": 1740009600000,
+                                        "height": 100
+                                    }
+                                ],
+                                "rootUrl": ""
+                            },
+                            "profile": {
+                                "_recipeType": "com.linkedin.e0372afc4a18480b00ca7e4906904fd7",
+                                "_type": "com.linkedin.voyager.dash.identity.profile.Profile",
+                                "entityUrn": "urn:li:fsd_profile:ACoAJX-7cQkBcsWlRsCWQ4grRQpuarJWIvYrAVU"
+                            }
+                        }
+                    },
+                    "tintColor": null,
+                    "_recipeType": "com.linkedin.eb94fbb1518f790c4545aafdf571c64e",
+                    "tapTargets": [],
+                    "displayAspectRatio": null
+                }
+            ],
+            "actionTarget": null,
+            "_recipeType": "com.linkedin.fe5b8a3ac5a4a165c17f53b7eae4209b",
+            "accessibilityTextAttributes": [],
+            "totalCount": null,
+            "accessibilityText": null
+        },
+        "lazyLoadedActions": null,
+        "secondarySubtitle": {
+            "textDirection": "USER_LOCALE",
+            "_type": "com.linkedin.voyager.dash.common.text.TextViewModel",
+            "text": "Etobicoke, ON",
+            "attributesV2": [],
+            "_recipeType": "com.linkedin.6a224ca38654a84754a1eb3e97c0f846",
+            "accessibilityTextAttributesV2": [],
+            "accessibilityText": null
+        },
+        "_type": "com.linkedin.voyager.dash.search.EntityResultViewModel",
+        "navigationUrl": "https://www.linkedin.com/search/results/people/headless?currentCompany=%5B1826%5D&schoolFilter=%5B3660%5D&origin=GLOBAL_SEARCH_HEADER&keywords=Investment%20Banking%20Associates",
+        "entityEmbeddedObject": null,
+        "unreadIndicatorDetails": null,
+        "_recipeType": "com.linkedin.cf4b25c18907ea8eafe915c8bfa24109",
+        "target": null,
+        "actorTrackingUrn": null,
+        "navigationContext": {
+            "_type": "com.linkedin.voyager.dash.search.NavigationContext",
+            "openExternally": false,
+            "_recipeType": "com.linkedin.55ee9afd4182671fe7e271f615659525",
+            "url": "https://www.linkedin.com/search/results/people/headless?currentCompany=%5B1826%5D&schoolFilter=%5B3660%5D&origin=GLOBAL_SEARCH_HEADER&keywords=Investment%20Banking%20Associates"
+        }
+    },
+    {
+        "template": "UNIVERSAL",
+        "actorNavigationContext": null,
+        "trackingUrn": "urn:li:member:629713357",
+        "controlName": null,
+        "interstitialComponent": null,
+        "primaryActions": [],
+        "entityCustomTrackingInfo": {
+            "memberDistance": "DISTANCE_3",
+            "_type": "com.linkedin.voyager.dash.search.EntityCustomTrackingInfo",
+            "privacySettingsInjectionHolder": null,
+            "_recipeType": "com.linkedin.4caf791202c7b71e3874d4551f078f32",
+            "nameMatch": false
+        },
+        "title": {
+            "textDirection": "FIRST_STRONG",
+            "_type": "com.linkedin.voyager.dash.common.text.TextViewModel",
+            "text": "David Mboko",
+            "attributesV2": [],
+            "_recipeType": "com.linkedin.6a224ca38654a84754a1eb3e97c0f846",
+            "accessibilityTextAttributesV2": [],
+            "accessibilityText": "View David Mboko\u2019s profile"
+        },
+        "overflowActions": [],
+        "searchActionType": null,
+        "actorInsights": [],
+        "insightsResolutionResults": [],
+        "badgeIcon": null,
+        "entityUrn": "urn:li:fsd_entityResultViewModel:(urn:li:fsd_profile:ACoAACWIqc0Bk7BQ6ZDZ5JRyEBLJVLW6nWdPalw,SEARCH_SRP,DEFAULT)",
+        "showAdditionalCluster": false,
+        "ringStatus": null,
+        "primarySubtitle": {
+            "textDirection": "USER_LOCALE",
+            "_type": "com.linkedin.voyager.dash.common.text.TextViewModel",
+            "text": "Data Scientist @ CIBC",
+            "attributesV2": [],
+            "_recipeType": "com.linkedin.6a224ca38654a84754a1eb3e97c0f846",
+            "accessibilityTextAttributesV2": [],
+            "accessibilityText": null
+        },
+        "badgeText": {
+            "textDirection": "USER_LOCALE",
+            "_type": "com.linkedin.voyager.dash.common.text.TextViewModel",
+            "text": "\u2022 3rd+",
+            "attributesV2": [],
+            "_recipeType": "com.linkedin.6a224ca38654a84754a1eb3e97c0f846",
+            "accessibilityTextAttributesV2": [],
+            "accessibilityText": "3rd+ degree connection"
+        },
+        "trackingId": "ollzHWwAQDSL7Kvr+Jlcjw==",
+        "summary": {
+            "textDirection": "USER_LOCALE",
+            "_type": "com.linkedin.voyager.dash.common.text.TextViewModel",
+            "text": "Past: Information Technology Help Desk Analyst at Canaccord Genuity Group Inc. - ...markets, and investment banking...",
+            "attributesV2": [
+                {
+                    "start": 97,
+                    "length": 10,
+                    "_type": "com.linkedin.voyager.dash.common.text.TextAttribute",
+                    "detailData": {
+                        "jobPostingName": null,
+                        "hyperlink": null,
+                        "profileFamiliarName": null,
+                        "color": null,
+                        "companyName": null,
+                        "icon": null,
+                        "epoch": null,
+                        "systemImage": null,
+                        "textLink": null,
+                        "listItemStyle": null,
+                        "groupName": null,
+                        "hyperlinkOpenExternally": null,
+                        "listStyle": null,
+                        "profileFullName": null,
+                        "stringFieldReference": null,
+                        "learningCourseName": null,
+                        "profileMention": null,
+                        "style": "BOLD",
+                        "schoolName": null,
+                        "hashtag": null
+                    },
+                    "_recipeType": "com.linkedin.b8a09c2c7547138a1c3aebdda8a94e12"
+                },
+                {
+                    "start": 108,
+                    "length": 7,
+                    "_type": "com.linkedin.voyager.dash.common.text.TextAttribute",
+                    "detailData": {
+                        "jobPostingName": null,
+                        "hyperlink": null,
+                        "profileFamiliarName": null,
+                        "color": null,
+                        "companyName": null,
+                        "icon": null,
+                        "epoch": null,
+                        "systemImage": null,
+                        "textLink": null,
+                        "listItemStyle": null,
+                        "groupName": null,
+                        "hyperlinkOpenExternally": null,
+                        "listStyle": null,
+                        "profileFullName": null,
+                        "stringFieldReference": null,
+                        "learningCourseName": null,
+                        "profileMention": null,
+                        "style": "BOLD",
+                        "schoolName": null,
+                        "hashtag": null
+                    },
+                    "_recipeType": "com.linkedin.b8a09c2c7547138a1c3aebdda8a94e12"
+                }
+            ],
+            "_recipeType": "com.linkedin.6a224ca38654a84754a1eb3e97c0f846",
+            "accessibilityTextAttributesV2": [],
+            "accessibilityText": null
+        },
+        "addEntityToSearchHistory": true,
+        "actorNavigationUrl": null,
+        "image": {
+            "_type": "com.linkedin.voyager.dash.common.image.ImageViewModel",
+            "attributes": [
+                {
+                    "scalingType": null,
+                    "_type": "com.linkedin.voyager.dash.common.image.ImageAttribute",
+                    "detailData": {
+                        "profilePictureWithoutFrame": null,
+                        "profilePictureWithRingStatus": null,
+                        "companyLogo": null,
+                        "icon": null,
+                        "systemImage": null,
+                        "nonEntityGroupLogo": null,
+                        "vectorImage": null,
+                        "nonEntityProfessionalEventLogo": null,
+                        "profilePicture": null,
+                        "imageUrl": null,
+                        "professionalEventLogo": null,
+                        "nonEntityCompanyLogo": null,
+                        "nonEntitySchoolLogo": null,
+                        "groupLogo": null,
+                        "schoolLogo": null,
+                        "ghostImage": null,
+                        "nonEntityProfilePicture": {
+                            "_type": "com.linkedin.voyager.dash.common.image.NonEntityProfilePicture",
+                            "ringStatus": null,
+                            "_recipeType": "com.linkedin.4b009c1d6ea192a94bda77fb9ace3a7d",
+                            "vectorImage": {
+                                "_type": "com.linkedin.common.VectorImage",
+                                "attribution": null,
+                                "_recipeType": "com.linkedin.28db8575bcf1c65bdc4bc15948d50ee9",
+                                "digitalmediaAsset": null,
+                                "artifacts": [
+                                    {
+                                        "width": 100,
+                                        "_type": "com.linkedin.common.VectorArtifact",
+                                        "_recipeType": "com.linkedin.f0f435b4425ee2990eba8f0a4d614944",
+                                        "fileIdentifyingUrlPathSegment": "https://media.licdn.com/dms/image/v2/D4E03AQGm8vWf11AmpA/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1710450284859?e=1740009600&v=beta&t=-IJCpYRIVo6QFpo7wrBoXi41_X-lG21LEK4-MhsvwSk",
+                                        "expiresAt": 1740009600000,
+                                        "height": 100
+                                    }
+                                ],
+                                "rootUrl": ""
+                            },
+                            "profile": {
+                                "_recipeType": "com.linkedin.e0372afc4a18480b00ca7e4906904fd7",
+                                "_type": "com.linkedin.voyager.dash.identity.profile.Profile",
+                                "entityUrn": "urn:li:fsd_profile:ACoAACWIqc0Bk7BQ6ZDZ5JRyEBLJVLW6nWdPalw"
+                            }
+                        }
+                    },
+                    "tintColor": null,
+                    "_recipeType": "com.linkedin.eb94fbb1518f790c4545aafdf571c64e",
+                    "tapTargets": [],
+                    "displayAspectRatio": null
+                }
+            ],
+            "actionTarget": null,
+            "_recipeType": "com.linkedin.fe5b8a3ac5a4a165c17f53b7eae4209b",
+            "accessibilityTextAttributes": [],
+            "totalCount": null,
+            "accessibilityText": "David Mboko"
+        },
+        "lazyLoadedActions": {
+            "_recipeType": "com.linkedin.92ece182782ae4412e712925cd97f9fe",
+            "_type": "com.linkedin.voyager.dash.search.LazyLoadedActions",
+            "entityUrn": "urn:li:fsd_lazyLoadedActions:(urn:li:fsd_profileActions:(ACoAACWIqc0Bk7BQ6ZDZ5JRyEBLJVLW6nWdPalw,SEARCH_STATEFUL_SUPPLEMENTARY,EMPTY_CONTEXT_ENTITY_URN),PEOPLE,SEARCH_SRP)"
+        },
+        "secondarySubtitle": {
+            "textDirection": "USER_LOCALE",
+            "_type": "com.linkedin.voyager.dash.common.text.TextViewModel",
+            "text": "Canada",
+            "attributesV2": [],
+            "_recipeType": "com.linkedin.6a224ca38654a84754a1eb3e97c0f846",
+            "accessibilityTextAttributesV2": [],
+            "accessibilityText": null
+        },
+        "_type": "com.linkedin.voyager.dash.search.EntityResultViewModel",
+        "navigationUrl": "https://www.linkedin.com/in/davidmboko?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAACWIqc0Bk7BQ6ZDZ5JRyEBLJVLW6nWdPalw",
+        "entityEmbeddedObject": null,
+        "unreadIndicatorDetails": null,
+        "_recipeType": "com.linkedin.cf4b25c18907ea8eafe915c8bfa24109",
+        "target": null,
+        "actorTrackingUrn": null,
+        "navigationContext": {
+            "_type": "com.linkedin.voyager.dash.search.NavigationContext",
+            "openExternally": false,
+            "_recipeType": "com.linkedin.55ee9afd4182671fe7e271f615659525",
+            "url": "https://www.linkedin.com/in/davidmboko?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAACWIqc0Bk7BQ6ZDZ5JRyEBLJVLW6nWdPalw"
+        }
+    },
+    {
+        "template": "UNIVERSAL",
+        "actorNavigationContext": null,
+        "trackingUrn": "urn:li:member:headless",
+        "controlName": null,
+        "interstitialComponent": null,
+        "primaryActions": [],
+        "entityCustomTrackingInfo": {
+            "memberDistance": "OUT_OF_NETWORK",
+            "_type": "com.linkedin.voyager.dash.search.EntityCustomTrackingInfo",
+            "privacySettingsInjectionHolder": null,
+            "_recipeType": "com.linkedin.4caf791202c7b71e3874d4551f078f32",
+            "nameMatch": false
+        },
+        "title": {
+            "textDirection": "USER_LOCALE",
+            "_type": "com.linkedin.voyager.dash.common.text.TextViewModel",
+            "text": "LinkedIn Member",
+            "attributesV2": [],
+            "_recipeType": "com.linkedin.6a224ca38654a84754a1eb3e97c0f846",
+            "accessibilityTextAttributesV2": [],
+            "accessibilityText": null
+        },
+        "overflowActions": [],
+        "searchActionType": null,
+        "actorInsights": [],
+        "insightsResolutionResults": [],
+        "badgeIcon": null,
+        "entityUrn": "urn:li:fsd_entityResultViewModel:(urn:li:fsd_profile:ACr__7q7bTwBn93gyvkLq_P2y0Do1N0JYAtxuWA,SEARCH_SRP,DEFAULT)",
+        "showAdditionalCluster": false,
+        "ringStatus": null,
+        "primarySubtitle": {
+            "textDirection": "USER_LOCALE",
+            "_type": "com.linkedin.voyager.dash.common.text.TextViewModel",
+            "text": "Portfolio Management Associate at CIBC Private Wealth",
+            "attributesV2": [],
+            "_recipeType": "com.linkedin.6a224ca38654a84754a1eb3e97c0f846",
+            "accessibilityTextAttributesV2": [],
+            "accessibilityText": null
+        },
+        "badgeText": null,
+        "trackingId": "CqGcvbclT/eH4fzHIZOYaw==",
+        "actorNavigationUrl": null,
+        "addEntityToSearchHistory": false,
+        "summary": null,
+        "image": {
+            "_type": "com.linkedin.voyager.dash.common.image.ImageViewModel",
+            "attributes": [
+                {
+                    "scalingType": null,
+                    "_type": "com.linkedin.voyager.dash.common.image.ImageAttribute",
+                    "detailData": {
+                        "profilePictureWithoutFrame": null,
+                        "profilePictureWithRingStatus": null,
+                        "companyLogo": null,
+                        "icon": null,
+                        "systemImage": null,
+                        "nonEntityGroupLogo": null,
+                        "vectorImage": null,
+                        "nonEntityProfessionalEventLogo": null,
+                        "profilePicture": null,
+                        "imageUrl": null,
+                        "professionalEventLogo": null,
+                        "nonEntityCompanyLogo": null,
+                        "nonEntitySchoolLogo": null,
+                        "groupLogo": null,
+                        "schoolLogo": null,
+                        "ghostImage": null,
+                        "nonEntityProfilePicture": {
+                            "_type": "com.linkedin.voyager.dash.common.image.NonEntityProfilePicture",
+                            "ringStatus": null,
+                            "_recipeType": "com.linkedin.4b009c1d6ea192a94bda77fb9ace3a7d",
+                            "profile": {
+                                "_recipeType": "com.linkedin.e0372afc4a18480b00ca7e4906904fd7",
+                                "_type": "com.linkedin.voyager.dash.identity.profile.Profile",
+                                "entityUrn": "urn:li:fsd_profile:ACr__7q7bTwBn93gyvkLq_P2y0Do1N0JYAtxuWA"
+                            },
+                            "vectorImage": null
+                        }
+                    },
+                    "tintColor": null,
+                    "_recipeType": "com.linkedin.eb94fbb1518f790c4545aafdf571c64e",
+                    "tapTargets": [],
+                    "displayAspectRatio": null
+                }
+            ],
+            "actionTarget": null,
+            "_recipeType": "com.linkedin.fe5b8a3ac5a4a165c17f53b7eae4209b",
+            "accessibilityTextAttributes": [],
+            "totalCount": null,
+            "accessibilityText": null
+        },
+        "lazyLoadedActions": null,
+        "secondarySubtitle": {
+            "textDirection": "USER_LOCALE",
+            "_type": "com.linkedin.voyager.dash.common.text.TextViewModel",
+            "text": "Toronto, ON",
+            "attributesV2": [],
+            "_recipeType": "com.linkedin.6a224ca38654a84754a1eb3e97c0f846",
+            "accessibilityTextAttributesV2": [],
+            "accessibilityText": null
+        },
+        "_type": "com.linkedin.voyager.dash.search.EntityResultViewModel",
+        "navigationUrl": "https://www.linkedin.com/search/results/people/headless?currentCompany=%5B1826%5D&schoolFilter=%5B3660%5D&origin=GLOBAL_SEARCH_HEADER&keywords=Investment%20Banking%20Associates",
+        "entityEmbeddedObject": null,
+        "unreadIndicatorDetails": null,
+        "_recipeType": "com.linkedin.cf4b25c18907ea8eafe915c8bfa24109",
+        "target": null,
+        "actorTrackingUrn": null,
+        "navigationContext": {
+            "_type": "com.linkedin.voyager.dash.search.NavigationContext",
+            "openExternally": false,
+            "_recipeType": "com.linkedin.55ee9afd4182671fe7e271f615659525",
+            "url": "https://www.linkedin.com/search/results/people/headless?currentCompany=%5B1826%5D&schoolFilter=%5B3660%5D&origin=GLOBAL_SEARCH_HEADER&keywords=Investment%20Banking%20Associates"
+        }
+    }
+]

@@ -209,7 +209,7 @@ if __name__ == "__main__":
 
     # result = enrich_person(
     #     linkedin=linkedin,
-    #     value="https://www.linkedin.com/in/vaishika-mathisayan/?originalSubdomain=ca",
+    #     value="https://www.linkedin.com/in/rachel-levitt-bb0922b5/",
     #     url_value=True
     # )
 
@@ -273,8 +273,11 @@ if __name__ == "__main__":
 
     result = enrich_person(
         linkedin=linkedin,
-        value="https://www.linkedin.com/in/vaishika-mathisayan/?originalSubdomain=ca",
+        value="https://www.linkedin.com/in/rachel-levitt-bb0922b5/",
         url_value=True
     )
+    with open("user_profile_rachel.json", "w") as f:
+        import json
+        json.dump(result, f, indent=4)
 
-    print(json.dumps(result, indent=4))
+    # print(json.dumps(result, indent=4))

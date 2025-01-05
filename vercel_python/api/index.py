@@ -159,8 +159,10 @@ class DraftEmailsRequest(BaseModel):
     user_linkedin_url: str
     email_template: str
 
-class SchoolIdRequest(BaseModel):
+class EnrichProfileRequest(BaseModel):
     linkedin_url: str
+
+EnrichProfileRequest
 
 @app.post("/extract-prompt-data")
 async def extract_prompt_data(request: PromptExtractionRequest) -> dict:
@@ -288,7 +290,7 @@ async def get_email_addresses(request: EmailAddressRequest) -> dict:
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.post("/get-school-id") # TBD
-async def get_school_id(request: SchoolIdRequest) -> dict:
+async def get_school_id(request: EnrichProfileRequest) -> dict:
     logger.info(f"Received prompt: {request}")
     try:
         # if not hasattr(app.state, 'linkedin_client'):
@@ -312,6 +314,62 @@ async def get_school_id(request: SchoolIdRequest) -> dict:
         # Your existing logic here using linkedin_client
         return JSONResponse(content={
             "result": education_set
+        }, media_type="application/json")
+
+    except Exception as e:
+        logger.error(f"Error in get_company_locations_id: {str(e)}")
+        logger.error(f"Traceback: {traceback.format_exc()}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/enrich-profile") # TBD
+async def enrich_profile(request: EnrichProfileRequest) -> dict:
+    logger.info(f"Received prompt: {request}")
+    try:
+
+        linkedin_client = init_linkedin_client()
+        if not linkedin_client:
+            raise HTTPException(status_code=500, detail="Failed to initialize LinkedIn client")
+
+        result = enrich_person(
+            linkedin=linkedin_client,
+            value=request.linkedin_url,
+            url_value=True
+        )
+
+        # Your existing logic here using linkedin_client
+        return JSONResponse(content={
+            "result": result
+        }, media_type="application/json")
+
+    except Exception as e:
+        logger.error(f"Error in get_company_locations_id: {str(e)}")
+        logger.error(f"Traceback: {traceback.format_exc()}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/selenium") # TBD
+async def test_selenium(request: EnrichProfileRequest) -> dict:
+    logger.info(f"Received prompt: {request}")
+    try:
+
+        from selenium import webdriver
+        from selenium.webdriver.chrome.options import Options
+
+        chrome_options = Options()
+        chrome_options.add_argument("--headless")
+
+        driver = webdriver.Chrome(options=chrome_options)
+
+        # Navigate to the page
+        driver.get(request.linkedin_url)
+
+        # Grab the page source
+        html = driver.page_source
+
+        driver.quit()
+
+        # Your existing logic here using linkedin_client
+        return JSONResponse(content={
+            "result": html
         }, media_type="application/json")
 
     except Exception as e:

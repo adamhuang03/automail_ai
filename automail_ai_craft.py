@@ -103,6 +103,83 @@ def enrich_person(
     logger.info("Successfully enriched profile data")
     return cleaned_person
 
+def enrich_person_more(
+    linkedin: LinkedinWrapper,
+    value: str,
+    url_value: bool = False
+) -> dict:
+    logger.info("Starting profile enrichment for value: %s (url_value=%s)", value, url_value)
+    
+    # Create a cleaned person dictionary with relevant fields
+    if url_value:
+        url = value.split('?')[0].rstrip('/')
+        id = url.split('/')[-1]
+        logger.info("Extracting profile using public_id: %s", id)
+    else:
+        id = value
+        logger.info("Extracting profile using urn_id: %s", value)
+    
+    person = linkedin.get_profile(id)
+
+    if not person:
+        logger.warning("No profile data returned for value: %s", value)
+        return {}
+    
+    logger.info("Successfully retrieved profile for %s %s", 
+                person.get("firstName", "Unknown"), 
+                person.get("lastName", "Unknown"))
+    
+    cleaned_person = {
+        "personal": {
+            "first_name": person.get("firstName"),
+            "last_name": person.get("lastName"),
+            "headline": person.get("headline"),
+            "location": person.get("locationName"),
+            "city": person.get("geoLocationName"),
+            "industry": person.get("industryName")
+        },
+        "experiences": [],
+        "education": [],
+        "skills": [skill['name'] for skill in person.get("skills", [])]
+    }
+    
+    # Add experiences
+    experience_count = len(person.get("experience", []))
+    logger.info("Processing %d experiences", experience_count)
+    for exp in person.get("experience", []):
+        cleaned_exp = {
+            "title": exp.get("title"),
+            "company": exp.get("companyName"),
+            "description": exp.get("description"),
+            "start_date": exp.get("startDate"),
+            "end_date": exp.get("endDate")
+        }
+        cleaned_person["experiences"].append(cleaned_exp)
+    
+    # Add education
+    education_count = len(person.get("education", []))
+    logger.info("Processing %d education entries", education_count)
+    for edu in person.get("education", []):
+        cleaned_edu = {
+            "school": edu.get("schoolName"),
+            "activities": edu.get("activities"),
+            "grade": edu.get("grade"),
+            "start_date": edu.get("timePeriod", {}).get("startDate"),
+            "end_date": edu.get("timePeriod", {}).get("endDate")
+        }
+        cleaned_person["education"].append(cleaned_edu)
+    
+    # Add identifier based on parameter
+    if url_value:
+        cleaned_person["id"] = person.get("public_id")
+        logger.info("Added public_id to profile")
+    else:
+        cleaned_person["id"] = person.get("profile_urn")
+        logger.info("Added profile_urn to profile")
+    
+    logger.info("Successfully enriched profile data")
+    return cleaned_person
+
 def multi_enrich_persons(
     linkedin: LinkedinWrapper,
     values: List[str],
@@ -160,15 +237,15 @@ if __name__ == "__main__":
     # ==================================================================
     # Single enrichement
 
-    # result = enrich_person(
-    #     linkedin=linkedin,
-    #     value="https://www.linkedin.com/in/vaishika-mathisayan/?originalSubdomain=ca",
-    #     url_value=True
-    # )
+    result = enrich_person_more(
+        linkedin=linkedin,
+        value="https://www.linkedin.com/in/danbipark//",
+        url_value=True
+    )
 
-    # with open("data/user_profile_vaishika.json", "w") as f:
-    #     import json
-    #     json.dump(result, f, indent=4)
+    with open("user_profile_danbi.json", "w") as f:
+        import json
+        json.dump(result, f, indent=4)
 
     # with open("data/user_profile_hasan.json", "r") as f:
     #     user_profile = json.load(f)
@@ -186,45 +263,45 @@ if __name__ == "__main__":
     # Multi enrichement
 
     # Read csv
-    csv_file = "v2_output/linkedin_data.csv"
-    with open(csv_file, "r") as f:
-        csv_data = [line.strip().split(",") for line in f.readlines()]
-    # Get the 1st column
-    list_of_urns = [row[0] for row in csv_data]
+    # csv_file = "v2_output/linkedin_data.csv"
+    # with open(csv_file, "r") as f:
+    #     csv_data = [line.strip().split(",") for line in f.readlines()]
+    # # Get the 1st column
+    # list_of_urns = [row[0] for row in csv_data]
     
-    multi_result_enriched = multi_enrich_persons(
-        linkedin=linkedin,
-        values=list_of_urns,
-        url_value=False
-    )
+    # multi_result_enriched = multi_enrich_persons(
+    #     linkedin=linkedin,
+    #     values=list_of_urns,
+    #     url_value=False
+    # )
 
-    with open("data/user_profile_vaishika.json", "r") as f:
-        user_profile = json.load(f)
+    # with open("data/user_profile_vaishika.json", "r") as f:
+    #     user_profile = json.load(f)
 
-    with open("v2_search/params.json", "r") as f:
-        params = json.load(f)
-        keyword_industry = params["keyword_industry"]
+    # with open("v2_search/params.json", "r") as f:
+    #     params = json.load(f)
+    #     keyword_industry = params["keyword_industry"]
 
-    emails = []
+    # emails = []
     
-    for enriched_person in multi_result_enriched:
-        email = draft_email(
-            openai=openai,
-            user_profile=user_profile,
-            candidate_profile=enriched_person,
-            keyword_industry=keyword_industry,
-            email_template=EMAIL_TEMPLATE
-        )
-        emails.append(email)
+    # for enriched_person in multi_result_enriched:
+    #     email = draft_email(
+    #         openai=openai,
+    #         user_profile=user_profile,
+    #         candidate_profile=enriched_person,
+    #         keyword_industry=keyword_industry,
+    #         email_template=EMAIL_TEMPLATE
+    #     )
+    #     emails.append(email)
 
-    # Add the enriched data to the csv data
-    for i in range(len(csv_data)):
-        csv_data[i].append(json.dumps(emails[i]))
+    # # Add the enriched data to the csv data
+    # for i in range(len(csv_data)):
+    #     csv_data[i].append(json.dumps(emails[i]))
     
-    # Save the csv data
-    with open("v2_output/linkedin_data_w_enriched.csv", "w") as f:
-        f.write("urn_id,url,email\n")
-        f.write("\n".join([",".join(row) for row in csv_data]))
+    # # Save the csv data
+    # with open("v2_output/linkedin_data_w_enriched.csv", "w") as f:
+    #     f.write("urn_id,url,email\n")
+    #     f.write("\n".join([",".join(row) for row in csv_data]))
 
 
     # ==================================================================
