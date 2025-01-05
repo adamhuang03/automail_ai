@@ -406,7 +406,7 @@ async def get_company_id(request: StandardInputRequest) -> dict:
         if not linkedin_client:
             raise HTTPException(status_code=500, detail="Failed to initialize LinkedIn client")
 
-        search_results = linkedin.search_companies(
+        search_results = linkedin_client.search_companies(
             keywords=[request.input],
             limit=10,
             offset=0
