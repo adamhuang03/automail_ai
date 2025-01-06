@@ -155,6 +155,13 @@ class ExecutionSearch(BaseModel):
     target_count: int = 10
     use_cad: bool = False
 
+class SearchPeopleRequest(BaseModel):
+    keywords: str
+    past_companies: list
+    or_past_companies: bool
+    limit: int
+    offset: int
+
 class EmailAddressRequest(BaseModel):
     names: list
     company: str
@@ -255,6 +262,33 @@ async def get_execution_search(request: ExecutionSearch) -> dict:
             offset=request.offset,
             target_count=request.target_count,
             use_cad=request.use_cad,
+        )
+        logger.info(f"Successfully executed single search: {result}")   
+
+        # Your existing logic here using linkedin_client
+        return JSONResponse(content={
+            "result": result
+        }, media_type="application/json")
+
+    except Exception as e:
+        logger.error(f"Error in get_company_locations_id: {str(e)}")
+        logger.error(f"Traceback: {traceback.format_exc()}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/search-people")
+async def get_search_people(request: SearchPeopleRequest) -> dict:
+    logger.info(f"Received prompt: {request}")
+    try:
+        linkedin_client = init_linkedin_client()
+        if not linkedin_client:
+            raise HTTPException(status_code=500, detail="Failed to initialize LinkedIn client")
+
+        result = linkedin_client.search_people(
+            keywords=request.keywords,
+            past_companies=request.past_companies,
+            or_past_companies=request.or_past_companies,
+            limit=request.limit,
+            offset=request.offset
         )
         logger.info(f"Successfully executed single search: {result}")   
 
