@@ -6,7 +6,7 @@ import json
 
 def cookie_extractor():
 
-    cookies = json.load(open('lib/cookies.json')) # Path of exported cookie via https://www.editthiscookie.com/
+    cookies = json.load(open('custom_lib/cookies.json')) # Path of exported cookie via https://www.editthiscookie.com/
 
     cookie_jar = RequestsCookieJar()
 
