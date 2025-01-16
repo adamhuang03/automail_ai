@@ -23,7 +23,7 @@ result = linkedin.search_people(
 )
 
 # result = linkedin.add_connection(
-#     profile_public_id="automail-automail-7a39a4341",
+#     profile_public_id="hasan-raza-",
 #     message="Hello, this is a test message",
 # )
 
