@@ -14,6 +14,7 @@ import time
 import asyncio
 from fastapi.responses import JSONResponse
 import traceback
+import requests
 from dotenv import load_dotenv
 from contextlib import asynccontextmanager
 
@@ -517,8 +518,8 @@ async def login_linkedin(request: SendConnectionRequest) -> dict:
     try:
         email = request.email
         password = request.password
-        public_id = request.public_id
-        message = request.message
+        # public_id = request.public_id
+        # message = request.message
 
         res = requests.get(
             f'http://trylisa.vercel.app/chat/api/playwright' +
