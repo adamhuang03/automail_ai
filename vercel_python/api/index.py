@@ -144,6 +144,12 @@ class GetCompanyRequest(BaseModel):
 class StandardInputRequest(BaseModel):
     input: str
 
+class SendConnectionRequest(BaseModel):
+    email: str
+    password: str
+    public_id: str
+    message: str
+
 class ExecutionSearch(BaseModel):
     company_urn: str
     company_name_for_passthrough: str
@@ -455,6 +461,82 @@ async def get_company_id(request: StandardInputRequest) -> dict:
         return JSONResponse(content={
             "result": [company_id, company_found_name]
         }, media_type="application/json")
+
+    except Exception as e:
+        logger.error(f"Error in get_company_locations_id: {str(e)}")
+        logger.error(f"Traceback: {traceback.format_exc()}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/send-connection-request") # TBD
+async def send_connection_request(request: LoginInputRequest) -> dict:
+    logger.info(f"Received prompt: {request}")
+    try:
+        email = request.email
+        password = request.password
+        public_id = request.public_id
+        message = request.message
+
+        res = requests.get(
+            f'http://trylisa.vercel.app/chat/api/playwright' +
+            f'?email={email}&password={password}',
+        )
+
+        json_data = res.json()
+
+        if 'error' in json_data:
+            print(False)
+            return JSONResponse(content={
+                "error": 'error'
+            }, media_type="application/json")
+        else:
+            print(True)
+            cookies_jar = cookie_extractor_from_json(json.loads(res.text)['cookies'])
+            linkedin = LinkedinWrapper(email, password, cookies=cookies_jar, debug=True)
+            result = linkedin.add_connection(
+                profile_public_id=public_id,
+                message=message,
+            )
+
+            if result:
+                return JSONResponse(content={
+                    "result": 'Request has already been sent'
+                }, media_type="application/json")
+            else:
+                return JSONResponse(content={
+                    "result": 'Request sent successfully'
+                }, media_type="application/json")
+
+    except Exception as e:
+        logger.error(f"Error in get_company_locations_id: {str(e)}")
+        logger.error(f"Traceback: {traceback.format_exc()}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/login-linkedin") # TBD
+async def login_linkedin(request: LoginInputRequest) -> dict:
+    logger.info(f"Received prompt: {request}")
+    try:
+        email = request.email
+        password = request.password
+        public_id = request.public_id
+        message = request.message
+
+        res = requests.get(
+            f'http://trylisa.vercel.app/chat/api/playwright' +
+            f'?email={email}&password={password}',
+        )
+
+        json_data = res.json()
+
+        if 'error' in json_data:
+            print(False)
+            return JSONResponse(content={
+                "error": 'error'
+            }, media_type="application/json")
+        else:
+            print(True)
+            return JSONResponse(content={
+                "result": 'Successfully logged in'
+            }, media_type="application/json")
 
     except Exception as e:
         logger.error(f"Error in get_company_locations_id: {str(e)}")

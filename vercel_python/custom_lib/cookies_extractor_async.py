@@ -3,7 +3,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-async def cookie_extractor_from_json(cookies_json: dict) -> RequestsCookieJar:
+def cookie_extractor_from_json(cookies_json: dict) -> RequestsCookieJar:
     """
     Creates a cookie jar from JSON cookie data for LinkedIn API use.
     
