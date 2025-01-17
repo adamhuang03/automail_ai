@@ -468,7 +468,7 @@ async def get_company_id(request: StandardInputRequest) -> dict:
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.post("/send-connection-request") # TBD
-async def send_connection_request(request: LoginInputRequest) -> dict:
+async def send_connection_request(request: SendConnectionRequest) -> dict:
     logger.info(f"Received prompt: {request}")
     try:
         email = request.email
@@ -512,7 +512,7 @@ async def send_connection_request(request: LoginInputRequest) -> dict:
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.post("/login-linkedin") # TBD
-async def login_linkedin(request: LoginInputRequest) -> dict:
+async def login_linkedin(request: SendConnectionRequest) -> dict:
     logger.info(f"Received prompt: {request}")
     try:
         email = request.email
