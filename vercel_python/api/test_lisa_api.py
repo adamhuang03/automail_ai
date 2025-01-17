@@ -6,15 +6,17 @@ from custom_lib.automail_ai_search_v2 import search_people
 from custom_lib.cookies_extractor_async import cookie_extractor_from_json
 from dotenv import load_dotenv
 import json
-
+import os
 load_dotenv()
+
 
 res = requests.get(
         f'http://localhost:3000/chat/api/playwright' +
-        f'?email={'huangadam9@gmail.com'}&password={'112245huagn'}',
+        f'?email={os.getenv("LINKEDIN_USER")}&password={os.getenv("LINKEDIN_PASS")}',
     )
 
 json_data = res.json()
+print(json.dumps(json_data['cookies'], indent=4))
 
 if 'error' in json_data:
     print(False)
