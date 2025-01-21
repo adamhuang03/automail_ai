@@ -11,37 +11,39 @@ load_dotenv()
 
 import time
 
+url = 'http://localhost:3000/chat/api/playwright'
+url_main = 'http://trylisa.vercel.app/chat/api/playwright'
 
 res = requests.get(
-        f'http://localhost:3000/chat/api/playwright' +
+        url +
         f'?email={os.getenv("LINKEDIN_USER_OG")}&password={os.getenv("LINKEDIN_PASS_OG")}',
     )
 
 json_data = res.json()
 print(json.dumps(json_data['cookies'], indent=4))
 
-if 'error' in json_data:
-    print(False)
-else:
-    print(True)
-    cookies_jar = cookie_extractor_from_json(json.loads(res.text)['cookies'])
-    linkedin = LinkedinWrapper(os.getenv("LINKEDIN_USER"), os.getenv("LINKEDIN_PASS"), cookies=cookies_jar, debug=True)
+# if 'error' in json_data:
+#     print(False)
+# else:
+#     print(True)
+#     cookies_jar = cookie_extractor_from_json(json.loads(res.text)['cookies'])
+#     linkedin = LinkedinWrapper(os.getenv("LINKEDIN_USER"), os.getenv("LINKEDIN_PASS"), cookies=cookies_jar, debug=True)
 
-    result = linkedin.search_people(
-        keywords="investment banking",
-        limit=10,
-        offset=0
-    )
-    print(json.dumps(result, indent=4))
+#     result = linkedin.search_people(
+#         keywords="investment banking",
+#         limit=10,
+#         offset=0
+#     )
+#     print(json.dumps(result, indent=4))
 
-    time.sleep(20)
+#     time.sleep(20)
 
-    result = linkedin.search_people(
-        keywords="investment banking",
-        limit=10,
-        offset=0
-    )
-    print(json.dumps(result, indent=4))
+#     result = linkedin.search_people(
+#         keywords="investment banking",
+#         limit=10,
+#         offset=0
+#     )
+#     print(json.dumps(result, indent=4))
 
     
 

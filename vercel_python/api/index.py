@@ -528,6 +528,8 @@ async def login_linkedin(request: SendConnectionRequest) -> dict:
 
         json_data = res.json()
 
+        print(json_data)
+
         if 'error' in json_data:
             print(False)
             return JSONResponse(content={
@@ -536,7 +538,8 @@ async def login_linkedin(request: SendConnectionRequest) -> dict:
         else:
             print(True)
             return JSONResponse(content={
-                "result": 'Successfully logged in'
+                "result": 'Successfully logged in',
+                'cookies': json.dumps(json_data['cookies'], indent=4)
             }, media_type="application/json")
 
     except Exception as e:
