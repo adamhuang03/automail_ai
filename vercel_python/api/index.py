@@ -539,7 +539,7 @@ async def login_linkedin(request: SendConnectionRequest) -> dict:
             print(True)
             return JSONResponse(content={
                 "result": 'Successfully logged in',
-                'cookies': json.dumps(json_data['cookies'], indent=4)
+                'cookies': json_data['cookies']
             }, media_type="application/json")
 
     except Exception as e:
