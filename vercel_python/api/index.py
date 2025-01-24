@@ -142,7 +142,6 @@ class ProcessDataRequest(BaseModel):
 
 class PromptExtractionRequest(BaseModel):
     input: str
-    cookies: List[Dict[str, Any]]
 
 class CompanyLocationsRequest(BaseModel):
     input: list
