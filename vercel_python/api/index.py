@@ -1,5 +1,5 @@
 from re import search
-from typing import Any
+from typing import Any, List
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
@@ -127,6 +127,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+from typing import Dict, Any
 
 # Define request model
 class ProcessDataRequest(BaseModel):
@@ -150,7 +151,7 @@ class StandardInputRequest(BaseModel):
 class SendConnectionRequest(BaseModel):
     public_id: str
     message: str
-    cookies: str
+    cookies: List[Dict[str, Any]]
 
 class ExecutionSearch(BaseModel):
     company_urn: str
