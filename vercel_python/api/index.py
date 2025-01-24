@@ -26,6 +26,9 @@ from pathlib import Path
 # Add the parent directory to sys.path
 sys.path.append(str(Path(__file__).parent.parent))
 
+dummy_username = 'dummy'
+dummy_password = 'dummy'
+
 # Configure logging
 # Set up logging
 logger = logging.getLogger(__name__)
@@ -49,44 +52,44 @@ from custom_lib.cookies_extractor_async import cookie_extractor_from_json
 
 # uvicorn vercel_python.api.index:app --reload --log-level info
 
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    # Initialize LinkedIn client at startup
-    try:
-        cookie_dir = 'custom_lib/'
-        cookie_repo = CookieRepository(cookies_dir=cookie_dir)
-        cookies = cookie_repo.get(os.getenv("LINKEDIN_USER"))
-        if cookies and isinstance(cookies, RequestsCookieJar):
-            logger.info("Successfully loaded cookies from repository")
-            logger.info(f"Cookie names: {[cookie.name for cookie in cookies]}")
-        else:
-            logger.warning("No valid cookies found in repository")
-            cookies = None
+# @asynccontextmanager
+# async def lifespan(app: FastAPI):
+#     # Initialize LinkedIn client at startup
+#     try:
+#         cookie_dir = 'custom_lib/'
+#         cookie_repo = CookieRepository(cookies_dir=cookie_dir)
+#         cookies = cookie_repo.get(os.getenv("LINKEDIN_USER"))
+#         if cookies and isinstance(cookies, RequestsCookieJar):
+#             logger.info("Successfully loaded cookies from repository")
+#             logger.info(f"Cookie names: {[cookie.name for cookie in cookies]}")
+#         else:
+#             logger.warning("No valid cookies found in repository")
+#             cookies = None
 
-        logger.info("Initializing LinkedIn client")
-        linkedin_client = LinkedinWrapper(
-            username=os.getenv("LINKEDIN_USER"),
-            password=os.getenv("LINKEDIN_PASSWORD"),
-            cookies=cookies,
-            authenticate=True,
-            refresh_cookies=False,
-            debug=True
-        )
+#         logger.info("Initializing LinkedIn client")
+#         linkedin_client = LinkedinWrapper(
+#             username=os.getenv("LINKEDIN_USER"),
+#             password=os.getenv("LINKEDIN_PASSWORD"),
+#             cookies=cookies,
+#             authenticate=True,
+#             refresh_cookies=False,
+#             debug=True
+#         )
         
-        # Store in app state
-        app.state.linkedin_client = linkedin_client
-        logger.info("LinkedIn client initialized and stored in app state")
-    except Exception as e:
-        logger.error(f"Failed to initialize LinkedIn client: {str(e)}")
-        logger.error(f"Traceback: {traceback.format_exc()}")
-        # Don't raise the exception - let the app start anyway
-        # We'll handle the missing client in the routes
+#         # Store in app state
+#         app.state.linkedin_client = linkedin_client
+#         logger.info("LinkedIn client initialized and stored in app state")
+#     except Exception as e:
+#         logger.error(f"Failed to initialize LinkedIn client: {str(e)}")
+#         logger.error(f"Traceback: {traceback.format_exc()}")
+#         # Don't raise the exception - let the app start anyway
+#         # We'll handle the missing client in the routes
     
-    yield  # Server is running
+#     yield  # Server is running
     
-    # Cleanup (if needed) when the server shuts down
-    if hasattr(app.state, 'linkedin_client'):
-        pass  # No need to close the client
+#     # Cleanup (if needed) when the server shuts down
+#     if hasattr(app.state, 'linkedin_client'):
+#         pass  # No need to close the client
 
 # Vercel version
 
@@ -117,7 +120,8 @@ def init_linkedin_client():
         logger.error(f"Traceback: {traceback.format_exc()}")
         return None
 
-app = FastAPI(lifespan=lifespan)
+# app = FastAPI(lifespan=lifespan)
+app = FastAPI()
 
 # Configure CORS
 app.add_middleware(
@@ -138,15 +142,19 @@ class ProcessDataRequest(BaseModel):
 
 class PromptExtractionRequest(BaseModel):
     input: str
+    cookies: List[Dict[str, Any]]
 
 class CompanyLocationsRequest(BaseModel):
     input: list
+    cookies: List[Dict[str, Any]]
 
 class GetCompanyRequest(BaseModel):
     company_public_id: str
+    cookies: List[Dict[str, Any]]
 
 class StandardInputRequest(BaseModel):
     input: str
+    cookies: List[Dict[str, Any]]
 
 class SendConnectionRequest(BaseModel):
     public_id: str
@@ -163,6 +171,7 @@ class ExecutionSearch(BaseModel):
     offset: int = 0
     target_count: int = 10
     use_cad: bool = False
+    cookies: List[Dict[str, Any]]
 
 class SearchPeopleRequest(BaseModel):
     keywords: str
@@ -170,6 +179,7 @@ class SearchPeopleRequest(BaseModel):
     or_past_companies: bool
     limit: int
     offset: int
+    cookies: List[Dict[str, Any]]
 
 class EmailAddressRequest(BaseModel):
     names: list
@@ -180,11 +190,11 @@ class DraftEmailsRequest(BaseModel):
     keyword_industry: str
     user_linkedin_url: str
     email_template: str
+    cookies: List[Dict[str, Any]]
 
 class EnrichProfileRequest(BaseModel):
     linkedin_url: str
-
-EnrichProfileRequest
+    cookies: List[Dict[str, Any]]
 
 @app.post("/extract-prompt-data")
 async def extract_prompt_data(request: PromptExtractionRequest) -> dict:
@@ -219,7 +229,10 @@ async def get_ids(request: CompanyLocationsRequest) -> dict:
         # # # Use the client from app state
         # linkedin_client = app.state.linkedin_client
 
-        linkedin_client = init_linkedin_client()
+        # linkedin_client = init_linkedin_client()
+        cookies = request.cookies
+        cookies_jar = cookie_extractor_from_json(cookies)
+        linkedin_client = LinkedinWrapper(dummy_username, dummy_password, cookies=cookies_jar, debug=True)
         if not linkedin_client:
             raise HTTPException(status_code=500, detail="Failed to initialize LinkedIn client")
 
@@ -255,8 +268,10 @@ async def get_execution_search(request: ExecutionSearch) -> dict:
             
         # # # Use the client from app state
         # linkedin_client = app.state.linkedin_client
+        cookies = request.cookies
+        cookies_jar = cookie_extractor_from_json(cookies)
+        linkedin_client = LinkedinWrapper(dummy_username, dummy_password, cookies=cookies_jar, debug=True)
 
-        linkedin_client = init_linkedin_client()
         if not linkedin_client:
             raise HTTPException(status_code=500, detail="Failed to initialize LinkedIn client")
 
@@ -288,7 +303,9 @@ async def get_execution_search(request: ExecutionSearch) -> dict:
 async def get_search_people(request: SearchPeopleRequest) -> dict:
     logger.info(f"Received prompt: {request}")
     try:
-        linkedin_client = init_linkedin_client()
+        cookies = request.cookies
+        cookies_jar = cookie_extractor_from_json(cookies)
+        linkedin_client = LinkedinWrapper(dummy_username, dummy_password, cookies=cookies_jar, debug=True)
         if not linkedin_client:
             raise HTTPException(status_code=500, detail="Failed to initialize LinkedIn client")
 
@@ -348,7 +365,9 @@ async def get_school_id(request: EnrichProfileRequest) -> dict:
         # # # Use the client from app state
         # linkedin_client = app.state.linkedin_client
 
-        linkedin_client = init_linkedin_client()
+        cookies = request.cookies
+        cookies_jar = cookie_extractor_from_json(cookies)
+        linkedin_client = LinkedinWrapper(dummy_username, dummy_password, cookies=cookies_jar, debug=True)
         if not linkedin_client:
             raise HTTPException(status_code=500, detail="Failed to initialize LinkedIn client")
 
@@ -375,7 +394,9 @@ async def enrich_profile(request: EnrichProfileRequest) -> dict:
     logger.info(f"Received prompt: {request}")
     try:
 
-        linkedin_client = init_linkedin_client()
+        cookies = request.cookies
+        cookies_jar = cookie_extractor_from_json(cookies)
+        linkedin_client = LinkedinWrapper(dummy_username, dummy_password, cookies=cookies_jar, debug=True)
         if not linkedin_client:
             raise HTTPException(status_code=500, detail="Failed to initialize LinkedIn client")
 
@@ -400,7 +421,9 @@ async def enrich_profile_more(request: EnrichProfileRequest) -> dict:
     logger.info(f"Received prompt: {request}")
     try:
 
-        linkedin_client = init_linkedin_client()
+        cookies = request.cookies
+        cookies_jar = cookie_extractor_from_json(cookies)
+        linkedin_client = LinkedinWrapper(dummy_username, dummy_password, cookies=cookies_jar, debug=True)
         if not linkedin_client:
             raise HTTPException(status_code=500, detail="Failed to initialize LinkedIn client")
 
@@ -425,7 +448,9 @@ async def get_company(request: GetCompanyRequest) -> dict:
     logger.info(f"Received prompt: {request}")
     try:
 
-        linkedin_client = init_linkedin_client()
+        cookies = request.cookies
+        cookies_jar = cookie_extractor_from_json(cookies)
+        linkedin_client = LinkedinWrapper(dummy_username, dummy_password, cookies=cookies_jar, debug=True)
         if not linkedin_client:
             raise HTTPException(status_code=500, detail="Failed to initialize LinkedIn client")
 
@@ -445,7 +470,9 @@ async def get_company(request: GetCompanyRequest) -> dict:
 async def get_company_id(request: StandardInputRequest) -> dict:
     logger.info(f"Received prompt: {request}")
     try:
-        linkedin_client = init_linkedin_client()
+        cookies = request.cookies
+        cookies_jar = cookie_extractor_from_json(cookies)
+        linkedin_client = LinkedinWrapper(dummy_username, dummy_password, cookies=cookies_jar, debug=True)
         if not linkedin_client:
             raise HTTPException(status_code=500, detail="Failed to initialize LinkedIn client")
 
@@ -487,6 +514,7 @@ async def send_connection_request(request: SendConnectionRequest) -> dict:
         logger.info(f"cookies: {request.cookies}")
         logger.info("=== End Request Data ===")
         
+
         public_id = request.public_id
         message = request.message
         cookies = request.cookies  
@@ -494,20 +522,30 @@ async def send_connection_request(request: SendConnectionRequest) -> dict:
         # result = True 
 
         cookies_jar = cookie_extractor_from_json(cookies)
-        linkedin = LinkedinWrapper(public_id, message, cookies=cookies_jar, debug=True)
-        result = linkedin.add_connection(
-            profile_public_id=public_id,
-            message=message,
-        )
+        linkedin = LinkedinWrapper(dummy_username, dummy_password, cookies=cookies_jar, debug=True)
+        try:
+            result = linkedin.add_connection(
+                profile_public_id=public_id,
+                message=message,
+            )
 
-        if result:
+            if result:
+                return JSONResponse(content={
+                    "result": 'Request has already been sent'
+                }, media_type="application/json")
+            else:
+                return JSONResponse(content={
+                    "result": 'Request sent successfully'
+                }, media_type="application/json")
+        except Exception as e:
+            logger.error(f"Error in send_connection_request: {str(e)}")
+            logger.error(f"Traceback: {traceback.format_exc()}")
             return JSONResponse(content={
-                "result": 'Request has already been sent'
+                "error": str(e),
+                "result": 'Cookies are invalid'
             }, media_type="application/json")
-        else:
-            return JSONResponse(content={
-                "result": 'Request sent successfully'
-            }, media_type="application/json")
+
+
 
     except Exception as e:
         logger.error(f"Error in get_company_locations_id: {str(e)}")
@@ -579,7 +617,9 @@ async def draft_emails(request: DraftEmailsRequest):
             # # Use the client from app state
             # linkedin_client = app.state.linkedin_client
 
-            linkedin_client = init_linkedin_client()
+            cookies = request.cookies
+            cookies_jar = cookie_extractor_from_json(cookies)
+            linkedin_client = LinkedinWrapper(dummy_username, dummy_password, cookies=cookies_jar, debug=True)
             if not linkedin_client:
                 raise HTTPException(status_code=500, detail="Failed to initialize LinkedIn client")
             
