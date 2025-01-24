@@ -70,8 +70,8 @@ def get_first_google_result_link(query):
         return None
 
     soup = BeautifulSoup(response.text, "html.parser")
-    with open('google_search_results.txt', 'w', encoding='utf-8') as f:
-        f.write(soup.prettify())
+    # with open('google_search_results.txt', 'w', encoding='utf-8') as f:
+    #     f.write(soup.prettify())
 
     # Find RocketReach links in Bing search results
     link_tags = soup.select('a[href*="https://rocketreach.co"]')
