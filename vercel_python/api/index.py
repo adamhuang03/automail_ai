@@ -343,11 +343,17 @@ async def get_email_addresses(request: EmailAddressRequest) -> dict:
         )
         logger.info(f"Successfully generated email addresses: {emails}")
 
-        # Your existing logic here using linkedin_client
-        return JSONResponse(content={
-            "format": emails[0],
-            "result": emails[1]
-        }, media_type="application/json")
+        if not emails:
+            return JSONResponse(content={
+                "format": "",
+                "result": []
+            }, media_type="application/json")
+        else:
+            # Your existing logic here using linkedin_client
+            return JSONResponse(content={
+                "format": emails[0],
+                "result": emails[1]
+            }, media_type="application/json")
 
     except Exception as e:
         logger.error(f"Error in get_company_locations_id: {str(e)}")
