@@ -18,11 +18,11 @@ For personalization_field, ensure the words are concise and simple. You will use
 
 Here is an example of a well drafted email:
 “““
-Hi Chris,  
+Hi {name_field},  
   
 Hope you are having a great day.  
   
-My name is Adam and I’m a second-year at the University of Toronto. I have an interest in Investment Banking and am completing a 4-month internship at National Bank this winter, in their Toronto office.  
+My name is {user_field} and I’m a second-year at the University of Toronto. I have an interest in Investment Banking and am completing a 4-month internship at National Bank this winter, in their Toronto office.  
   
 I was interested in your experience working with the team at Greenhill and how you came to IB after your experience in Accounting at Linamar. If you had the time, I’d love to meet for coffee to learn a bit about your career journey. I've attached my resume for reference if needed.  
   
@@ -31,7 +31,7 @@ I understand you must be busy, so I'd be more than happy to find a time that wor
 Looking forward to hearing back!  
   
 Best,  
-Adam
+{user_field}
 ““”
 
 Provide only the email as part of the output...
