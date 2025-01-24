@@ -3,22 +3,66 @@ import json
 import requests
 from bs4 import BeautifulSoup
 from linkedin_api.linkedin import default_evade 
+import random
+import time
+import logging
+
+logger = logging.getLogger(__name__)
+
+USER_AGENTS = [
+    # Chrome on Windows 10
+    {
+        "User-Agent": (
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+            "AppleWebKit/537.36 (KHTML, like Gecko) "
+            "Chrome/120.0.0.0 Safari/537.36"
+        )
+    },
+    # Firefox on Windows 10
+    {
+        "User-Agent": (
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:121.0) "
+            "Gecko/20100101 Firefox/121.0"
+        )
+    },
+    # Edge on Windows 10
+    {
+        "User-Agent": (
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+            "AppleWebKit/537.36 (KHTML, like Gecko) "
+            "Edge/120.0.0.0 Safari/537.36"
+        )
+    },
+    # Safari on macOS
+    {
+        "User-Agent": (
+            "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_1) "
+            "AppleWebKit/605.1.15 (KHTML, like Gecko) "
+            "Version/17.1 Safari/605.1.15"
+        )
+    },
+    # Opera on Windows 10
+    {
+        "User-Agent": (
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+            "AppleWebKit/537.36 (KHTML, like Gecko) "
+            "OPR/106.0.0.0 Safari/537.36"
+        )
+    }
+]
+
+def get_random_headers():
+    return random.choice(USER_AGENTS)
 
 def structure_rocketreach_query(input: str):
     # Fetch the page content
     return f"site:rocketreach.co {input} email format"
 
 def get_first_google_result_link(query):
-    headers = {
-        "User-Agent": (
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-            "AppleWebKit/537.36 (KHTML, like Gecko) "
-            "Chrome/70.0.3538.77 Safari/537.36"
-        )
-    }
-
-    search_url = "https://www.google.com/search"
+    headers = get_random_headers()
+    search_url = "https://www.bing.com/search"
     params = {"q": query, "num": "10"}
+    # print(query)
 
     response = requests.get(search_url, headers=headers, params=params)
     if response.status_code != 200:
@@ -26,14 +70,23 @@ def get_first_google_result_link(query):
         return None
 
     soup = BeautifulSoup(response.text, "html.parser")
+    with open('google_search_results.txt', 'w', encoding='utf-8') as f:
+        f.write(soup.prettify())
 
-    link_tags = soup.select('a[href^="/url?"][href*="https://rocketreach.co/"]')
-    link = link_tags[0]['href'].split('url=')[1].split('&')[0]
+    # Find RocketReach links in Bing search results
+    link_tags = soup.select('a[href*="https://rocketreach.co"]')
+    logger.info(f"Found {len(link_tags)} RocketReach links")
     
-    default_evade()
-    
-    if link:
-        return link
+    if not link_tags:
+        logger.error("No RocketReach links found in search results")
+        return None
+        
+    # Get the first valid RocketReach link
+    for link in link_tags:
+        href = link.get('href')
+        if href and 'rocketreach.co' in href and 'email-format' in href:
+            return href
+            
     return None
 
 
@@ -59,13 +112,7 @@ def get_first_google_result_link(query):
 def get_top_email_format(url):
     # Fetch the page content
     default_evade()
-    headers = {
-        "User-Agent": (
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-            "AppleWebKit/537.36 (KHTML, like Gecko) "
-            "Chrome/70.0.3538.77 Safari/537.36"
-        )
-    }
+    headers = get_random_headers()
     headers_firefox = {
         "User-Agent": (
             "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:120.0) "
@@ -269,53 +316,7 @@ if __name__ == "__main__":
         # "Pinterest",
         # "Reddit",
     ]
-    client = AsyncOpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-    for company in input_companies:
-        asyncio.run(search_and_generate_emails(client, company))
-
-if __name__ == "__main__":
-    # Example search
-    input_companies = [
-        # "Moelis",
-        # "Morgan Stanley",
-        # "GitHub",
-        # "Google",
-        # "Microsoft",
-        # "Apple",
-        # "Facebook",
-        "Twitter",
-        # "Amazon",
-        # "Tesla",
-        # "Netflix",
-        # "Spotify",
-        # "Airbnb",
-        # "Uber",
-        # "Lyft",
-        # "Snapchat",
-        # "Instagram",
-        # "TikTok",
-        # "Pinterest",
-        # "Reddit",
-    ]
-    client = AsyncOpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-    for company in input_companies:
-        query = structure_rocketreach_query(company)
-        first_link = get_first_google_result_link(query)
-        if first_link:
-            print("First link found:", first_link)
-            result = get_top_email_format(first_link)
-            if result:
-                pattern, example = result
-                print(f"For URL: {first_link}")
-                print(f"Top Email Format Pattern: {pattern}")
-                print(f"Example: {example}")
-                print("-" * 50)
-
-                email_domain = example.split("@")[1]
-                print(f"Email Domain: {email_domain}")
-
-                # Generate emails using GPT-3.5 Turbo
-                names = [
+    names = [
                     "Nathan Beber", 
                     "John Smith", 
                     "Jane Doe",
@@ -327,13 +328,71 @@ if __name__ == "__main__":
                     "Jane Doe",
                     "Abdullah Chandna"
                 ]
-                emails = asyncio.run(generate_email_gpt_batch(client, names, pattern))
-                emails_appended = [f"{email}@{email_domain}" for email in emails]
-                print(f"Generated Emails: {emails_appended}")
-            else:
-                print("Could not find format for", first_link)
-        else:
-            print("No link found.")
+    client = AsyncOpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+    for company in input_companies:
+        asyncio.run(search_and_generate_emails(client, company, names))
+
+# if __name__ == "__main__":
+#     # Example search
+#     input_companies = [
+#         # "Moelis",
+#         # "Morgan Stanley",
+#         # "GitHub",
+#         # "Google",
+#         # "Microsoft",
+#         # "Apple",
+#         # "Facebook",
+#         "Twitter",
+#         # "Amazon",
+#         # "Tesla",
+#         # "Netflix",
+#         # "Spotify",
+#         # "Airbnb",
+#         # "Uber",
+#         # "Lyft",
+#         # "Snapchat",
+#         # "Instagram",
+#         # "TikTok",
+#         # "Pinterest",
+#         # "Reddit",
+#     ]
+#     client = AsyncOpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+#     for company in input_companies:
+#         query = structure_rocketreach_query(company)
+#         first_link = get_first_google_result_link(query)
+#         if first_link:
+#             print("First link found:", first_link)
+#             result = get_top_email_format(first_link)
+#             if result:
+#                 pattern, example = result
+#                 print(f"For URL: {first_link}")
+#                 print(f"Top Email Format Pattern: {pattern}")
+#                 print(f"Example: {example}")
+#                 print("-" * 50)
+
+#                 email_domain = example.split("@")[1]
+#                 print(f"Email Domain: {email_domain}")
+
+#                 # Generate emails using GPT-3.5 Turbo
+#                 names = [
+#                     "Nathan Beber", 
+#                     "John Smith", 
+#                     "Jane Doe",
+#                     "Abdullah Chandna",
+#                     "Hasan Raza",
+#                     "Ahmed Ali",
+#                     "Nathan Beber",
+#                     "John Smith",
+#                     "Jane Doe",
+#                     "Abdullah Chandna"
+#                 ]
+#                 emails = asyncio.run(generate_email_gpt_batch(client, names, pattern))
+#                 emails_appended = [f"{email}@{email_domain}" for email in emails]
+#                 print(f"Generated Emails: {emails_appended}")
+#             else:
+#                 print("Could not find format for", first_link)
+#         else:
+#             print("No link found.")
     
     # urls = [
     #     "https://rocketreach.co/moelis-company-email-format_b5c01de7f42e0fcd",
