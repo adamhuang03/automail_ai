@@ -44,6 +44,7 @@ from prompt.email import EMAIL_SYSTEM_PROMPT
 from custom_lib.linkedin_wrapper import LinkedinWrapper
 from requests.cookies import RequestsCookieJar
 from linkedin_api.cookie_repository import CookieRepository
+from custom_lib.cookies_extractor_async import cookie_extractor_from_json
 
 # uvicorn vercel_python.api.index:app --reload --log-level info
 
@@ -146,10 +147,9 @@ class StandardInputRequest(BaseModel):
     input: str
 
 class SendConnectionRequest(BaseModel):
-    email: str
-    password: str
     public_id: str
     message: str
+    cookies: str
 
 class ExecutionSearch(BaseModel):
     company_urn: str
@@ -470,42 +470,28 @@ async def get_company_id(request: StandardInputRequest) -> dict:
 
 @app.post("/send-connection-request") # TBD
 async def send_connection_request(request: SendConnectionRequest) -> dict:
+    # use one initilized linkedin, and send out multiple in one session
     logger.info(f"Received prompt: {request}")
     try:
-        email = request.email
-        password = request.password
         public_id = request.public_id
         message = request.message
+        cookies = request.cookies   
 
-        res = requests.get(
-            f'http://trylisa.vercel.app/chat/api/playwright' +
-            f'?email={email}&password={password}',
+        cookies_jar = cookie_extractor_from_json(cookies)
+        linkedin = LinkedinWrapper(public_id, message, cookies=cookies_jar, debug=True)
+        result = linkedin.add_connection(
+            profile_public_id=public_id,
+            message=message,
         )
 
-        json_data = res.json()
-
-        if 'error' in json_data:
-            print(False)
+        if result:
             return JSONResponse(content={
-                "error": 'error'
+                "result": 'Request has already been sent'
             }, media_type="application/json")
         else:
-            print(True)
-            cookies_jar = cookie_extractor_from_json(json.loads(res.text)['cookies'])
-            linkedin = LinkedinWrapper(email, password, cookies=cookies_jar, debug=True)
-            result = linkedin.add_connection(
-                profile_public_id=public_id,
-                message=message,
-            )
-
-            if result:
-                return JSONResponse(content={
-                    "result": 'Request has already been sent'
-                }, media_type="application/json")
-            else:
-                return JSONResponse(content={
-                    "result": 'Request sent successfully'
-                }, media_type="application/json")
+            return JSONResponse(content={
+                "result": 'Request sent successfully'
+            }, media_type="application/json")
 
     except Exception as e:
         logger.error(f"Error in get_company_locations_id: {str(e)}")
