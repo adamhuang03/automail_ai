@@ -1,5 +1,6 @@
 from re import search
-from fastapi import FastAPI, HTTPException
+from typing import Any
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
@@ -468,14 +469,28 @@ async def get_company_id(request: StandardInputRequest) -> dict:
         logger.error(f"Traceback: {traceback.format_exc()}")
         raise HTTPException(status_code=500, detail=str(e))
 
-@app.post("/send-connection-request") # TBD
+@app.post("/send-connection-request")
 async def send_connection_request(request: SendConnectionRequest) -> dict:
-    # use one initilized linkedin, and send out multiple in one session
-    logger.info(f"Received prompt: {request}")
     try:
+        # Debug raw request
+        # raw_body = await raw_request.json()
+        # logger.info("=== Raw Request Data ===")
+        # logger.info(f"Headers: {raw_request.headers}")
+        # logger.info(f"Raw body: {raw_body}")
+        
+        # Debug parsed request
+        logger.info("=== Parsed Request Data ===")
+        logger.info(f"Request type: {type(request)}")
+        logger.info(f"public_id: {request.public_id}")
+        logger.info(f"message: {request.message}")
+        logger.info(f"cookies: {request.cookies}")
+        logger.info("=== End Request Data ===")
+        
         public_id = request.public_id
         message = request.message
-        cookies = request.cookies   
+        cookies = request.cookies  
+        # print(public_id, message, cookies)
+        # result = True 
 
         cookies_jar = cookie_extractor_from_json(cookies)
         linkedin = LinkedinWrapper(public_id, message, cookies=cookies_jar, debug=True)
